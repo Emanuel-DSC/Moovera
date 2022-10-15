@@ -36,16 +36,25 @@ class OTPSreen extends StatelessWidget {
                 OtpTextField(
                   numberOfFields: 6,
                   filled: true,
-                  fillColor: isDarkMode ? tPrimaryColor.withOpacity(0.1) : tSecundaryDarkColor.withOpacity(0.1),
-                  focusedBorderColor: isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
-                  disabledBorderColor: tThirdDarkColor,
+                  fillColor: isDarkMode
+                      ? tPrimaryColor.withOpacity(0.1)
+                      : tSecundaryDarkColor.withOpacity(0.1),
+                  focusedBorderColor:
+                      isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
+                  disabledBorderColor: tThirdColor,
                   cursorColor: isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
                   margin: const EdgeInsets.only(right: 10.0),
                   fieldWidth: 45,
-                  onSubmit: (code) {print("OTP IS -> $code"); } ,
+                  onSubmit: (code) {
+                    print("OTP IS -> $code");
+                  },
                 ),
                 const SizedBox(height: 50),
-                DegradeButton(buttonText: 'DONE', isDarkMode: isDarkMode, border: 10, screenName: 'OTPScreen'),
+                DegradeButton(
+                    buttonText: 'DONE',
+                    isDarkMode: isDarkMode,
+                    border: 10,
+                    screenName: 'OTPScreen'),
               ],
             ),
           ),

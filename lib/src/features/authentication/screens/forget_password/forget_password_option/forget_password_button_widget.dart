@@ -26,7 +26,7 @@ class ForgetPasswordWidget extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: isDarkMode ? tSecundaryDarkColor : Colors.grey[300]),
+            color: isDarkMode ? tBottomDarkColor : Colors.grey[300]),
         child: Row(
           children: [
             Icon(icon, size: 60.0),
