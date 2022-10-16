@@ -18,7 +18,7 @@ class MovieCards extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(imageName), fit: BoxFit.cover),
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
           // ignore: prefer_const_literals_to_create_immutables
           boxShadow: [
             const BoxShadow(

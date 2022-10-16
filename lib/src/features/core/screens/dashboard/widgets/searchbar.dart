@@ -23,7 +23,7 @@ class SearchBar extends StatelessWidget {
           height: 50,
           decoration: BoxDecoration(
             color: isDarkMode ? tBottomDarkColor : tThirdDarkColor,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

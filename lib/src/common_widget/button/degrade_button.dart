@@ -6,6 +6,7 @@ import 'package:movie_login/src/features/authentication/screens/forget_password/
 import 'package:movie_login/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:movie_login/src/features/authentication/screens/signup_screen/signup_screen.dart';
 import 'package:movie_login/src/features/core/screens/dashboard/dashboard.dart';
+import 'package:movie_login/src/features/core/screens/dashboard/widgets/gnav_bottom_bar.dart';
 
 class DegradeButton extends StatelessWidget {
   const DegradeButton({
@@ -71,7 +72,7 @@ callPage(page) {
   if (page == 'OTPScreen') {
     Get.to(const OTPSreen());
   }
-  if (page == 'Dashboard') {
-    Get.to(const DashBoard());
+  if (page == 'GNAV') {
+    Get.to(const GnavBottomBar());
   }
 }

@@ -55,7 +55,7 @@ class LoginForm extends StatelessWidget {
               buttonText: 'SIGN IN',
               isDarkMode: isDarkMode,
               border: 10,
-              screenName: 'Dashboard'),
+              screenName: 'GNAV'),
         ],
       ),
     );
