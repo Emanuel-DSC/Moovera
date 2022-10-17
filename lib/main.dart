@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/features/authentication/screens/splash_screen/splash_screen.dart';
+import 'package:movie_login/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
 import 'package:movie_login/src/utils/theme/theme.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: SplashScreen(),
+      home: OnBoardingScreen(),
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
     );
