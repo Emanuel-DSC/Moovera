@@ -1,10 +1,10 @@
-
 // ignore_for_file: constant_identifier_names
 
 //splash images
 const String tSplashIcon = "assets/images/splash_images/logo.png";
 const String tSplashLauncher = "assets/images/splash_images/launcher.png";
-const String tSplashLauncherDark = "assets/images/splash_images/launcher_dark.png";
+const String tSplashLauncherDark =
+    "assets/images/splash_images/launcher_dark.png";
 
 //on boarding images
 
@@ -17,12 +17,18 @@ const String tSequence3 = "assets/images/on_boarding_images/sequence3.png";
 const String tWelcomeImage = "assets/images/welcome_images/logo.png";
 const String tWelcomeImage_dark = "assets/images/welcome_images/logo_dark.png";
 
-// login images 
+// login images
 
 const String tGoogleImage = "assets/images/login_images/google.png";
 
 // password images
 
-const String tEmailPassword = "assets/images/password_images/email_password.png";
-const String tEmailPasswordDark = "assets/images/password_images/email_password_dark.png";
+const String tEmailPassword =
+    "assets/images/password_images/email_password.png";
+const String tEmailPasswordDark =
+    "assets/images/password_images/email_password_dark.png";
 
+// profile images
+
+const String tProfileBg = "assets/images/profile_images/profile_bg.png";
+const String tProfileBgDark = "assets/images/profile_images/profile_bg_dark.png";

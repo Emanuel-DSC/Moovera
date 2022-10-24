@@ -5,6 +5,7 @@ import 'package:movie_login/src/constants/custom_icon_icons.dart';
 import 'package:movie_login/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:movie_login/src/features/authentication/screens/signup_screen/signup_screen.dart';
 import 'package:movie_login/src/features/core/screens/dashboard/dashboard.dart';
+import 'package:movie_login/src/features/core/screens/profile_sreen.dart';
 
 class GnavBottomBar extends StatefulWidget {
   const GnavBottomBar({
@@ -27,7 +28,7 @@ class _GnavBottomBarState extends State<GnavBottomBar> {
   final List<Widget> _pages = [
     const DashBoard(),
     const LoginScreen(),
-    const SignUpScreen(),
+    const ProfileScreen(),
   ];
 
   @override

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>578682965712-id1nfe85is07e0vk9pseg5ue4i52kua9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.578682965712-id1nfe85is07e0vk9pseg5ue4i52kua9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCOr7ACHZDf_Q6TznKIkeMx0dBx7f2YNNE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>578682965712</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.movieLogin</string>
+	<key>PROJECT_ID</key>
+	<string>moovera-760e7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>moovera-760e7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:578682965712:ios:b27e126b79905d460058d5</string>
+</dict>
+</plist>

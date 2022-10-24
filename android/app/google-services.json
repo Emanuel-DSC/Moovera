@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "578682965712",
+    "project_id": "moovera-760e7",
+    "storage_bucket": "moovera-760e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578682965712:android:ae1a2b70087fffa40058d5",
+        "android_client_info": {
+          "package_name": "com.example.movie_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578682965712-1shhq49msi01ju6reocembssb8n2fpqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2BiqW_0VeQk-zGsYSFEHUn5y8y04Ps60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578682965712-1shhq49msi01ju6reocembssb8n2fpqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
