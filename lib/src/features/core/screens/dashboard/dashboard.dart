@@ -7,6 +7,7 @@ import 'package:movie_login/src/features/core/models/dashboard/categories_models
 import 'package:movie_login/src/features/core/models/dashboard/categories_models_popular.dart';
 import 'package:movie_login/src/features/core/screens/dashboard/widgets/banners.dart';
 import 'package:movie_login/src/features/core/screens/dashboard/widgets/categories_text.dart';
+import 'package:movie_login/src/features/core/screens/dashboard/widgets/gnav_bottom_bar.dart';
 import 'package:movie_login/src/features/core/screens/dashboard/widgets/moviecards.dart';
 import 'package:movie_login/src/features/core/screens/dashboard/widgets/searchbar.dart';
 
@@ -47,7 +48,10 @@ class DashBoard extends StatelessWidget {
                   itemCount: listBanner.length,
                   itemBuilder: ((context, index) => GestureDetector(
                       onTap: listBanner[index].onPress,
-                      child: Banners(imageName: listBanner[index].bannerNumber, bannerText: listBanner[index].bannerTitle,))),
+                      child: Banners(
+                        imageName: listBanner[index].bannerNumber,
+                        bannerText: listBanner[index].bannerTitle,
+                      ))),
                   clipBehavior: Clip.none,
                   scrollDirection: Axis.horizontal,
                 ),
@@ -84,9 +88,10 @@ class DashBoard extends StatelessWidget {
                   itemCount: listPopular.length,
                   itemBuilder: ((context, index) => GestureDetector(
                       onTap: listPopular[index].onPress,
-                      child: MovieCards(imageName: listPopular[index].movieTitle))),
+                      child: MovieCards(
+                          imageName: listPopular[index].movieTitle))),
                   clipBehavior: Clip.none,
-                  scrollDirection: Axis.horizontal,     
+                  scrollDirection: Axis.horizontal,
                 ),
               ),
             ],
@@ -96,4 +101,3 @@ class DashBoard extends StatelessWidget {
     );
   }
 }
-
