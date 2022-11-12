@@ -7,8 +7,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../controllers/on_boarding_controlles.dart';
 import '../welcome/welcome_screen.dart';
 
-class onBoarding3 extends StatelessWidget {
-  const onBoarding3({
+class OnBoarding3 extends StatelessWidget {
+  const OnBoarding3({
     Key? key,
     required this.screenWidth,
     required this.obController,
@@ -63,8 +63,7 @@ class onBoarding3 extends StatelessWidget {
             height: 50,
             decoration: ShapeDecoration(
               shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(28))),
+                  borderRadius: BorderRadius.all(Radius.circular(28))),
               gradient: LinearGradient(
                 colors: [
                   Colors.redAccent.shade200,
@@ -75,8 +74,9 @@ class onBoarding3 extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 // vai para a Welcome Screen e remove todas as anteriores
-                 Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-    WelcomeScreen()), (Route<dynamic> route) => false);
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                    (Route<dynamic> route) => false);
               },
               child: const Text(
                 'GET STARTED',

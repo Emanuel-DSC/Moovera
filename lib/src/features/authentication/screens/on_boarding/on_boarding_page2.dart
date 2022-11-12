@@ -5,8 +5,8 @@ import 'package:movie_login/src/constants/text_string.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../controllers/on_boarding_controlles.dart';
 
-class onBoarding2 extends StatelessWidget {
-  const onBoarding2({
+class OnBoarding2 extends StatelessWidget {
+  const OnBoarding2({
     Key? key,
     required this.screenWidth,
     required this.obController,

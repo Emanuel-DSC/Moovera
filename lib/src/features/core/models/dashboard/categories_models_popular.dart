@@ -1,20 +1,67 @@
-import 'package:flutter/animation.dart';
-import 'package:movie_login/src/constants/text_string.dart';
+import 'package:flutter/material.dart';
+import 'package:movie_login/src/features/core/models/details/description.dart';
+import '../../screens/dashboard/widgets/moviecards.dart';
 
-class DashBoardPopularMovies {
-  final String movieTitle;
-  final VoidCallback? onPress;
+class PopularMovies extends StatelessWidget {
+  final List popular;
 
-  DashBoardPopularMovies(this.movieTitle, this.onPress);
+  const PopularMovies({required Key key, required this.popular})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return PopularList(popular: popular);
+  }
+}
 
-  static List<DashBoardPopularMovies> list = [
-    DashBoardPopularMovies(tMovie9, null),
-    DashBoardPopularMovies(tMovie10, null),
-    DashBoardPopularMovies(tMovie11, null),
-    DashBoardPopularMovies(tMovie12, null),
-    DashBoardPopularMovies(tMovie13, null),
-    DashBoardPopularMovies(tMovie14, null),
-    DashBoardPopularMovies(tMovie15, null),
-    DashBoardPopularMovies(tMovie16, null),
-  ];
+class PopularList extends StatelessWidget {
+  const PopularList({
+    Key? key,
+    required this.popular,
+  }) : super(key: key);
+
+  final List popular;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopularListWidget(popular: popular);
+  }
+}
+
+class PopularListWidget extends StatelessWidget {
+  const PopularListWidget({
+    Key? key,
+    required this.popular,
+  }) : super(key: key);
+
+  final List popular;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      width: double.infinity,
+      child: ListView.builder(
+        itemCount: popular.length,
+        itemBuilder: ((context, index) => InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => 
+                      Description(
+                        name: popular[index]['title'],
+                        bannerurl: 'https://image.tmdb.org/t/p/w500' + popular[index]['backdrop_path'],
+                        posterurl: 'https://image.tmdb.org/t/p/w500' + popular[index]['poster_path'],
+                        description: popular[index]['overview'],
+                        vote: popular[index]['vote_average'].toString(),
+                        launch_on: popular[index]['release_date'],)));
+            },
+            child: MovieCards(
+                imageName: 'https://image.tmdb.org/t/p/w500' +
+                    popular[index]['poster_path']))),
+        clipBehavior: Clip.none,
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+  }
 }

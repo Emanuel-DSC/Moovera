@@ -24,20 +24,11 @@ class WelcomeScreen extends StatelessWidget {
         children: [
           // ignore: prefer_const_constructors
           SizedBox(height: 50),
-
-          // se for dark mode carrega X imagem se nao Y
-          isDarkMode
-              ? Container(
-                  width: 200,
-                  height: 200,
-                  child: Image(
-                      image: AssetImage(tWelcomeImage_dark),
-                      height: height * 0.6))
-              : Container(
-                  width: 200,
-                  height: 200,
-                  child: Image(
-                      image: AssetImage(tWelcomeImage),
+          // ignore: sized_box_for_whitespace
+          Container(
+            width: 200,
+            height: 200,
+            child: Image(image: AssetImage(tWelcomeImage_dark),
                       height: height * 0.6)),
 
           Text(tWelcomeText, style: Theme.of(context).textTheme.headline2),

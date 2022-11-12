@@ -6,8 +6,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../controllers/on_boarding_controlles.dart';
 
-class onBoarding1 extends StatelessWidget {
-  const onBoarding1({
+class OnBoarding1 extends StatelessWidget {
+  const OnBoarding1({
     Key? key,
     required this.screenWidth,
     required this.obController,

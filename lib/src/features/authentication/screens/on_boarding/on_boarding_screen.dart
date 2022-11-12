@@ -16,7 +16,6 @@ class OnBoardingScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     final obController = OnBoardingController();
 
-
     return Scaffold(
       body: Stack(children: [
         LiquidSwipe(
@@ -28,16 +27,11 @@ class OnBoardingScreen extends StatelessWidget {
             ),
             enableSideReveal: true,
             pages: [
-              onBoarding1(screenWidth: screenWidth, obController: obController),
-              onBoarding2(screenWidth: screenWidth, obController: obController),
-              onBoarding3(screenWidth: screenWidth, obController: obController),
+              OnBoarding1(screenWidth: screenWidth, obController: obController),
+              OnBoarding2(screenWidth: screenWidth, obController: obController),
+              OnBoarding3(screenWidth: screenWidth, obController: obController),
             ]),
       ]),
     );
   }
 }
-
-
-
-
-

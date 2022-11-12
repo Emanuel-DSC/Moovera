@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,6 +46,15 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAGNq-ueeb_4N8hhYyOMND2le7nyk30gBQ',
+    appId: '1:578682965712:web:bcf57981baf4f5070058d5',
+    messagingSenderId: '578682965712',
+    projectId: 'moovera-760e7',
+    authDomain: 'moovera-760e7.firebaseapp.com',
+    storageBucket: 'moovera-760e7.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC2BiqW_0VeQk-zGsYSFEHUn5y8y04Ps60',
     appId: '1:578682965712:android:ae1a2b70087fffa40058d5',
@@ -63,6 +69,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '578682965712',
     projectId: 'moovera-760e7',
     storageBucket: 'moovera-760e7.appspot.com',
+    androidClientId: '578682965712-1ba697h1u8qd0p0cq3vftpg9p100e4hn.apps.googleusercontent.com',
     iosClientId: '578682965712-id1nfe85is07e0vk9pseg5ue4i52kua9.apps.googleusercontent.com',
     iosBundleId: 'com.example.movieLogin',
   );

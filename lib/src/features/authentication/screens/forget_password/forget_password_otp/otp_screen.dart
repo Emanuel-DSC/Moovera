@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:movie_login/src/common_widget/button/degrade_button.dart';
+import 'package:get/get.dart';
 import 'package:movie_login/src/common_widget/form_header_widget.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
+import 'package:movie_login/src/features/authentication/controllers/otp_controller.dart';
 
 class OTPSreen extends StatelessWidget {
   const OTPSreen({super.key});
@@ -15,6 +16,8 @@ class OTPSreen extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
+    var otp;
+    var otpController = Get.put(OTPController());
 
     return SafeArea(
       child: Scaffold(
@@ -46,15 +49,43 @@ class OTPSreen extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 10.0),
                   fieldWidth: 45,
                   onSubmit: (code) {
-                    print("OTP IS -> $code");
+                    otp = code;
+                    OTPController.instance.verifyOTP(otp);
                   },
                 ),
                 const SizedBox(height: 50),
-                DegradeButton(
-                    buttonText: 'DONE',
-                    isDarkMode: isDarkMode,
-                    border: 10,
-                    screenName: 'OTPScreen'),
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: ShapeDecoration(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    gradient: LinearGradient(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      colors: [
+                        isDarkMode ? tPrimaryColor : tPrimaryDarkColor,
+                        isDarkMode ? tSecundaryColor : tSecundaryDarkColor,
+                      ],
+                    ),
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      OTPController.instance.verifyOTP(otp);
+                    },
+                    child: const Text(
+                      'hahahah',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(8),
+                      backgroundColor: Colors.transparent,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      shadowColor: Colors.transparent,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
