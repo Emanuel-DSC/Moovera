@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_login/src/features/core/models/details/description.dart';
 import '../../screens/dashboard/widgets/moviecards.dart';
 
 class TopRatedMovies extends StatelessWidget {
@@ -41,14 +42,27 @@ class TopRatedListWidget extends StatelessWidget {
       width: double.infinity,
       child: ListView.builder(
         itemCount: topRated.length,
-        itemBuilder: ((context, index) => GestureDetector(
-            //onTap: tv[index].onPress,
+                itemBuilder: ((context, index) => InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => 
+                      Description(
+                        name: topRated[index]['title'],
+                        bannerurl: 'https://image.tmdb.org/t/p/w500' + topRated[index]['backdrop_path'],
+                        posterurl: 'https://image.tmdb.org/t/p/w500' + topRated[index]['poster_path'],
+                        description: topRated[index]['overview'],
+                        vote: topRated[index]['vote_average'].toString(),
+                        launch_on: topRated[index]['release_date'],)));
+            },
             child: MovieCards(
                 imageName: 'https://image.tmdb.org/t/p/w500' +
-                topRated[index]['poster_path']))),
+                    topRated[index]['poster_path']))),
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,
       ),
     );
   }
 }
+

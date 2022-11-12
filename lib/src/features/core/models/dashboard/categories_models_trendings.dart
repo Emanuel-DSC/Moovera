@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_login/src/features/core/models/details/description.dart';
 import '../../screens/dashboard/widgets/moviecards.dart';
 
 class TrendingMovies extends StatelessWidget {
@@ -41,8 +42,20 @@ class TrendingListWidget extends StatelessWidget {
       width: double.infinity,
       child: ListView.builder(
         itemCount: trending.length,
-        itemBuilder: ((context, index) => GestureDetector(
-            //onTap: tv[index].onPress,
+                       itemBuilder: ((context, index) => InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => 
+                      Description(
+                        name: trending[index]['title'],
+                        bannerurl: 'https://image.tmdb.org/t/p/w500' + trending[index]['backdrop_path'],
+                        posterurl: 'https://image.tmdb.org/t/p/w500' + trending[index]['poster_path'],
+                        description: trending[index]['overview'],
+                        vote: trending[index]['vote_average'].toString(),
+                        launch_on: trending[index]['release_date'],)));
+            },
             child: MovieCards(
                 imageName: 'https://image.tmdb.org/t/p/w500' +
                     trending[index]['poster_path']))),

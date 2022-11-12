@@ -28,7 +28,7 @@ class Description extends StatelessWidget {
                   height: 250,
                   width: MediaQuery.of(context).size.width,
                   child: Image.network(
-                    bannerurl,
+                    posterurl,
                     fit: BoxFit.cover,
                   ),
                 ),
