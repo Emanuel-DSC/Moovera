@@ -41,6 +41,7 @@ dependencies:
   firebase_core: ^1.24.0
   firebase_auth: ^3.11.2
   tmdb_api:
+  line_awesome_flutter: ^2.0.0
 
 
 dev_dependencies:

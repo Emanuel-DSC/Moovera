@@ -4,7 +4,7 @@ import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/custom_icon_icons.dart';
 import 'package:movie_login/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:movie_login/src/features/core/screens/dashboard/dashboard.dart';
-import 'package:movie_login/src/features/core/screens/profile_sreen.dart';
+import 'package:movie_login/src/features/core/screens/profile/profile_screen.dart';
 
 class GnavBottomBar extends StatefulWidget {
   const GnavBottomBar({
