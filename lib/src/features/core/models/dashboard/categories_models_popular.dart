@@ -53,7 +53,7 @@ class PopularListWidget extends StatelessWidget {
                         bannerurl: 'https://image.tmdb.org/t/p/w500' + popular[index]['backdrop_path'],
                         posterurl: 'https://image.tmdb.org/t/p/w500' + popular[index]['poster_path'],
                         description: popular[index]['overview'],
-                        vote: popular[index]['vote_average'].toString(),
+                        vote: popular[index]['vote_average'].toDouble(),
                         launch_on: popular[index]['release_date'],)));
             },
             child: MovieCards(

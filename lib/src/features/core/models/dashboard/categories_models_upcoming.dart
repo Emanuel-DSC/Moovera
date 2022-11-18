@@ -53,7 +53,7 @@ class UpcomingListWidget extends StatelessWidget {
                         bannerurl: 'https://image.tmdb.org/t/p/w500' + upcoming[index]['backdrop_path'],
                         posterurl: 'https://image.tmdb.org/t/p/w500' + upcoming[index]['poster_path'],
                         description: upcoming[index]['overview'],
-                        vote: upcoming[index]['vote_average'].toString(),
+                        vote: upcoming[index]['vote_average'].toDouble(),
                         launch_on: upcoming[index]['release_date'],)));
             },
             child: Banners(

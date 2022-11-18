@@ -53,7 +53,7 @@ class TopRatedListWidget extends StatelessWidget {
                         bannerurl: 'https://image.tmdb.org/t/p/w500' + topRated[index]['backdrop_path'],
                         posterurl: 'https://image.tmdb.org/t/p/w500' + topRated[index]['poster_path'],
                         description: topRated[index]['overview'],
-                        vote: topRated[index]['vote_average'].toString(),
+                        vote: topRated[index]['vote_average'].toDouble(),
                         launch_on: topRated[index]['release_date'],)));
             },
             child: MovieCards(

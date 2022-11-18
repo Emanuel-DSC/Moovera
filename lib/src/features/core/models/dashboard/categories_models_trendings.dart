@@ -53,7 +53,7 @@ class TrendingListWidget extends StatelessWidget {
                         bannerurl: 'https://image.tmdb.org/t/p/w500' + trending[index]['backdrop_path'],
                         posterurl: 'https://image.tmdb.org/t/p/w500' + trending[index]['poster_path'],
                         description: trending[index]['overview'],
-                        vote: trending[index]['vote_average'].toString(),
+                        vote: trending[index]['vote_average'].toDouble(),
                         launch_on: trending[index]['release_date'],)));
             },
             child: MovieCards(

@@ -1,68 +1,184 @@
 // ignore_for_file: sized_box_for_whitespace, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:movie_login/src/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 
 class Description extends StatelessWidget {
-  final String name, description, bannerurl, posterurl, vote, launch_on;
+  final String name, description, bannerurl, posterurl, launch_on;
+  final double vote;
 
-  const Description({Key? key,required this.name,required this.description,
-  required this.bannerurl,required this.posterurl,required this.vote,
-  required this.launch_on}): super(key: key);
+  const Description({
+    Key? key,
+    required this.name,
+    required this.description,
+    required this.bannerurl,
+    required this.posterurl,
+    required this.vote,
+    required this.launch_on,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: isDarkMode ? tDarkBackground : tWhiteColor,
-      body: ListView(children: [
-        Container(
-            height: 250,
-            child: Stack(children: [
-              Positioned(
-                child: Container(
-                  height: 250,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.network(
-                    bannerurl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+      body: Stack(
+        children: [
+          Container(
+            height: double.infinity,
+            color: isDarkMode ? tDarkBackground : tWhiteColor,
+          ),
+          Image.network(bannerurl,
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.5,
+              fit: BoxFit.cover),
+          Positioned(
+            top: 30,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(LineAwesomeIcons.angle_left, color: tWhiteColor)),
+            ),
+          ),
+          Positioned.fill(
+            child: DecoratedBox(
+                decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.transparent,
+                  isDarkMode ? tDarkBackground : tWhiteColor
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.3, 0.5],
               ),
-              Positioned(bottom: 10, child: Text('⭐ Average Rating - ' + vote)),
-            ])),
-        const SizedBox(height: 15),
-        Container(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              name,
             )),
-        Container(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text(
-              'Releasing On - ' + launch_on,
-            )),
-        Row(
-          children: [
-            Container(
-              height: 200,
-              width: 100,
-              child: Image.network(posterurl),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.49,
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: isDarkMode ? tWhiteColor : Colors.black),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    launch_on,
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: isDarkMode ? tWhiteColor : Colors.black),
+                  ),
+                  const SizedBox(height: 20),
+                  RatingBar.builder(
+                    initialRating: vote / 2,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    ignoreGestures: true,
+                    itemCount: 5,
+                    itemSize: 20,
+                    unratedColor: tThirdDarkColor,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 2),
+                    itemBuilder: (context, index) {
+                      return Icon(
+                        LineAwesomeIcons.star_1,
+                        color: isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
+                      );
+                    },
+                    onRatingUpdate: (rating) {},
+                  ),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      maxLines: 8,
+                      description,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: isDarkMode ? tWhiteColor : Colors.black),
+                    ),
+                  ),
+                  const SizedBox(height: 60),
+                  Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
+                                  elevation: 5,
+                                  foregroundColor: tWhiteColor,
+                                  shape: const CircleBorder(
+                                  ),
+                                ),
+                                child: Ink(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(120),
+                                    gradient: LinearGradient(
+                                      colors: [isDarkMode ? tPrimaryColor : tPrimaryDarkColor, isDarkMode ? tSecundaryColor : tSecundaryDarkColor,],
+                                    ),
+                                  ),
+                                  child: Container(
+                                width: 80,
+                                height: 80,
+                                alignment: Alignment.center,
+                                child: const Icon(LineAwesomeIcons.play,
+                                  ),
+                                ),
+                              ),
+                            ),   
+                                ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
+                                  elevation: 5,
+                                  foregroundColor: tWhiteColor,
+                                  shape: const CircleBorder(
+                                  ),
+                                ),
+                                child: Ink(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(120),
+                                    gradient: LinearGradient(
+                                      colors: [isDarkMode ? tPrimaryColor : tPrimaryDarkColor, isDarkMode ? tSecundaryColor : tSecundaryDarkColor,],
+                                    ),
+                                  ),
+                                  child: Container(
+                                width: 80,
+                                height: 80,
+                                alignment: Alignment.center,
+                                child: const Icon(LineAwesomeIcons.heart,
+                                  ),
+                                ),
+                              ),
+                            ),   
+                          ],
+                        ),
+                      ),
+                ],
+              ),
             ),
-            Flexible(
-              child: Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    description,
-                  )),
-            ),
-          ],
-        )
-      ]),
+          ),
+        ],
+      ),
     );
   }
 }

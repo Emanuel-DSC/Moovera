@@ -42,7 +42,7 @@ dependencies:
   firebase_auth: ^3.11.2
   tmdb_api:
   line_awesome_flutter: ^2.0.0
-
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
