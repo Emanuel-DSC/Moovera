@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:movie_login/src/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 
 class Description extends StatelessWidget {
@@ -112,7 +111,7 @@ class Description extends StatelessWidget {
                           color: isDarkMode ? tWhiteColor : Colors.black),
                     ),
                   ),
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 30),
                   Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Row(

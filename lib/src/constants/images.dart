@@ -31,4 +31,9 @@ const String tEmailPasswordDark =
 // profile images
 
 const String tProfileBg = "assets/images/profile_images/profile_bg.png";
-const String tProfileBgDark = "assets/images/profile_images/profile_bg_dark.png";
+const String tProfileBgDark =
+    "assets/images/profile_images/profile_bg_dark.png";
+
+// error imagge
+
+const String error = "assets/images/error_images/error.png";

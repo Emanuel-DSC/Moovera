@@ -42,19 +42,21 @@ class UpcomingListWidget extends StatelessWidget {
       width: 400,
       child: ListView.builder(
         itemCount: upcoming.length,
-                               itemBuilder: ((context, index) => InkWell(
+        itemBuilder: ((context, index) => InkWell(
             onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => 
-                       Description(
-                        name: upcoming[index]['title'],
-                        bannerurl: 'https://image.tmdb.org/t/p/w500' + upcoming[index]['backdrop_path'],
-                        posterurl: 'https://image.tmdb.org/t/p/w500' + upcoming[index]['poster_path'],
-                        description: upcoming[index]['overview'],
-                        vote: upcoming[index]['vote_average'].toDouble(),
-                        launch_on: upcoming[index]['release_date'],)));
+                      builder: (context) => Description(
+                            name: upcoming[index]['title'],
+                            bannerurl: 'https://image.tmdb.org/t/p/w500' +
+                                upcoming[index]['backdrop_path'],
+                            posterurl: 'https://image.tmdb.org/t/p/w500' +
+                                upcoming[index]['poster_path'],
+                            description: upcoming[index]['overview'],
+                            vote: upcoming[index]['vote_average'].toDouble(),
+                            launch_on: upcoming[index]['release_date'],
+                          )));
             },
             child: Banners(
                 imageName: 'https://image.tmdb.org/t/p/w500' +

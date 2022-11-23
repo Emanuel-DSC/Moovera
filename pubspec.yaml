@@ -82,6 +82,7 @@ flutter:
     - assets/images/login_images/
     - assets/images/password_images/
     - assets/images/profile_images/
+    - assets/images/error_images/
 
   fonts:
     - family: CustomIcon

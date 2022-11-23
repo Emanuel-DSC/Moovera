@@ -28,7 +28,7 @@ class WelcomeScreen extends StatelessWidget {
           Container(
             width: 200,
             height: 200,
-            child: Image(image: AssetImage(tWelcomeImage_dark),
+            child: Image(image: AssetImage( isDarkMode ? tWelcomeImage_dark : tWelcomeImage),
                       height: height * 0.6)),
 
           Text(tWelcomeText, style: Theme.of(context).textTheme.headline2),
