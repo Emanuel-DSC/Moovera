@@ -38,8 +38,9 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   flutter_otp_text_field: ^1.1.1
   google_nav_bar: ^5.0.6
-  firebase_core: ^1.24.0
-  firebase_auth: ^3.11.2
+  firebase_core: ^2.4.0
+  firebase_auth: ^4.2.0
+  cloud_firestore: ^4.2.0
   tmdb_api:
   line_awesome_flutter: ^2.0.0
   flutter_rating_bar: ^4.0.1

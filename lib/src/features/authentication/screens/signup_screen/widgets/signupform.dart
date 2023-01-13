@@ -6,7 +6,7 @@ import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/features/authentication/controllers/signup_controller.dart';
-import 'package:movie_login/src/features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
+import 'package:movie_login/src/features/authentication/models/user_models.dart';
 
 class SignUpFormWidget extends StatelessWidget {
   const SignUpFormWidget({
@@ -17,7 +17,7 @@ class SignUpFormWidget extends StatelessWidget {
 
   final bool isDarkMode;
   final Size size;
-  
+
   //backend
   static final controller = Get.put(SignUpController());
   static final _formKey = GlobalKey<FormState>();
@@ -90,10 +90,18 @@ class SignUpFormWidget extends StatelessWidget {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     //SignUpController.instance.registerUser(controller.email.text.trim(),controller.password.text.trim());
-                    SignUpController.instance.phoneAuthentication(controller.phoneNo.text.trim());
-                    Get.to(const OTPSreen());
+                    //SignUpController.instance.phoneAuthentication(controller.phoneNo.text.trim());
+
+                    final user = UserModel(
+                      email: controller.email.text.trim(),
+                      password: controller.password.text.trim(),
+                      fullName: controller.fullName.text.trim(),
+                      phoneNo: controller.phoneNo.text.trim(),
+                    );
+                    SignUpController.instance.createUser(user);
                   }
                 },
+                // estilo do botao
                 child: const Text(
                   tSignUpText,
                   style: TextStyle(
