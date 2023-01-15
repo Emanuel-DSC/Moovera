@@ -16,7 +16,7 @@ class OTPSreen extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    var otp;
+    String otp;
     var otpController = Get.put(OTPController());
 
     return SafeArea(
@@ -49,6 +49,7 @@ class OTPSreen extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 10.0),
                   fieldWidth: 45,
                   onSubmit: (code) {
+                    code.toString();
                     otp = code;
                     OTPController.instance.verifyOTP(otp);
                   },
@@ -70,10 +71,11 @@ class OTPSreen extends StatelessWidget {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      OTPController.instance.verifyOTP(otp);
+                      
+                     // OTPController.instance.verifyOTP(otp);
                     },
                     child: const Text(
-                      'hahahah',
+                      'NEXT',
                       style: TextStyle(
                         color: Colors.white,
                       ),

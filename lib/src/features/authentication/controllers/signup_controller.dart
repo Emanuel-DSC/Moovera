@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/features/authentication/models/user_models.dart';
 import 'package:movie_login/src/features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
 import 'package:movie_login/src/repository/auth_repository/auth_repo.dart';
@@ -19,11 +18,11 @@ class SignUpController extends GetxController {
 
   // Call this Function from Design and it will do the rest
   void registerUser(String email, String password) {
-    AuthenticationRepository.instance
+    String ? error = AuthenticationRepository.instance
         .createUserWithEmailAndPassword(email, password) as String?;
-    Get.showSnackbar(GetSnackBar(
-      message: error.toString(),
-    ));
+    if(error != null){
+      Get.showSnackbar(GetSnackBar(message: error.toString()));
+    }
   }
 
   Future<void> createUser(UserModel user) async {
