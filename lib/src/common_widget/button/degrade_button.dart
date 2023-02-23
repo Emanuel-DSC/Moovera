@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/features/authentication/screens/forget_password/forget_password_email/forget_password_mail.dart';
-import 'package:movie_login/src/features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
-import 'package:movie_login/src/features/authentication/screens/login_screen/login_screen.dart';
-import 'package:movie_login/src/features/authentication/screens/signup_screen/signup_screen.dart';
-import 'package:movie_login/src/features/core/screens/dashboard/widgets/gnav_bottom_bar.dart';
-import 'package:movie_login/src/features/core/screens/profile/profile_screen.dart';
-import 'package:movie_login/src/features/core/screens/profile/profile_update_screen.dart';
+import 'package:movie_login/src/profile/widgets/profile_screen.dart';
+import 'package:movie_login/src/screens/forget_password/forget_password_email/forget_password_mail.dart';
+import 'package:movie_login/src/screens/forget_password/forget_password_otp/otp_screen.dart';
+import 'package:movie_login/src/screens/login_screen/login_screen.dart';
+import 'package:movie_login/src/screens/signup_screen/signup_screen.dart';
+import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
 
 class DegradeButton extends StatelessWidget {
   const DegradeButton({
@@ -76,9 +75,9 @@ callPage(page) {
   if (page == 'GNAV') {
     Get.to(const GnavBottomBar());
   }
-  if (page == 'ProfileUpdate') {
-    Get.to(const ProfileScreeenUpdate());
-  }
+  // if (page == 'ProfileUpdate') {
+  //   Get.to(const ProfileScreeenUpdate());
+  // }
   if (page == 'Profile') {
     Get.to(const ProfileScreen());
   }

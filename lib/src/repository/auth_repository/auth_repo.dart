@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/features/authentication/screens/welcome/welcome_screen.dart';
-import 'package:movie_login/src/features/core/screens/dashboard/widgets/gnav_bottom_bar.dart';
-import 'package:movie_login/src/repository/auth_repository/exceptions/signup_email_password_failure.dart';
+import 'package:movie_login/src/repository/auth_repository/signup_email_password_failure.dart';
+import 'package:movie_login/src/screens/on_boarding/on_boarding_screen.dart';
+import 'package:movie_login/src/screens/welcome/welcome_screen.dart';
+import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -24,7 +25,7 @@ class AuthenticationRepository extends GetxController {
 
   //setting initial screen on load
   _setInitialScreen(User? user) {
-    user == null ? Get.offAll(() => const WelcomeScreen()) : const GnavBottomBar();
+    user == null ? Get.offAll(() => const OnBoardingScreen()) : const GnavBottomBar();
   }
 
   //FUNC

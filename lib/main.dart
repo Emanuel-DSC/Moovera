@@ -7,9 +7,10 @@ import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/firebase_options.dart';
 import 'package:movie_login/src/constants/images.dart';
-import 'package:movie_login/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
 import 'package:movie_login/src/repository/auth_repository/auth_repo.dart';
 import 'package:movie_login/src/utils/theme/theme.dart';
+
+import 'src/screens/on_boarding/on_boarding_screen.dart';
 
 void main() {
   ErrorWidget.builder = (FlutterErrorDetails details) => Scaffold(
