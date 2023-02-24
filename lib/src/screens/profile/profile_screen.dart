@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/profile/widgets/profile_menu_widget.dart';
+import 'package:movie_login/src/screens/widgets/profile_menu_widget.dart';
 import 'package:movie_login/src/repository/auth_repository/auth_repo.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -95,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                       buttonText: 'Edit Profile',
                       isDarkMode: isDarkMode,
                       border: 20,
-                      screenName: 'ProfileUpdate'),
+                      onTab: () { Get.to(const ProfileScreen()); },),
                 )
               ]),
             ),

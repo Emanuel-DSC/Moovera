@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:movie_login/src/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
-import 'package:movie_login/src/screens/login_screen/login_screen.dart';
+import 'package:movie_login/src/screens/signup_screen/signup_screen.dart';
+
+import '../login_screen/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -27,18 +29,17 @@ class WelcomeScreen extends StatelessWidget {
 
           // se for dark mode carrega X imagem se nao Y
           isDarkMode
-              ? Container(
+              ? SizedBox(
                   width: 200,
                   height: 200,
                   child: Image(
                       image: AssetImage(tWelcomeImage_dark),
                       height: height * 0.6))
-              : Container(
+              : SizedBox(
                   width: 200,
                   height: 200,
                   child: Image(
-                      image: AssetImage(tWelcomeImage),
-                      height: height * 0.6)),
+                      image: AssetImage(tWelcomeImage), height: height * 0.6)),
 
           Text(tWelcomeText, style: Theme.of(context).textTheme.headline2),
           Padding(
@@ -65,10 +66,13 @@ class WelcomeScreen extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: DegradeButton(
-                      buttonText: 'SIGN UP',
-                      isDarkMode: isDarkMode,
-                      border: 32,
-                      screenName: 'SignUpScreen'),
+                    buttonText: 'SIGN UP',
+                    isDarkMode: isDarkMode,
+                    border: 32,
+                    onTab: () {
+                      Get.to(SignUpScreen());
+                    },
+                  ),
                 ),
               ],
             ),

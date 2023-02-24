@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:movie_login/src/constants/authentication/controllers/on_boarding_controlles.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../controllers/on_boarding_controlles.dart';
 import '../welcome/welcome_screen.dart';
 
-class onBoarding3 extends StatelessWidget {
-  const onBoarding3({
+class OnBoarding3 extends StatelessWidget {
+  const OnBoarding3({
     Key? key,
     required this.screenWidth,
     required this.obController,
@@ -43,15 +43,13 @@ class onBoarding3 extends StatelessWidget {
             height: 130,
           ),
           Obx(
-            () => Positioned(
-              child: AnimatedSmoothIndicator(
-                activeIndex: obController.currentPage.value,
-                count: 3,
-                effect: SwapEffect(
-                  dotColor: Colors.grey.shade500,
-                  activeDotColor: Colors.white,
-                  dotWidth: 24.0,
-                ),
+            () => AnimatedSmoothIndicator(
+              activeIndex: obController.currentPage.value,
+              count: 3,
+              effect: SwapEffect(
+                dotColor: Colors.grey.shade500,
+                activeDotColor: Colors.white,
+                dotWidth: 24.0,
               ),
             ),
           ),
@@ -63,8 +61,7 @@ class onBoarding3 extends StatelessWidget {
             height: 50,
             decoration: ShapeDecoration(
               shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(28))),
+                  borderRadius: BorderRadius.all(Radius.circular(28))),
               gradient: LinearGradient(
                 colors: [
                   Colors.redAccent.shade200,
@@ -73,10 +70,12 @@ class onBoarding3 extends StatelessWidget {
               ),
             ),
             child: ElevatedButton(
-              onPressed: () {
-                // vai para a Welcome Screen e remove todas as anteriores
-                 Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-    WelcomeScreen()), (Route<dynamic> route) => false);
+              onPressed: () async {
+                // dont let back to onBoarding
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen()),
+                    (Route<dynamic> route) => false);
               },
               child: const Text(
                 'GET STARTED',

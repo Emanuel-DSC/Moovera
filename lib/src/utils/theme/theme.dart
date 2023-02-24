@@ -46,7 +46,7 @@ class TAppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,  
+    outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
   );
 
@@ -88,7 +88,6 @@ class TAppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-
     outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
   );

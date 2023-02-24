@@ -6,9 +6,8 @@ class OnBoardingController extends GetxController {
   final controller = LiquidController();
   RxInt currentPage = 0.obs;
 
-  // ignore: non_constant_identifier_names
-  OnPageChangeCallback(int activePageeIndex) {
-    currentPage.value = activePageeIndex;
+  onPageChangeCallback(int activePageIndex) {
+    currentPage.value = activePageIndex;
   }
 
   skip() => controller.jumpToPage(page: 2);

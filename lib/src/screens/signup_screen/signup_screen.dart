@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movie_login/src/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/common_widget/form/form_footer_widget.dart';
 import 'package:movie_login/src/common_widget/form/form_header_widget.dart';
@@ -64,8 +65,8 @@ class SignUpScreen extends StatelessWidget {
                   DegradeButton(
                       isDarkMode: isDarkMode,
                       buttonText: 'SIGN UP',
-                      border: 8,
-                      screenName: 'SignUpScreen'),
+                      border: 8, onTab: () { Get.to(const SignUpScreen()); },
+                      ),
                   const FormFooter(
                       buttonTitle1: tLoginText6,
                       buttonTitle2: tSignUpText5,

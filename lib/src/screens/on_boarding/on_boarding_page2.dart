@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:movie_login/src/constants/authentication/controllers/on_boarding_controlles.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../controllers/on_boarding_controlles.dart';
+import '../welcome/welcome_screen.dart';
 
-class onBoarding2 extends StatelessWidget {
-  const onBoarding2({
+class OnBoarding2 extends StatelessWidget {
+  const OnBoarding2({
     Key? key,
     required this.screenWidth,
     required this.obController,
@@ -42,15 +43,13 @@ class onBoarding2 extends StatelessWidget {
             height: 130,
           ),
           Obx(
-            () => Positioned(
-              child: AnimatedSmoothIndicator(
-                activeIndex: obController.currentPage.value,
-                count: 3,
-                effect: SwapEffect(
-                  dotColor: Colors.grey.shade500,
-                  activeDotColor: Colors.white,
-                  dotWidth: 24.0,
-                ),
+            () => AnimatedSmoothIndicator(
+              activeIndex: obController.currentPage.value,
+              count: 3,
+              effect: SwapEffect(
+                dotColor: Colors.grey.shade500,
+                activeDotColor: Colors.white,
+                dotWidth: 24.0,
               ),
             ),
           ),
@@ -74,6 +73,25 @@ class onBoarding2 extends StatelessWidget {
                 'Next',
                 style: TextStyle(
                   color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () async {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (context) => const WelcomeScreen()),
+                  (Route<dynamic> route) => false);
+            },
+            child: const SizedBox(
+              width: 190,
+              height: 50,
+              child: Center(
+                child: Text(
+                  'Skip',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
               ),
             ),

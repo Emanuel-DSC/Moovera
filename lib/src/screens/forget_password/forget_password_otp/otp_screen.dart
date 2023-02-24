@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:get/get.dart';
 import 'package:movie_login/src/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/common_widget/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/colors.dart';
@@ -45,7 +46,7 @@ class OTPSreen extends StatelessWidget {
                   onSubmit: (code) {print("OTP IS -> $code"); } ,
                 ),
                 const SizedBox(height: 50),
-                DegradeButton(buttonText: 'DONE', isDarkMode: isDarkMode, border: 10, screenName: 'OTPScreen'),
+                DegradeButton(buttonText: 'DONE', isDarkMode: isDarkMode, border: 10, onTab: () { Get.to(const OTPSreen()); },),
               ],
             ),
           ),

@@ -1,13 +1,100 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/common_widget/button/degrade_button.dart';
+import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
+import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
 
 import '../forget_password/forget_password_option/forget_password_model_bottom_sheet.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+// text editing controllers
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  // sign user in method
+  void signUserIn() async {
+    // show loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    // try sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      // pop the loading circle
+      Get.to(const GnavBottomBar());
+    } on FirebaseAuthException catch (e) {
+      // pop the loading circle
+      Navigator.pop(context);
+      // WRONG EMAIL
+      if (e.code == 'user-not-found') {
+        // show error to user
+        wrongEmailMessage();
+      }
+
+      // WRONG PASSWORD
+      else if (e.code == 'wrong-password') {
+        // show error to user
+        wrongPasswordMessage();
+      }
+    }
+  }
+
+  // wrong email message popup
+  void wrongEmailMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: tThirdColor,
+          title: Center(
+            child: Text(
+              tLoginText10,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // wrong password message popup
+  void wrongPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: tThirdColor,
+          title: Center(
+            child: Text(
+              tLoginText11,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +108,7 @@ class LoginForm extends StatelessWidget {
         children: [
           const SizedBox(height: 10),
           TextFormField(
+            controller: emailController,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.person_outline_outlined),
               labelText: tLoginText3,
@@ -29,6 +117,8 @@ class LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
+            obscureText: true,
+            controller: passwordController,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.fingerprint),
               labelText: tLoginText4,
@@ -52,14 +142,15 @@ class LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           DegradeButton(
-              buttonText: 'SIGN IN',
-              isDarkMode: isDarkMode,
-              border: 10,
-              screenName: 'GNAV'),
+            buttonText: 'SIGN IN',
+            isDarkMode: isDarkMode,
+            border: 10,
+            onTab: () {
+              signUserIn();
+            },
+          ),
         ],
       ),
     );
   }
 }
-
-

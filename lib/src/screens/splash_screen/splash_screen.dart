@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/authentication/controllers/splash_screen_controllers.dart';
+import 'package:movie_login/src/controllers/splash_screen_controllers.dart';
 import 'package:movie_login/src/constants/images.dart';
 
 class SplashScreen extends StatelessWidget {

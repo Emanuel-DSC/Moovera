@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/profile/widgets/profile_screen.dart';
-import 'package:movie_login/src/screens/forget_password/forget_password_email/forget_password_mail.dart';
-import 'package:movie_login/src/screens/forget_password/forget_password_otp/otp_screen.dart';
-import 'package:movie_login/src/screens/login_screen/login_screen.dart';
-import 'package:movie_login/src/screens/signup_screen/signup_screen.dart';
-import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
 
 class DegradeButton extends StatelessWidget {
   const DegradeButton({
@@ -14,13 +7,13 @@ class DegradeButton extends StatelessWidget {
     required this.buttonText,
     required this.isDarkMode,
     required this.border,
-    required this.screenName,
+    required this.onTab,
   }) : super(key: key);
 
   final bool isDarkMode;
   final String buttonText;
   final double border;
-  final String screenName;
+  final VoidCallback onTab;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +32,7 @@ class DegradeButton extends StatelessWidget {
         ),
       ),
       child: ElevatedButton(
-        onPressed: () {
-          callPage(screenName);
-        },
+        onPressed: onTab,
         child: Text(
           buttonText,
           style: const TextStyle(
@@ -59,26 +50,3 @@ class DegradeButton extends StatelessWidget {
   }
 }
 
-callPage(page) {
-  if (page == 'SignUpScreen') {
-    Get.to(const SignUpScreen());
-  }
-  if (page == 'LoginScreen') {
-    Get.to(const LoginScreen());
-  }
-  if (page == 'ForgetPasswordMailScreen') {
-    Get.to(const ForgetPasswordMailScreen());
-  }
-  if (page == 'OTPScreen') {
-    Get.to(const OTPSreen());
-  }
-  if (page == 'GNAV') {
-    Get.to(const GnavBottomBar());
-  }
-  // if (page == 'ProfileUpdate') {
-  //   Get.to(const ProfileScreeenUpdate());
-  // }
-  if (page == 'Profile') {
-    Get.to(const ProfileScreen());
-  }
-}

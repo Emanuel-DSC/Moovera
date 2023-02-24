@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
-import 'package:movie_login/src/constants/authentication/controllers/on_boarding_controlles.dart';
+import '../../controllers/on_boarding_controlles.dart';
 import 'on_boarding_page1.dart';
 import 'on_boarding_page2.dart';
 import 'on_boarding_page3.dart';
@@ -15,28 +15,22 @@ class OnBoardingScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     final obController = OnBoardingController();
 
-
     return Scaffold(
       body: Stack(children: [
         LiquidSwipe(
             liquidController: obController.controller,
-            onPageChangeCallback: obController.OnPageChangeCallback,
+            onPageChangeCallback: obController.onPageChangeCallback,
             slideIconWidget: const Icon(
               Icons.arrow_back_ios_new,
               color: Colors.white,
             ),
             enableSideReveal: true,
             pages: [
-              onBoarding1(screenWidth: screenWidth, obController: obController),
-              onBoarding2(screenWidth: screenWidth, obController: obController),
-              onBoarding3(screenWidth: screenWidth, obController: obController),
+              OnBoarding1(screenWidth: screenWidth, obController: obController),
+              OnBoarding2(screenWidth: screenWidth, obController: obController),
+              OnBoarding3(screenWidth: screenWidth, obController: obController),
             ]),
       ]),
     );
   }
 }
-
-
-
-
-

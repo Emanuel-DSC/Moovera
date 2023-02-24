@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movie_login/src/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/common_widget/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
+import 'package:movie_login/src/screens/forget_password/forget_password_otp/otp_screen.dart';
 
 class ForgetPasswordMailScreen extends StatelessWidget {
   const ForgetPasswordMailScreen({Key? key}) : super(key: key);
@@ -42,8 +44,8 @@ class ForgetPasswordMailScreen extends StatelessWidget {
               DegradeButton(
               buttonText: 'NEXT',
               isDarkMode: isDarkMode,
-              border: 8,
-              screenName: 'OTPScreen'),
+              border: 8, onTab: () { Get.to(const OTPSreen()); },
+              ),
               ],
             ),
           ),

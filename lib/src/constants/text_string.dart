@@ -27,6 +27,9 @@ const String tLoginText6 = "Sign-in with Google";
 const String tLoginText7 = "Don't have an account? ";
 const String tLoginText8 = "SIGN IN ";
 const String tLoginText9 = "SIGN UP ";
+const String tLoginText10 = "Invalid email";
+const String tLoginText11 = "Invalid Password";
+
 
 //sign up text
 

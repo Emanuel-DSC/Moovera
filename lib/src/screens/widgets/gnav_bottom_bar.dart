@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/custom_icon_icons.dart';
-import 'package:movie_login/src/profile/widgets/profile_screen.dart';
+import 'package:movie_login/src/screens/profile/profile_screen.dart';
 import 'package:movie_login/src/screens/dashboard/dashboard.dart';
 import 'package:movie_login/src/screens/login_screen/login_screen.dart';
 
