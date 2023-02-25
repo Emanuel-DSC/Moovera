@@ -17,9 +17,10 @@ class FormHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        const SizedBox(height: 50.0),
+        SizedBox(height: height * 0.1),
         isDarkMode
             ? Image(
                 image: AssetImage(image),

@@ -1,30 +1,28 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/screens/widgets/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
 
-import '../forget_password/forget_password_option/forget_password_model_bottom_sheet.dart';
-
-class LoginForm extends StatefulWidget {
-  const LoginForm({
+class SignUpForm extends StatefulWidget {
+  const SignUpForm({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignUpFormState extends State<SignUpForm> {
 // text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final passwordConfirmController = TextEditingController();
 
-  // sign user in method
-  void signUserIn() async {
+  // sign user up method
+  void signUserUp() async {
     // show loading circle
     showDialog(
       context: context,
@@ -35,9 +33,15 @@ class _LoginFormState extends State<LoginForm> {
       },
     );
 
-    // try sign in
+    // check if passwords are the same
+    if (passwordController.text != passwordConfirmController.text) {
+      Navigator.pop(context);
+      showErrorMessage("Passwords do not match");
+      return;
+    }
+    // try sign Up
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -81,45 +85,37 @@ class _LoginFormState extends State<LoginForm> {
         children: [
           const SizedBox(height: 10),
           TextFormField(
-            controller: emailController,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.person_outline_outlined),
-              labelText: tLoginText3,
-              border: OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 10),
-          TextFormField(
-            obscureText: true,
-            controller: passwordController,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.fingerprint),
-              labelText: tLoginText4,
-              border: OutlineInputBorder(),
-              suffixIcon: IconButton(
-                onPressed: null,
-                icon: Icon(Icons.remove_red_eye_outlined),
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {
-                //cria um container pop up inferior
-                ForgetPasswordScreen.buildShowModalBottomSheet(context);
-              },
-              child: const Text(tLoginText5),
-            ),
-          ),
+                    controller: emailController,
+                    decoration: const InputDecoration(
+                      label: Text(tLoginText3),
+                      prefixIcon: Icon(Icons.mail_outline_rounded),
+                    ),
+                  ),   
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      label: Text(tLoginText4),
+                      prefixIcon: Icon(Icons.fingerprint),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    controller: passwordConfirmController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      label: Text(tLoginText44),
+                      prefixIcon: Icon(Icons.fingerprint),
+                    ),
+                  ),
           const SizedBox(height: 10),
           DegradeButton(
-            buttonText: 'SIGN IN',
+            buttonText: 'SIGN UP',
             isDarkMode: isDarkMode,
             border: 10,
             onTab: () {
-              signUserIn();
+              signUserUp();
             },
           ),
         ],

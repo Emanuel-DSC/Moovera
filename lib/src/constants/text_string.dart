@@ -22,21 +22,17 @@ const String tLoginText = "Moovera, see what you like!";
 const String tLoginText2 = "Watch The Best Series And Movies.";
 const String tLoginText3 = "E-Mail";
 const String tLoginText4 = "Password";
+const String tLoginText44 = "Confirm Password";
 const String tLoginText5 = "Forget Password?";
 const String tLoginText6 = "Sign-in with Google";
 const String tLoginText7 = "Don't have an account? ";
 const String tLoginText8 = "SIGN IN ";
 const String tLoginText9 = "SIGN UP ";
-const String tLoginText10 = "Invalid email";
-const String tLoginText11 = "Invalid Password";
-
 
 //sign up text
 
 const String tSignUpText = "Get on Board!";
 const String tSignUpText2 = "Create your profile to start your journey.";
-const String tSignUpText3 = "Full name";
-const String tSignUpText4 = "Phone";
 const String tSignUpText5 = "Already have an account? ";
 
 // forget password text

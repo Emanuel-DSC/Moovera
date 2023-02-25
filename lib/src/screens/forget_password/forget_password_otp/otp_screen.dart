@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/common_widget/button/degrade_button.dart';
-import 'package:movie_login/src/common_widget/form/form_header_widget.dart';
+import 'package:movie_login/src/screens/widgets/common_widget/button/degrade_button.dart';
+import 'package:movie_login/src/screens/widgets/common_widget/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/constants/images.dart';
+import 'package:movie_login/src/screens/login_screen/login_screen.dart';
 
 class FormFooter extends StatelessWidget {
   const FormFooter({
@@ -7,9 +10,12 @@ class FormFooter extends StatelessWidget {
     required this.buttonTitle1,
     required this.buttonTitle2,
     required this.buttonTitle3,
+    required this.onTap,
   }) : super(key: key);
 
   final String buttonTitle1, buttonTitle2, buttonTitle3;
+  final VoidCallback onTap ;
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +52,7 @@ class FormFooter extends StatelessWidget {
         ),
         const SizedBox(height: 10.0),
         TextButton(
-          onPressed: () {},
+          onPressed: onTap,
           child: Text.rich(
             TextSpan(
               text: buttonTitle2,

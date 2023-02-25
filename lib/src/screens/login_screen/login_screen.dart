@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movie_login/src/common_widget/form/form_footer_widget.dart';
-import 'package:movie_login/src/common_widget/form/form_header_widget.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:movie_login/src/screens/signup_screen/signup_screen.dart';
+import 'package:movie_login/src/screens/widgets/common_widget/form/form_footer_widget.dart';
+import 'package:movie_login/src/screens/widgets/common_widget/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'login_form.dart';
-
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,12 +29,23 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // theme on image
-                FormHeaderWidget(isDarkMode: isDarkMode, size: size, title: tLoginText, subtitle: tLoginText2,
-                        image: tWelcomeImage_dark,
-                        imageDark: tWelcomeImage),
+                FormHeaderWidget(
+                    isDarkMode: isDarkMode,
+                    size: size,
+                    title: tLoginText,
+                    subtitle: tLoginText2,
+                    image: tWelcomeImage_dark,
+                    imageDark: tWelcomeImage),
                 const SizedBox(height: 20),
                 const LoginForm(),
-                const FormFooter(buttonTitle1: tLoginText6, buttonTitle2: tLoginText7, buttonTitle3: tLoginText9)
+                FormFooter(
+                  buttonTitle1: tLoginText6,
+                  buttonTitle2: tLoginText7,
+                  buttonTitle3: tLoginText9,
+                  onTap: () {
+                    Get.to(const SignUpScreen());
+                  },
+                )
               ],
             ),
           ),
@@ -41,4 +54,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
