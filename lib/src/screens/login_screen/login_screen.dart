@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/screens/signup_screen/signup_screen.dart';
 import 'package:movie_login/src/screens/widgets/common_widget/form/form_footer_widget.dart';
 import 'package:movie_login/src/screens/widgets/common_widget/form/form_header_widget.dart';

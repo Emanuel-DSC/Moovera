@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/authentication/auth_services.dart';
 import 'package:movie_login/src/screens/widgets/common_widget/button/degrade_button.dart';

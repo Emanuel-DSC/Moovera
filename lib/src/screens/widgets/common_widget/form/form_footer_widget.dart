@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/authentication/auth_services.dart';
 import 'package:movie_login/src/constants/images.dart';
-import 'package:movie_login/src/screens/login_screen/login_screen.dart';
-import 'package:tmdb_api/tmdb_api.dart';
 
 class FormFooter extends StatelessWidget {
   const FormFooter({

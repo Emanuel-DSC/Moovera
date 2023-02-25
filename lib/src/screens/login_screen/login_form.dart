@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/screens/widgets/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
