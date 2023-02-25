@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:movie_login/src/authentication/auth_services.dart';
 import 'package:movie_login/src/screens/widgets/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/screens/widgets/profile_menu_widget.dart';
@@ -49,9 +51,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                   icon: Icon(isDarkMode
                       ? LineAwesomeIcons.sun
                       : LineAwesomeIcons.moon)),
@@ -86,6 +86,7 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.logout,
                     onPress: () {
                       AuthenticationRepository.instance.logout();
+                      AuthService().signOutWithGoogle();
                     },
                     textColor: Colors.red,
                     endIcon: false),
@@ -93,10 +94,13 @@ class ProfileScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: DegradeButton(
-                      buttonText: 'Edit Profile',
-                      isDarkMode: isDarkMode,
-                      border: 20,
-                      onTab: () { Get.to(const ProfileScreen()); },),
+                    buttonText: 'Edit Profile',
+                    isDarkMode: isDarkMode,
+                    border: 20,
+                    onTab: () {
+                      Get.to(const ProfileScreen());
+                    },
+                  ),
                 )
               ]),
             ),

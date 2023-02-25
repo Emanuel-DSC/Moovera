@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:movie_login/src/authentication/auth_services.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/screens/login_screen/login_screen.dart';
+import 'package:tmdb_api/tmdb_api.dart';
 
 class FormFooter extends StatelessWidget {
   const FormFooter({
@@ -14,8 +16,7 @@ class FormFooter extends StatelessWidget {
   }) : super(key: key);
 
   final String buttonTitle1, buttonTitle2, buttonTitle3;
-  final VoidCallback onTap ;
-
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +33,14 @@ class FormFooter extends StatelessWidget {
           height: 50,
           child: OutlinedButton.icon(
             style: OutlinedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                side: BorderSide(width: 2, color: isDarkMode ? Colors.white : Colors.black,),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
               ),
+              side: BorderSide(
+                width: 2,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
             icon: const Image(
               image: AssetImage(tGoogleImage),
               width: 20.0,
@@ -47,7 +51,9 @@ class FormFooter extends StatelessWidget {
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              AuthService().signInWithGoogle();
+            },
           ),
         ),
         const SizedBox(height: 10.0),
