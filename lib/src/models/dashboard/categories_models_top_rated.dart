@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/models/details/description.dart';
-import 'package:movie_login/src/screens/widgets/moviecards.dart';
+import 'package:movie_login/src/screens/favorites_screen.dart';
+import 'package:movie_login/src/widgets/moviecards.dart';
 
 class TopRatedMovies extends StatelessWidget {
   final List topRated;
@@ -54,7 +55,8 @@ class TopRatedListWidget extends StatelessWidget {
                         posterurl: 'https://image.tmdb.org/t/p/w500' + topRated[index]['poster_path'],
                         description: topRated[index]['overview'],
                         vote: topRated[index]['vote_average'].toDouble(),
-                        launch_on: topRated[index]['release_date'],)));
+                        launch_on: topRated[index]['release_date'],
+                        )));
             },
             child: MovieCards(
                 imageName: 'https://image.tmdb.org/t/p/w500' +

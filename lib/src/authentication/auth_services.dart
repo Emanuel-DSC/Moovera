@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
+import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 
 
 class AuthService {

@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/screens/widgets/common_widget/button/degrade_button.dart';
+import 'package:movie_login/src/widgets/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/screens/signup_screen/signup_screen.dart';
 
-import '../login_screen/login_screen.dart';
+import 'login_screen/login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

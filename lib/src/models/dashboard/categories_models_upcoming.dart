@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/models/details/description.dart';
-import 'package:movie_login/src/screens/widgets/banners.dart';
+import 'package:movie_login/src/screens/dashboard_screen.dart';
+import 'package:movie_login/src/screens/favorites_screen.dart';
+import 'package:movie_login/src/widgets/banners.dart';
 
 class UpComingMovies extends StatelessWidget {
   final List upcoming;
@@ -55,7 +59,7 @@ class UpcomingListWidget extends StatelessWidget {
                                 upcoming[index]['poster_path'],
                             description: upcoming[index]['overview'],
                             vote: upcoming[index]['vote_average'].toDouble(),
-                            launch_on: upcoming[index]['release_date'],
+                            launch_on: upcoming[index]['release_date'], 
                           )));
             },
             child: Banners(

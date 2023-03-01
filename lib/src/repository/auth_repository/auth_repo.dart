@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:movie_login/src/repository/auth_repository/signup_email_password_failure.dart';
 import 'package:movie_login/src/screens/on_boarding/on_boarding_screen.dart';
-import 'package:movie_login/src/screens/welcome/welcome_screen.dart';
-import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
+import 'package:movie_login/src/screens/welcome_screen.dart';
+import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();

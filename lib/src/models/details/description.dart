@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
+import 'package:movie_login/src/screens/favorites_screen.dart';
 
 class Description extends StatelessWidget {
   final String name, description, bannerurl, posterurl, launch_on;
@@ -24,6 +25,7 @@ class Description extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
+    var pressed = false;
 
     return Scaffold(
       backgroundColor: isDarkMode ? tDarkBackground : tWhiteColor,
@@ -42,8 +44,9 @@ class Description extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(LineAwesomeIcons.angle_left, color: tWhiteColor)),
+                  onPressed: () {},
+                  icon: const Icon(LineAwesomeIcons.angle_left,
+                      color: tWhiteColor)),
             ),
           ),
           Positioned.fill(
@@ -113,65 +116,82 @@ class Description extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
                   Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
-                                  elevation: 5,
-                                  foregroundColor: tWhiteColor,
-                                  shape: const CircleBorder(
-                                  ),
-                                ),
-                                child: Ink(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(120),
-                                    gradient: LinearGradient(
-                                      colors: [isDarkMode ? tPrimaryColor : tPrimaryDarkColor, isDarkMode ? tSecundaryColor : tSecundaryDarkColor,],
-                                    ),
-                                  ),
-                                  child: Container(
-                                width: 80,
-                                height: 80,
-                                alignment: Alignment.center,
-                                child: const Icon(LineAwesomeIcons.play,
-                                  ),
-                                ),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isDarkMode
+                                ? tPrimaryColor
+                                : tSecundaryDarkColor,
+                            elevation: 5,
+                            foregroundColor: tWhiteColor,
+                            shape: const CircleBorder(),
+                          ),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(120),
+                              gradient: LinearGradient(
+                                colors: [
+                                  isDarkMode
+                                      ? tPrimaryColor
+                                      : tPrimaryDarkColor,
+                                  isDarkMode
+                                      ? tSecundaryColor
+                                      : tSecundaryDarkColor,
+                                ],
                               ),
-                            ),   
-                                ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
-                                  elevation: 5,
-                                  foregroundColor: tWhiteColor,
-                                  shape: const CircleBorder(
-                                  ),
-                                ),
-                                child: Ink(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(120),
-                                    gradient: LinearGradient(
-                                      colors: [isDarkMode ? tPrimaryColor : tPrimaryDarkColor, isDarkMode ? tSecundaryColor : tSecundaryDarkColor,],
-                                    ),
-                                  ),
-                                  child: Container(
-                                width: 80,
-                                height: 80,
-                                alignment: Alignment.center,
-                                child: const Icon(LineAwesomeIcons.heart,
-                                  ),
-                                ),
+                            ),
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              alignment: Alignment.center,
+                              child: const Icon(
+                                LineAwesomeIcons.play,
                               ),
-                            ),   
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
+                        ElevatedButton(
+                          onPressed: () {
+                            FavoritesScreen.favoritesList.add(name);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isDarkMode
+                                ? tPrimaryColor
+                                : tSecundaryDarkColor,
+                            elevation: 5,
+                            foregroundColor: tWhiteColor,
+                            shape: const CircleBorder(),
+                          ),
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(120),
+                              gradient: LinearGradient(
+                                colors: [
+                                  isDarkMode
+                                      ? tPrimaryColor
+                                      : tPrimaryDarkColor,
+                                  isDarkMode
+                                      ? tSecundaryColor
+                                      : tSecundaryDarkColor,
+                                ],
+                              ),
+                            ),
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              alignment: Alignment.center,
+                              child: const Icon(LineAwesomeIcons.heart,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

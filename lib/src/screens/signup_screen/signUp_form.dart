@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/screens/widgets/common_widget/button/degrade_button.dart';
+import 'package:movie_login/src/widgets/common_widget/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
-import 'package:movie_login/src/screens/widgets/gnav_bottom_bar.dart';
+import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({

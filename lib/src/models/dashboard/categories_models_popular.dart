@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/models/details/description.dart';
-import 'package:movie_login/src/screens/widgets/moviecards.dart';
+import 'package:movie_login/src/screens/favorites_screen.dart';
+import 'package:movie_login/src/widgets/moviecards.dart';
 
 class PopularMovies extends StatelessWidget {
   final List popular;
@@ -47,14 +48,17 @@ class PopularListWidget extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => 
-                      Description(
-                        name: popular[index]['title'],
-                        bannerurl: 'https://image.tmdb.org/t/p/w500' + popular[index]['backdrop_path'],
-                        posterurl: 'https://image.tmdb.org/t/p/w500' + popular[index]['poster_path'],
-                        description: popular[index]['overview'],
-                        vote: popular[index]['vote_average'].toDouble(),
-                        launch_on: popular[index]['release_date'],)));
+                      builder: (context) => Description(
+                            name: popular[index]['title'],
+                            bannerurl: 'https://image.tmdb.org/t/p/w500' +
+                                popular[index]['backdrop_path'],
+                            posterurl: 'https://image.tmdb.org/t/p/w500' +
+                                popular[index]['poster_path'],
+                            description: popular[index]['overview'],
+                            vote: popular[index]['vote_average'].toDouble(),
+                            launch_on: popular[index]['release_date'],
+                            
+                          )));
             },
             child: MovieCards(
                 imageName: 'https://image.tmdb.org/t/p/w500' +
