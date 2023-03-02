@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/models/details/description.dart';
-import 'package:movie_login/src/screens/dashboard_screen.dart';
 import 'package:movie_login/src/screens/favorites_screen.dart';
 import 'package:movie_login/src/widgets/banners.dart';
 
@@ -41,6 +39,9 @@ class UpcomingListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return SizedBox(
       height: 200,
       width: 400,
@@ -60,6 +61,20 @@ class UpcomingListWidget extends StatelessWidget {
                             description: upcoming[index]['overview'],
                             vote: upcoming[index]['vote_average'].toDouble(),
                             launch_on: upcoming[index]['release_date'], 
+                            onTab: () { 
+                              FavoritesScreen.favoritesList.add(upcoming[index]['title'].toString(),); 
+                              var snackBar = SnackBar(
+                                content: 
+                                const Text('ADDED TO LIST', 
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: tWhiteColor, 
+                                      fontSize: 16, )),
+                                backgroundColor: isDarkMode ? tSecundaryColor : tSecundaryDarkColor,
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              },
                           )));
             },
             child: Banners(

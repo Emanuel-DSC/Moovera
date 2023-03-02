@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/models/details/description.dart';
 import 'package:movie_login/src/screens/favorites_screen.dart';
 import 'package:movie_login/src/widgets/moviecards.dart';
@@ -38,6 +39,9 @@ class TrendingListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return SizedBox(
       height: 200,
       width: double.infinity,
@@ -56,6 +60,20 @@ class TrendingListWidget extends StatelessWidget {
                         description: trending[index]['overview'],
                         vote: trending[index]['vote_average'].toDouble(),
                         launch_on: trending[index]['release_date'],
+                        onTab: () { 
+                              FavoritesScreen.favoritesList.add(trending[index]['title'].toString(),); 
+                              var snackBar = SnackBar(
+                                content: 
+                                const Text('ADDED TO LIST', 
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: tWhiteColor, 
+                                      fontSize: 16, )),
+                                backgroundColor: isDarkMode ? tSecundaryColor : tSecundaryDarkColor,
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              },
                         )));
             },
             child: MovieCards(

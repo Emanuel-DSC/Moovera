@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/models/details/description.dart';
 import 'package:movie_login/src/screens/favorites_screen.dart';
 import 'package:movie_login/src/widgets/moviecards.dart';
+
+import '../../widgets/common_widget/my_SnackBar.dart';
 
 class PopularMovies extends StatelessWidget {
   final List popular;
@@ -38,6 +41,9 @@ class PopularListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return SizedBox(
       height: 200,
       width: double.infinity,
@@ -57,7 +63,21 @@ class PopularListWidget extends StatelessWidget {
                             description: popular[index]['overview'],
                             vote: popular[index]['vote_average'].toDouble(),
                             launch_on: popular[index]['release_date'],
-                            
+                            onTab: () {
+                              if (FavoritesScreen.favoritesList.contains(popular[index]['title'])) {
+                                var snackBar = mySnackBar(isDarkMode, tPrimaryColor, tPrimaryDarkColor, 'ALREADY ON FAVORITES');
+                                ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              }
+                              else{
+                                FavoritesScreen.favoritesList.add(
+                                popular[index]['title'].toString(),
+                              );
+                                var snackBar = mySnackBar(isDarkMode, tSecundaryColor, tSecundaryDarkColor, 'ADDED TO FAVORITES');
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              }                           
+                            },
                           )));
             },
             child: MovieCards(
@@ -68,4 +88,6 @@ class PopularListWidget extends StatelessWidget {
       ),
     );
   }
+
+  
 }

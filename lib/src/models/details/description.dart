@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/screens/favorites_screen.dart';
+import 'package:movie_login/src/widgets/common_widget/button/my_elevated_button.dart';
 
 class Description extends StatelessWidget {
   final String name, description, bannerurl, posterurl, launch_on;
   final double vote;
+  final VoidCallback onTab;
 
   const Description({
     Key? key,
@@ -18,6 +19,7 @@ class Description extends StatelessWidget {
     required this.posterurl,
     required this.vote,
     required this.launch_on,
+    required this.onTab,
   }) : super(key: key);
 
   @override
@@ -25,7 +27,6 @@ class Description extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    var pressed = false;
 
     return Scaffold(
       backgroundColor: isDarkMode ? tDarkBackground : tWhiteColor,
@@ -120,75 +121,15 @@ class Description extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: isDarkMode
-                                ? tPrimaryColor
-                                : tSecundaryDarkColor,
-                            elevation: 5,
-                            foregroundColor: tWhiteColor,
-                            shape: const CircleBorder(),
-                          ),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(120),
-                              gradient: LinearGradient(
-                                colors: [
-                                  isDarkMode
-                                      ? tPrimaryColor
-                                      : tPrimaryDarkColor,
-                                  isDarkMode
-                                      ? tSecundaryColor
-                                      : tSecundaryDarkColor,
-                                ],
-                              ),
-                            ),
-                            child: Container(
-                              width: 80,
-                              height: 80,
-                              alignment: Alignment.center,
-                              child: const Icon(
-                                LineAwesomeIcons.play,
-                              ),
-                            ),
-                          ),
+                        MyElevatedButton(
+                          isDarkMode: isDarkMode,
+                          icon: LineAwesomeIcons.play,
+                          onTap: () {},
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            FavoritesScreen.favoritesList.add(name);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: isDarkMode
-                                ? tPrimaryColor
-                                : tSecundaryDarkColor,
-                            elevation: 5,
-                            foregroundColor: tWhiteColor,
-                            shape: const CircleBorder(),
-                          ),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(120),
-                              gradient: LinearGradient(
-                                colors: [
-                                  isDarkMode
-                                      ? tPrimaryColor
-                                      : tPrimaryDarkColor,
-                                  isDarkMode
-                                      ? tSecundaryColor
-                                      : tSecundaryDarkColor,
-                                ],
-                              ),
-                            ),
-                            child: Container(
-                              width: 80,
-                              height: 80,
-                              alignment: Alignment.center,
-                              child: const Icon(LineAwesomeIcons.heart,
-                              ),
-                            ),
-                          ),
-                        ),
+                        MyElevatedButton(
+                            isDarkMode: isDarkMode,
+                            icon: LineAwesomeIcons.plus,
+                            onTap: onTab),
                       ],
                     ),
                   ),

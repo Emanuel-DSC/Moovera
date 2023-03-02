@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/custom_icon_icons.dart';
 import 'package:movie_login/src/constants/text_string.dart';

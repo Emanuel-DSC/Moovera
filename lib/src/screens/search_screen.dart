@@ -1,9 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:tmdb_api/tmdb_api.dart';
-import '';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
