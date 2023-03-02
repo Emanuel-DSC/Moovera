@@ -39,18 +39,17 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   google_nav_bar: ^5.0.6
   firebase_core: ^2.4.0
+  firebase_database: ^10.0.14
   firebase_auth: ^4.2.0
   cloud_firestore: ^4.2.0
   tmdb_api:
   line_awesome_flutter: ^2.0.0
   flutter_rating_bar: ^4.0.1
   google_sign_in: ^6.0.1
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
   flutter_lints: ^1.0.0
 
 flutter_native_splash:

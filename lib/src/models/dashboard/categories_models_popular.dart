@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/models/details/description.dart';
-import 'package:movie_login/src/screens/favorites_screen.dart';
+import 'package:movie_login/src/screens/description.dart';
 import 'package:movie_login/src/widgets/moviecards.dart';
 
-import '../../widgets/common_widget/my_SnackBar.dart';
 
 class PopularMovies extends StatelessWidget {
   final List popular;
@@ -50,7 +47,7 @@ class PopularListWidget extends StatelessWidget {
       child: ListView.builder(
         itemCount: popular.length,
         itemBuilder: (context, index) {
-          var title = popular[index]['title'].toString();
+          var title = popular[index]['title'].t;
           return InkWell(
               onTap: () {
                 Navigator.push(
@@ -66,27 +63,27 @@ class PopularListWidget extends StatelessWidget {
                               vote: popular[index]['vote_average'].toDouble(),
                               launch_on: popular[index]['release_date'],
                               onTab: () {
-                                if (FavoritesScreen.favoritesList
-                                    .contains(title)) {
-                                  var snackBar = mySnackBar(
-                                      isDarkMode,
-                                      tPrimaryColor,
-                                      tPrimaryDarkColor,
-                                      'ALREADY ON FAVORITES');
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                } else {
-                                  FavoritesScreen.favoritesList.add(
-                                    title,
-                                  );
-                                  var snackBar = mySnackBar(
-                                      isDarkMode,
-                                      tSecundaryColor,
-                                      tSecundaryDarkColor,
-                                      'ADDED TO FAVORITES');
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
+                                // if (FavoritesScreen.favoritesList
+                                //     .contains(title)) {
+                                //   var snackBar = mySnackBar(
+                                //       isDarkMode,
+                                //       tPrimaryColor,
+                                //       tPrimaryDarkColor,
+                                //       'ALREADY ON FAVORITES');
+                                //   ScaffoldMessenger.of(context)
+                                //       .showSnackBar(snackBar);
+                                // } else {
+                                //   FavoritesScreen.favoritesList.add(
+                                //     title,
+                                //   );
+                                //   var snackBar = mySnackBar(
+                                //       isDarkMode,
+                                //       tSecundaryColor,
+                                //       tSecundaryDarkColor,
+                                //       'ADDED TO FAVORITES');
+                                //   ScaffoldMessenger.of(context)
+                                //       .showSnackBar(snackBar);
+                                // }
                               },
                             )));
               },

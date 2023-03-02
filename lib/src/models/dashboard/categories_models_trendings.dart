@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/models/details/description.dart';
+import 'package:movie_login/src/screens/description.dart';
 import 'package:movie_login/src/screens/favorites_screen.dart';
 import 'package:movie_login/src/widgets/moviecards.dart';
+
+import '../../widgets/common_widget/my_SnackBar.dart';
 
 class TrendingMovies extends StatelessWidget {
   final List trending;
@@ -47,38 +49,51 @@ class TrendingListWidget extends StatelessWidget {
       width: double.infinity,
       child: ListView.builder(
         itemCount: trending.length,
-                       itemBuilder: ((context, index) => InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => 
-                      Description(
-                        name: trending[index]['title'],
-                        bannerurl: 'https://image.tmdb.org/t/p/w500' + trending[index]['backdrop_path'],
-                        posterurl: 'https://image.tmdb.org/t/p/w500' + trending[index]['poster_path'],
-                        description: trending[index]['overview'],
-                        vote: trending[index]['vote_average'].toDouble(),
-                        launch_on: trending[index]['release_date'],
-                        onTab: () { 
-                              FavoritesScreen.favoritesList.add(trending[index]['title'].toString(),); 
-                              var snackBar = SnackBar(
-                                content: 
-                                const Text('ADDED TO LIST', 
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: tWhiteColor, 
-                                      fontSize: 16, )),
-                                backgroundColor: isDarkMode ? tSecundaryColor : tSecundaryDarkColor,
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
+        itemBuilder: (context, index) {
+          var title = trending[index]['title'].toString();
+          return InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Description(
+                              name: trending[index]['title'],
+                              bannerurl: 'https://image.tmdb.org/t/p/w500' +
+                                  trending[index]['backdrop_path'],
+                              posterurl: 'https://image.tmdb.org/t/p/w500' +
+                                  trending[index]['poster_path'],
+                              description: trending[index]['overview'],
+                              vote: trending[index]['vote_average'].toDouble(),
+                              launch_on: trending[index]['release_date'],
+                              onTab: () {
+                                if (FavoritesScreen.favoritesList
+                                    .contains(title)) {
+                                  var snackBar = mySnackBar(
+                                      isDarkMode,
+                                      tPrimaryColor,
+                                      tPrimaryDarkColor,
+                                      'ALREADY ON FAVORITES');
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                } else {
+                                  FavoritesScreen.favoritesList.add(
+                                    title,
+                                  );
+                                  var snackBar = mySnackBar(
+                                      isDarkMode,
+                                      tSecundaryColor,
+                                      tSecundaryDarkColor,
+                                      'ADDED TO FAVORITES');
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
                               },
-                        )));
-            },
-            child: MovieCards(
-                imageName: 'https://image.tmdb.org/t/p/w500' +
-                    trending[index]['poster_path']))),
+                            )));
+              },
+              child: MovieCards(
+                  imageName: 'https://image.tmdb.org/t/p/w500' +
+                      trending[index]['poster_path']));
+        },
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,
       ),

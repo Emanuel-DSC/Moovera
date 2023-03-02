@@ -11,9 +11,7 @@ import 'package:movie_login/src/utils/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- 
   Firebase.initializeApp();
-
   RenderErrorBox.backgroundColor = Colors.transparent;
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
