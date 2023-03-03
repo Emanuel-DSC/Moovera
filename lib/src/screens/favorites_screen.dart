@@ -19,73 +19,81 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: tDarkBackground,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_outlined,
-            color: Colors.white,
-          ),
-        ),
+  var mediaQuery = MediaQuery.of(context);
+  var brightness = mediaQuery.platformBrightness;
+  final isDarkMode = brightness == Brightness.dark;
+    return Container(
+      decoration:  BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [isDarkMode ? tPrimaryColor : tPrimaryDarkColor, 
+                       isDarkMode ? tSecundaryColor: tSecundaryDarkColor])),
+      child: Scaffold(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: Expanded(
-          child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('favourites')
-                  .snapshots(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                //checking connection state
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.hasData) {
-                  return GridView(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                    children: snapshot.data!.docs
-                        .map((favourite) => favouritesCard(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        WelcomeScreen(),
-                                  ));
-                            }, favourite, context))
-                        .toList(),
-                  );
-                }
-                return Text("There's no favourites",
-                    style: GoogleFonts.nunito(color: Colors.white));
-              }),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
-        // child: ListView.builder(
-        //         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        //         itemCount: FavoritesScreen.favoritesList.length,
-        //         itemBuilder: (context, index) {
-        //           return ListTile(
-        //             tileColor: Colors.blue,
-        //             title: Text(FavoritesScreen.favoritesList[index]),
-        //             trailing: IconButton(
-        //               onPressed: () {
+        body: Container(
+          padding: const EdgeInsets.all(10),
+          child: Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('favourites')
+                    .snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  //checking connection state
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasData) {
+                    return ListView(
+                      children: snapshot.data!.docs
+                          .map((favourite) => favouritesCard(() {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          WelcomeScreen(),
+                                    ));
+                              }, favourite, context))
+                          .toList(),
+                    );
+                  }
+                  return Text("There's no favourites",
+                      style: GoogleFonts.nunito(color: Colors.white));
+                }),
+          ),
+          // child: ListView.builder(
+          //         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          //         itemCount: FavoritesScreen.favoritesList.length,
+          //         itemBuilder: (context, index) {
+          //           return ListTile(
+          //             tileColor: Colors.blue,
+          //             title: Text(FavoritesScreen.favoritesList[index]),
+          //             trailing: IconButton(
+          //               onPressed: () {
 
-        //               },
-        //               icon: const Icon(
-        //                 Icons.favorite,
-        //                 color: Colors.red,
-        //               ),
-        //             ),
-        //           );
-        //         }
-        // ),
+          //               },
+          //               icon: const Icon(
+          //                 Icons.favorite,
+          //                 color: Colors.red,
+          //               ),
+          //             ),
+          //           );
+          //         }
+          // ),
+        ),
       ),
     );
   }
