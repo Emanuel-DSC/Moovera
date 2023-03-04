@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -56,33 +55,36 @@ Widget favouritesCard(Function()? onTap, QueryDocumentSnapshot doc , context) {
                       bottomRight: Radius.circular(5)),
                   color: Colors.grey.withOpacity(0.2),
                 ),
-                child:  Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(doc['movie_title'], 
-                    style: const TextStyle(fontSize: 28)),
-                    const SizedBox(height: tPadding10),
-                    RatingBar.builder(
-                              initialRating: doc['movie_vote'] / 2,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              ignoreGestures: true,
-                              itemCount: 5,
-                              itemSize: 25,
-                              unratedColor: Colors.grey.withOpacity(0.3),
-                              itemPadding: const EdgeInsets.symmetric(horizontal: 2),
-                              itemBuilder: (context, index) {
-                                return Icon(
-                                  LineAwesomeIcons.star_1,
-                                  color: isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
-                                );
-                              },
-                              onRatingUpdate: (rating) {},
-                            ),
-                    const SizedBox(height: tPadding10),
-                    Text(doc['movie_launch'], 
-                    style: const TextStyle(fontSize: 18)), 
-                  ],
+                child:  SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(doc['movie_title'], 
+                      style: Theme.of(context).textTheme.headline4,),
+                      const SizedBox(height: tPadding10),
+                      RatingBar.builder(
+                                initialRating: doc['movie_vote'] / 2,
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                ignoreGestures: true,
+                                itemCount: 5,
+                                itemSize: 25,
+                                unratedColor: Colors.grey.withOpacity(0.3),
+                                itemPadding: const EdgeInsets.symmetric(horizontal: 2),
+                                itemBuilder: (context, index) {
+                                  return Icon(
+                                    LineAwesomeIcons.star_1,
+                                    color: isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
+                                  );
+                                },
+                                onRatingUpdate: (rating) {},
+                              ),
+                      const SizedBox(height: tPadding10),
+                      Text(doc['movie_launch'], 
+                      style: const TextStyle(fontSize: 18, color: Colors.white)), 
+                    ],
+                  ),
                 ),
               ),
             ],

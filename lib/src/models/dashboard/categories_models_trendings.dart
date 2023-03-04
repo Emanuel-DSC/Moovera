@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/screens/description.dart';
-import 'package:movie_login/src/screens/favorites_screen.dart';
 import 'package:movie_login/src/widgets/moviecards.dart';
 
 import '../../widgets/common_widget/my_SnackBar.dart';
@@ -44,30 +44,55 @@ class TrendingListWidget extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
+    int count = 0;
+
     return SizedBox(
       height: 200,
       width: double.infinity,
       child: ListView.builder(
         itemCount: trending.length,
         itemBuilder: (context, index) {
-          var title = trending[index]['title'].toString();
+
+          var kTrending = trending[index];
+          String title = kTrending['title'].toString();
+          String bannerUrl =
+              'https://image.tmdb.org/t/p/w500' + kTrending['backdrop_path'];
+          String posterUrl =
+              'https://image.tmdb.org/t/p/w500' + kTrending['poster_path'];
+          String description = kTrending['overview'];
+          double vote = kTrending['vote_average'].toDouble();
+          String launchOn = kTrending['release_date'];
+
           return InkWell(
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Description(
-                              name: trending[index]['title'],
-                              bannerurl: 'https://image.tmdb.org/t/p/w500' +
-                                  trending[index]['backdrop_path'],
-                              posterurl: 'https://image.tmdb.org/t/p/w500' +
-                                  trending[index]['poster_path'],
-                              description: trending[index]['overview'],
-                              vote: trending[index]['vote_average'].toDouble(),
-                              launch_on: trending[index]['release_date'],
+                              name: title,
+                              bannerurl: bannerUrl,
+                              posterurl: posterUrl,
+                              description: description,
+                              vote: vote,
+                              launch_on: launchOn,
                               onTab: () {
-                                if (FavoritesScreen.favoritesList
-                                    .contains(title)) {
+                                count += 1;
+
+                                //add movie name to a key in firebase so it
+                                // wont duplicate 
+                                FirebaseFirestore.instance
+                                    .collection("favourites")
+                                    .doc(title)
+                                    .set({
+                                  "movie_title": title,
+                                  "movie_banner": bannerUrl,
+                                  "movie_description": description,
+                                  "movie_launch": launchOn,
+                                  "movie_vote": vote,
+                                  "movie_poster": posterUrl,
+                                });
+
+                                if (count >= 2) {
                                   var snackBar = mySnackBar(
                                       isDarkMode,
                                       tPrimaryColor,
@@ -76,9 +101,6 @@ class TrendingListWidget extends StatelessWidget {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else {
-                                  FavoritesScreen.favoritesList.add(
-                                    title,
-                                  );
                                   var snackBar = mySnackBar(
                                       isDarkMode,
                                       tSecundaryColor,
@@ -91,8 +113,7 @@ class TrendingListWidget extends StatelessWidget {
                             )));
               },
               child: MovieCards(
-                  imageName: 'https://image.tmdb.org/t/p/w500' +
-                      trending[index]['poster_path']));
+                  imageName: posterUrl));
         },
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,

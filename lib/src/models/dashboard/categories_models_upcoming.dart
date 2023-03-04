@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/screens/description.dart';
-
-import '../../widgets/moviecards.dart';
+import 'package:movie_login/src/widgets/banners.dart';
+import '../../constants/colors.dart';
+import '../../widgets/common_widget/my_SnackBar.dart';
 
 class UpComingMovies extends StatelessWidget {
   final List upcoming;
@@ -42,17 +43,20 @@ class UpcomingListWidget extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
+    int count = 0;
+
     return SizedBox(
       height: 200,
       width: 400,
       child: ListView.builder(
         itemCount: upcoming.length,
         itemBuilder: (context, index) {
-
           var kUpComing = upcoming[index];
           String title = kUpComing['title'].toString();
-          String banner = 'https://image.tmdb.org/t/p/w500' + kUpComing['backdrop_path'];
-          String posterurl = 'https://image.tmdb.org/t/p/w500' + kUpComing['poster_path'];
+          String bannerUrl =
+              'https://image.tmdb.org/t/p/w500' + kUpComing['backdrop_path'];
+          String posterUrl =
+              'https://image.tmdb.org/t/p/w500' + kUpComing['poster_path'];
           String description = kUpComing['overview'];
           double vote = kUpComing['vote_average'].toDouble();
           String launchOn = kUpComing['release_date'];
@@ -64,49 +68,50 @@ class UpcomingListWidget extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => Description(
                               name: title,
-                              bannerurl: banner,
-                              posterurl: posterurl,
+                              bannerurl: bannerUrl,
+                              posterurl: posterUrl,
                               description: description,
                               vote: vote,
                               launch_on: launchOn,
                               onTab: () {
+
+                                count += 1;
+
+                                //add movie name to a key in firebase so it
+                                // wont duplicate 
                                 FirebaseFirestore.instance
                                     .collection("favourites")
-                                    .add({
+                                    .doc(title)
+                                    .set({
                                   "movie_title": title,
-                                  "movie_banner": banner,
+                                  "movie_banner": bannerUrl,
                                   "movie_description": description,
                                   "movie_launch": launchOn,
                                   "movie_vote": vote,
-                                  "movie_poster": posterurl,
+                                  "movie_poster": posterUrl,
                                 });
-                                // if (FavoritesScreen.favoritesList
-                                //     .contains(title)) {
-                                //   var snackBar = mySnackBar(
-                                //       isDarkMode,
-                                //       tPrimaryColor,
-                                //       tPrimaryDarkColor,
-                                //       'ALREADY ON FAVORITES');
-                                //   ScaffoldMessenger.of(context)
-                                //       .showSnackBar(snackBar);
-                                // } else {
-                                //   FavoritesScreen.favoritesList.add(
-                                //     title,
-                                //   );
-                                //   var snackBar = mySnackBar(
-                                //       isDarkMode,
-                                //       tSecundaryColor,
-                                //       tSecundaryDarkColor,
-                                //       'ADDED TO FAVORITES');
-                                //   ScaffoldMessenger.of(context)
-                                //       .showSnackBar(snackBar);
-                                // }
+
+                                if (count >= 2) {
+                                  var snackBar = mySnackBar(
+                                      isDarkMode,
+                                      tPrimaryColor,
+                                      tPrimaryDarkColor,
+                                      'ALREADY ON FAVORITES');
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                } else {
+                                  var snackBar = mySnackBar(
+                                      isDarkMode,
+                                      tSecundaryColor,
+                                      tSecundaryDarkColor,
+                                      'ADDED TO FAVORITES');
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
                               },
                             )));
               },
-              child: MovieCards(
-                  imageName: 'https://image.tmdb.org/t/p/w500' +
-                      upcoming[index]['poster_path']));
+              child: Banners(imageName: bannerUrl));
         },
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,

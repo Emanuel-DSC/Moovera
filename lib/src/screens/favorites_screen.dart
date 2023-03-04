@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/screens/description.dart';
 import 'package:movie_login/src/screens/welcome_screen.dart';
 import 'package:movie_login/src/widgets/favourites_card.dart';
 
@@ -27,8 +26,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [isDarkMode ? tPrimaryColor : tPrimaryDarkColor, 
-                       isDarkMode ? tSecundaryColor: tSecundaryDarkColor])),
+              colors: [isDarkMode ? favouritesBgDarkColor : favouritesBgLightColor, 
+                       isDarkMode ? Colors.black : favouritesBgDarkColor])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -64,7 +63,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          WelcomeScreen(),
+                                          const WelcomeScreen(),
                                     ));
                               }, favourite, context))
                           .toList(),
