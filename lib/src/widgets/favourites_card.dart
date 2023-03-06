@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -6,7 +5,10 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 
-Widget favouritesCard(Function()? onTap, QueryDocumentSnapshot doc , context) {
+import '../screens/description.dart';
+import 'common_widget/my_SnackBar.dart';
+
+Widget favouritesCard(QueryDocumentSnapshot doc, context) {
   var mediaQuery = MediaQuery.of(context);
   var brightness = mediaQuery.platformBrightness;
   final isDarkMode = brightness == Brightness.dark;
@@ -14,9 +16,29 @@ Widget favouritesCard(Function()? onTap, QueryDocumentSnapshot doc , context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: InkWell(
-      onTap: onTap,
-      child: Expanded(
-        child: Row(
+      // go to favourite clicked movie
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Description(
+                  bannerurl: doc['movie_banner'], 
+                  description: doc['movie_description'], 
+                  launch_on: doc['movie_launch'], 
+                  name: doc['movie_title'],
+                  posterurl: doc['movie_poster'], 
+                  vote: doc['movie_vote'],
+                  onTab: () {
+                    var snackBar = mySnackBar(isDarkMode, tPrimaryColor,
+                        tPrimaryDarkColor, 'ALREADY ON FAVORITES');
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                ),
+              ));
+        },
+        // favourite card design
+        child: Expanded(
+          child: Row(
             children: [
               Container(
                 height: 182,
@@ -49,47 +71,63 @@ Widget favouritesCard(Function()? onTap, QueryDocumentSnapshot doc , context) {
                 padding: const EdgeInsets.all(16),
                 height: 182,
                 width: 215,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(5),
                       bottomRight: Radius.circular(5)),
                   color: Colors.grey.withOpacity(0.2),
                 ),
-                child:  SingleChildScrollView(
+                child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(doc['movie_title'], 
-                      style: Theme.of(context).textTheme.headline4,),
+                      Text(
+                        doc['movie_title'],
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
                       const SizedBox(height: tPadding10),
                       RatingBar.builder(
-                                initialRating: doc['movie_vote'] / 2,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                ignoreGestures: true,
-                                itemCount: 5,
-                                itemSize: 25,
-                                unratedColor: Colors.grey.withOpacity(0.3),
-                                itemPadding: const EdgeInsets.symmetric(horizontal: 2),
-                                itemBuilder: (context, index) {
-                                  return Icon(
-                                    LineAwesomeIcons.star_1,
-                                    color: isDarkMode ? tPrimaryColor : tSecundaryDarkColor,
-                                  );
-                                },
-                                onRatingUpdate: (rating) {},
-                              ),
+                        initialRating: doc['movie_vote'] / 2,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        ignoreGestures: true,
+                        itemCount: 5,
+                        itemSize: 25,
+                        unratedColor: Colors.grey.withOpacity(0.3),
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 2),
+                        itemBuilder: (context, index) {
+                          return Icon(
+                            LineAwesomeIcons.star_1,
+                            color: isDarkMode
+                                ? tPrimaryColor
+                                : tSecundaryDarkColor,
+                          );
+                        },
+                        onRatingUpdate: (rating) {},
+                      ),
                       const SizedBox(height: tPadding10),
-                      Text(doc['movie_launch'], 
-                      style: const TextStyle(fontSize: 18, color: Colors.white)), 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(doc['movie_launch'],
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white)),
+                          GestureDetector(
+                              onTap: () {
+                                //remove movie from Firebase and consequently from favourites list
+                                FirebaseFirestore.instance.collection('favourites').doc(doc['movie_title']).delete();
+                              },
+                              child: const Icon(Icons.delete_outline,
+                                  color: Colors.white))
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
             ],
-        ),
-      )),
+          ),
+        )),
   );
 }
-

@@ -2,13 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/screens/welcome_screen.dart';
 import 'package:movie_login/src/widgets/favourites_card.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
-
-  static List favoritesList = [];
 
   @override
   // ignore: library_private_types_in_public_api
@@ -58,14 +55,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   if (snapshot.hasData) {
                     return ListView(
                       children: snapshot.data!.docs
-                          .map((favourite) => favouritesCard(() {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const WelcomeScreen(),
-                                    ));
-                              }, favourite, context))
+                          .map((favourite) => favouritesCard(favourite, context))
                           .toList(),
                     );
                   }
@@ -73,25 +63,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       style: GoogleFonts.nunito(color: Colors.white));
                 }),
           ),
-          // child: ListView.builder(
-          //         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          //         itemCount: FavoritesScreen.favoritesList.length,
-          //         itemBuilder: (context, index) {
-          //           return ListTile(
-          //             tileColor: Colors.blue,
-          //             title: Text(FavoritesScreen.favoritesList[index]),
-          //             trailing: IconButton(
-          //               onPressed: () {
-
-          //               },
-          //               icon: const Icon(
-          //                 Icons.favorite,
-          //                 color: Colors.red,
-          //               ),
-          //             ),
-          //           );
-          //         }
-          // ),
         ),
       ),
     );
