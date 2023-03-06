@@ -35,8 +35,8 @@ class MyElevatedButton extends StatelessWidget {
           ),
         ),
         child: Container(
-          width: 80,
-          height: 80,
+          width: 140,
+          height: 60,
           alignment: Alignment.center,
           child: Icon(icon),
         ),

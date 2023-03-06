@@ -108,7 +108,7 @@ class Description extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       textAlign: TextAlign.center,
-                      maxLines: 8,
+                      maxLines: 10,
                       description,
                       style: TextStyle(
                           fontSize: 16,
@@ -116,22 +116,19 @@ class Description extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        MyElevatedButton(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MyElevatedButton(
+                        isDarkMode: isDarkMode,
+                        icon: LineAwesomeIcons.play,
+                        onTap: () {},
+                      ),
+                      MyElevatedButton(
                           isDarkMode: isDarkMode,
-                          icon: LineAwesomeIcons.play,
-                          onTap: () {},
-                        ),
-                        MyElevatedButton(
-                            isDarkMode: isDarkMode,
-                            icon: LineAwesomeIcons.plus,
-                            onTap: onTab),
-                      ],
-                    ),
+                          icon: LineAwesomeIcons.plus,
+                          onTap: onTab),
+                    ],
                   ),
                 ],
               ),
