@@ -37,37 +37,37 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
               ));
         },
         // favourite card design
-        child: Expanded(
-          child: Row(
-            children: [
-              Container(
-                height: 182,
-                width: 150,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      bottomLeft: Radius.circular(5)),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      bottomLeft: Radius.circular(5)),
-                  child: Image.network(doc['movie_poster'], fit: BoxFit.fill,
-                      loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) {
-                      return child;
-                    } else {
-                      return Center(
-                          child: CircularProgressIndicator(
-                        color: Colors.red.shade900,
-                        backgroundColor: Colors.grey.shade600,
-                      ));
-                    }
-                  }),
-                ),
+        child: Row(
+          children: [
+            Container(
+              height: 182,
+              width: 150,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    bottomLeft: Radius.circular(5)),
               ),
-              const SizedBox(width: 5),
-              Container(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    bottomLeft: Radius.circular(5)),
+                child: Image.network(doc['movie_poster'], fit: BoxFit.fill,
+                    loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.red.shade900,
+                      backgroundColor: Colors.grey.shade600,
+                    ));
+                  }
+                }),
+              ),
+            ),
+            const SizedBox(width: 5),
+            Flexible(
+              child: Container(
                 padding: const EdgeInsets.all(16),
                 height: 182,
                 width: 215,
@@ -126,8 +126,8 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         )),
   );
 }

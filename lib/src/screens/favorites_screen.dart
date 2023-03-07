@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_login/src/constants/colors.dart';
@@ -15,16 +16,19 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
-  var mediaQuery = MediaQuery.of(context);
-  var brightness = mediaQuery.platformBrightness;
-  final isDarkMode = brightness == Brightness.dark;
+    var mediaQuery = MediaQuery.of(context);
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
+    
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [isDarkMode ? favouritesBgDarkColor : favouritesBgLightColor, 
-                       isDarkMode ? Colors.black : favouritesBgDarkColor])),
+              colors: [
+            isDarkMode ? favouritesBgDarkColor : favouritesBgLightColor,
+            isDarkMode ? Colors.black : favouritesBgDarkColor
+          ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -43,8 +47,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         body: Container(
           padding: const EdgeInsets.all(10),
           child: Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
+            child: 
+            StreamBuilder<QuerySnapshot>(
+                stream:    
+                FirebaseFirestore.instance
+                    .collection('Users')
+                    .doc(FirebaseAuth.instance.currentUser?.uid)
                     .collection('favourites')
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -55,16 +63,20 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   if (snapshot.hasData) {
                     return ListView(
                       children: snapshot.data!.docs
-                          .map((favourite) => favouritesCard(favourite, context))
+                          .map(
+                              (favourite) => favouritesCard(favourite, context))
                           .toList(),
                     );
                   }
-                  return Text("There's no favourites",
-                      style: GoogleFonts.nunito(color: Colors.white));
-                }),
+                  return Center(
+                    child: Text("There's no favourites",
+                        style: GoogleFonts.nunito(color: Colors.white)),
+                  );
+                }) 
           ),
         ),
       ),
     );
   }
 }
+//FirebaseAuth.instance.currentUser?.uid

@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -118,6 +119,13 @@ class _SignUpFormState extends State<SignUpForm> {
             border: 10,
             onTab: () {
               signUserUp();
+
+            // nao funcionando, corrigir !!!
+            var userUid = FirebaseAuth.instance.currentUser?.uid;
+            FirebaseFirestore.instance
+            .collection('Users')
+            .doc(userUid)
+            .set({"ID": userUid});
             },
           ),
         ],

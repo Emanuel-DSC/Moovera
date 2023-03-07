@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/screens/description.dart';
@@ -81,8 +82,9 @@ class TopRatedListWidget extends StatelessWidget {
                                 //add movie name to a key in firebase so it
                                 // wont duplicate 
                                 FirebaseFirestore.instance
-                                    .collection("favourites")
-                                    .doc(title)
+                                    .collection("Users")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection('favourites').doc(title)
                                     .set({
                                   "movie_title": title,
                                   "movie_banner": bannerUrl,
