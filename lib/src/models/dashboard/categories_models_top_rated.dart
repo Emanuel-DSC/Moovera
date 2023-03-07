@@ -81,6 +81,8 @@ class TopRatedListWidget extends StatelessWidget {
 
                                 //add movie name to a key in firebase so it
                                 // wont duplicate 
+                                // add movie inside favourites collection, inside
+                                // user collection so every user has his own list
                                 FirebaseFirestore.instance
                                     .collection("Users")
                                     .doc(FirebaseAuth.instance.currentUser?.uid)

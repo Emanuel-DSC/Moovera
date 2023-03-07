@@ -25,6 +25,7 @@ class AuthService {
         .collection('Users')
         .doc(userUid)
         .set({"ID": userUid});
+        
     //sign in
 
     return await FirebaseAuth.instance

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/screens/description.dart';
@@ -78,9 +79,12 @@ class PopularListWidget extends StatelessWidget {
 
                                 //add movie name to a key in firebase so it
                                 // wont duplicate 
+                                // add movie inside favourites collection, inside
+                                // user collection so every user has his own list
                                 FirebaseFirestore.instance
-                                    .collection("favourites")
-                                    .doc(title)
+                                    .collection("Users")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection('favourites').doc(title)
                                     .set({
                                   "movie_title": title,
                                   "movie_banner": bannerUrl,
@@ -89,7 +93,6 @@ class PopularListWidget extends StatelessWidget {
                                   "movie_vote": vote,
                                   "movie_poster": posterUrl,
                                 });
-
                                 if (count >= 2) {
                                   var snackBar = mySnackBar(
                                       isDarkMode,
