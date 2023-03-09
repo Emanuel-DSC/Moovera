@@ -44,12 +44,17 @@ class _SignUpFormState extends State<SignUpForm> {
     }
     // try sign Up
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
-        password: passwordController.text,
-      );
-      // pop the loading circle
+        password: passwordController.text);
+
+        // create user in Users collection Firebase
+        var user = FirebaseAuth.instance.currentUser?.uid;
+        await FirebaseFirestore.instance.collection('Users')
+        .doc(user).set({ 'ID': emailController.text});
+      // get to movies screen
       Get.to(const GnavBottomBar());
+
     } on FirebaseAuthException catch (e) {
       // pop the loading circle
       Navigator.pop(context);
@@ -81,6 +86,7 @@ class _SignUpFormState extends State<SignUpForm> {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
+    
 
     return Form(
       child: Column(
@@ -118,14 +124,7 @@ class _SignUpFormState extends State<SignUpForm> {
             isDarkMode: isDarkMode,
             border: 10,
             onTab: () {
-              signUserUp();
-
-            // nao funcionando, corrigir !!!
-            var userUid = FirebaseAuth.instance.currentUser?.uid;
-            FirebaseFirestore.instance
-            .collection('Users')
-            .doc(userUid)
-            .set({"ID": userUid});
+              signUserUp();         
             },
           ),
         ],
