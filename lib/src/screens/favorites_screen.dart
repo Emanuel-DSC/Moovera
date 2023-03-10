@@ -79,4 +79,3 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     );
   }
 }
-//FirebaseAuth.instance.currentUser?.uid

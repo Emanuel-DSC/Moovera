@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/custom_icon_icons.dart';
 import 'package:movie_login/src/constants/text_string.dart';
-
 import '../screens/search_screen.dart';
 
 class SearchBar extends StatelessWidget {

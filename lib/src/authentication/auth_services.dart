@@ -19,12 +19,10 @@ class AuthService {
       idToken: gAuth.idToken,
     );
 
-    // create user inside user collection
-    var userUid = FirebaseAuth.instance.currentUser?.uid;
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(userUid)
-        .set({"ID": userUid});
+    // create user in Users collection Firebase
+        var user = FirebaseAuth.instance.currentUser?.uid;
+        await FirebaseFirestore.instance.collection('Users')
+        .doc(user).set({ 'ID': credential.toString()});
         
     //sign in
 

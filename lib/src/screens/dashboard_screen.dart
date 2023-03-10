@@ -43,14 +43,14 @@ class _DashBoardState extends State<DashBoard> {
 
     Map trendingResult = await tmdbWithCustomLogs.v3.trending.getTrending();
     Map topratedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
-    Map pouplarResult = await tmdbWithCustomLogs.v3.movies.getPopular();
+    Map popularResult = await tmdbWithCustomLogs.v3.movies.getPouplar();
     Map upcomingResult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
 
     setState(() {
       trendingMovies = trendingResult['results'];
       topratedMovies = topratedResult['results'];
       upcomingMovies = upcomingResult['results'];
-      popularMovies = pouplarResult['results'];
+      popularMovies = popularResult['results'];
     });
   }
 
