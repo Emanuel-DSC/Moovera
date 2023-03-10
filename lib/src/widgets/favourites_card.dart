@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -15,17 +16,17 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: InkWell(
-      // go to favourite clicked movie
+        // go to favourite clicked movie
         onTap: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => Description(
-                  bannerurl: doc['movie_banner'], 
-                  description: doc['movie_description'], 
-                  launch_on: doc['movie_launch'], 
+                  bannerurl: doc['movie_banner'],
+                  description: doc['movie_description'],
+                  launch_on: doc['movie_launch'],
                   name: doc['movie_title'],
-                  posterurl: doc['movie_poster'], 
+                  posterurl: doc['movie_poster'],
                   vote: doc['movie_vote'],
                   onTab: () {
                     var snackBar = mySnackBar(isDarkMode, tPrimaryColor,
@@ -115,7 +116,12 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
                           GestureDetector(
                               onTap: () {
                                 //remove movie from Firebase and consequently from favourites list
-                                FirebaseFirestore.instance.collection('favourites').doc(doc['movie_title']).delete();
+                                FirebaseFirestore.instance
+                                    .collection("Users")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection('favourites')
+                                    .doc(doc['movie_title'])
+                                    .delete();
                               },
                               child: const Icon(Icons.delete_outline,
                                   color: Colors.white))

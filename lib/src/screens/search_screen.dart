@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie_login/src/constants/colors.dart';
 import 'dart:convert';
-
-import 'package:movie_login/src/widgets/moviecards.dart';
 import 'package:movie_login/src/widgets/search_cards.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -50,8 +48,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -96,27 +97,41 @@ class _SearchScreenState extends State<SearchScreen> {
           cursorRadius: const Radius.circular(3),
         ),
       ),
-      body: ListView.builder(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            itemCount: filteredMovies.length,
-            itemBuilder: (BuildContext context, int index) {
-              var moviesInfo = filteredMovies[index];
-              String name = moviesInfo['original_title'].toString();
-              String launch = moviesInfo['release_date'].toString();
-              double vote = moviesInfo['vote_average'];
-              String description = moviesInfo['overview'].toString();
-              String poster =
-                  'https://image.tmdb.org/t/p/w500' + moviesInfo['poster_path'];
-              String banner = 'https://image.tmdb.org/t/p/w500' +
-                  moviesInfo['backdrop_path'];
-              return SearchCards(
-                  banner: banner,
-                  description: description,
-                  launch: launch,
-                  name: name,
-                  poster: poster,
-                  vote: vote);
-            }),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+            isDarkMode ? favouritesBgDarkColor : favouritesBgLightColor,
+            isDarkMode ? Colors.black : favouritesBgDarkColor
+          ])),
+        padding: const EdgeInsets.all(10),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 400, 
+            childAspectRatio: 5/3),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          itemCount: filteredMovies.length,
+          itemBuilder: (BuildContext context, int index) {
+            var moviesInfo = filteredMovies[index];
+            String name = moviesInfo['original_title'].toString();
+            String launch = moviesInfo['release_date'].toString();
+            var vote = moviesInfo['vote_average'];
+            String description = moviesInfo['overview'].toString();
+            String poster = 'https://image.tmdb.org/t/p/w500' + moviesInfo['poster_path'];
+            String banner = 'https://image.tmdb.org/t/p/w500' + moviesInfo['backdrop_path'];
+
+            return SearchCards(
+              banner: banner,
+              description: description,
+              launch: launch,
+              name: name,
+              poster: poster,
+              vote: vote);
+              }, 
+        ),
+      ),
     );
   }
 }

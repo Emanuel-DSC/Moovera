@@ -21,7 +21,7 @@ class SearchCards extends StatelessWidget {
   final String launch;
   final String name;
   final String poster;
-  final double vote;
+  final vote;
 
   @override
   Widget build(BuildContext context) {
