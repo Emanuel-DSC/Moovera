@@ -45,7 +45,6 @@ class PopularListWidget extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    int count = 0;
 
     return SizedBox(
       height: 200,
@@ -74,9 +73,7 @@ class PopularListWidget extends StatelessWidget {
                               description: description,
                               vote: vote,
                               launch_on: launchOn,
-                              onTab: () {
-                                count += 1;
-
+                              onTabAdd: () {
                                 //add movie name to a key in firebase so it
                                 // wont duplicate 
                                 // add movie inside favourites collection, inside
@@ -93,24 +90,30 @@ class PopularListWidget extends StatelessWidget {
                                   "movie_vote": vote,
                                   "movie_poster": posterUrl,
                                 });
-                                if (count >= 2) {
-                                  var snackBar = mySnackBar(
-                                      isDarkMode,
-                                      tPrimaryColor,
-                                      tPrimaryDarkColor,
-                                      'ALREADY ON FAVORITES');
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                } else {
-                                  var snackBar = mySnackBar(
-                                      isDarkMode,
-                                      tSecundaryColor,
-                                      tSecundaryDarkColor,
-                                      'ADDED TO FAVORITES');
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-                              },
+                                // if (count >= 2) {
+                                //   var snackBar = mySnackBar(
+                                //       isDarkMode,
+                                //       tPrimaryColor,
+                                //       tPrimaryDarkColor,
+                                //       'ALREADY ON FAVORITES');
+                                //   ScaffoldMessenger.of(context)
+                                //       .showSnackBar(snackBar);
+                                // } else {
+                                //   var snackBar = mySnackBar(
+                                //       isDarkMode,
+                                //       tSecundaryColor,
+                                //       tSecundaryDarkColor,
+                                //       'ADDED TO FAVORITES');
+                                //   ScaffoldMessenger.of(context)
+                                //       .showSnackBar(snackBar);
+                                // }
+                              }, onTabDelete: () { 
+                                FirebaseFirestore.instance
+                                    .collection("Users")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection('favourites').doc(title)
+                                    .delete();
+                               },
                             )));
               },
               child: MovieCards(

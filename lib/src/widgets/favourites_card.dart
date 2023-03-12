@@ -28,11 +28,11 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
                   name: doc['movie_title'],
                   posterurl: doc['movie_poster'],
                   vote: doc['movie_vote'],
-                  onTab: () {
+                  onTabAdd: () {
                     var snackBar = mySnackBar(isDarkMode, tPrimaryColor,
                         tPrimaryDarkColor, 'ALREADY ON FAVORITES');
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  },
+                  }, onTabDelete: () {  },
                 ),
               ));
         },

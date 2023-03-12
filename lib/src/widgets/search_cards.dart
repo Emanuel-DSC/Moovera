@@ -43,9 +43,9 @@ class SearchCards extends StatelessWidget {
                   name: name,
                   posterurl: poster, 
                   vote: vote,
-                  onTab: () {
+                  onTabAdd: () {
                     
-                  },
+                  }, onTabDelete: () {  },
                 ),
               ));
         },

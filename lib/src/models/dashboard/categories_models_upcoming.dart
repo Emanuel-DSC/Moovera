@@ -74,7 +74,7 @@ class UpcomingListWidget extends StatelessWidget {
                               description: description,
                               vote: vote,
                               launch_on: launchOn,
-                              onTab: () {
+                              onTabAdd: () {
 
                                 count += 1;
 
@@ -112,7 +112,7 @@ class UpcomingListWidget extends StatelessWidget {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 }
-                              },
+                              }, onTabDelete: () {  },
                             )));
               },
               child: Banners(imageName: bannerUrl));

@@ -76,7 +76,7 @@ class TrendingListWidget extends StatelessWidget {
                               description: description,
                               vote: vote,
                               launch_on: launchOn,
-                              onTab: () {
+                              onTabAdd: () {
                                 count += 1;
 
                                 //add movie name to a key in firebase so it
@@ -113,7 +113,7 @@ class TrendingListWidget extends StatelessWidget {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 }
-                              },
+                              }, onTabDelete: () {  },
                             )));
               },
               child: MovieCards(
