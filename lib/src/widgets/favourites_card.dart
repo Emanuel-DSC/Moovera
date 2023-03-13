@@ -6,7 +6,6 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import '../screens/description.dart';
-import 'common_widget/my_SnackBar.dart';
 
 Widget favouritesCard(QueryDocumentSnapshot doc, context) {
   var mediaQuery = MediaQuery.of(context);
@@ -28,11 +27,7 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
                   name: doc['movie_title'],
                   posterurl: doc['movie_poster'],
                   vote: doc['movie_vote'],
-                  onTabAdd: () {
-                    var snackBar = mySnackBar(isDarkMode, tPrimaryColor,
-                        tPrimaryDarkColor, 'ALREADY ON FAVORITES');
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }, onTabDelete: () {  },
+                  
                 ),
               ));
         },

@@ -1,11 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/screens/description.dart';
-import 'package:movie_login/src/widgets/common_widget/my_SnackBar.dart';
 import 'package:movie_login/src/widgets/moviecards.dart';
-
 
 class PopularMovies extends StatelessWidget {
   final List popular;
@@ -42,10 +37,6 @@ class PopularListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-    var brightness = mediaQuery.platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
-
     return SizedBox(
       height: 200,
       width: double.infinity,
@@ -73,51 +64,10 @@ class PopularListWidget extends StatelessWidget {
                               description: description,
                               vote: vote,
                               launch_on: launchOn,
-                              onTabAdd: () {
-                                //add movie name to a key in firebase so it
-                                // wont duplicate 
-                                // add movie inside favourites collection, inside
-                                // user collection so every user has his own list
-                                FirebaseFirestore.instance
-                                    .collection("Users")
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .collection('favourites').doc(title)
-                                    .set({
-                                  "movie_title": title,
-                                  "movie_banner": bannerUrl,
-                                  "movie_description": description,
-                                  "movie_launch": launchOn,
-                                  "movie_vote": vote,
-                                  "movie_poster": posterUrl,
-                                });
-                                // if (count >= 2) {
-                                //   var snackBar = mySnackBar(
-                                //       isDarkMode,
-                                //       tPrimaryColor,
-                                //       tPrimaryDarkColor,
-                                //       'ALREADY ON FAVORITES');
-                                //   ScaffoldMessenger.of(context)
-                                //       .showSnackBar(snackBar);
-                                // } else {
-                                //   var snackBar = mySnackBar(
-                                //       isDarkMode,
-                                //       tSecundaryColor,
-                                //       tSecundaryDarkColor,
-                                //       'ADDED TO FAVORITES');
-                                //   ScaffoldMessenger.of(context)
-                                //       .showSnackBar(snackBar);
-                                // }
-                              }, onTabDelete: () { 
-                                FirebaseFirestore.instance
-                                    .collection("Users")
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .collection('favourites').doc(title)
-                                    .delete();
-                               },
+                              
                             )));
               },
-              child: MovieCards(
-                  imageName: posterUrl));
+              child: MovieCards(imageName: posterUrl));
         },
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,

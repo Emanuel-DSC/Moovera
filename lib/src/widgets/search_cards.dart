@@ -21,6 +21,7 @@ class SearchCards extends StatelessWidget {
   final String launch;
   final String name;
   final String poster;
+  // ignore: prefer_typing_uninitialized_variables
   final vote;
 
   @override
@@ -42,10 +43,8 @@ class SearchCards extends StatelessWidget {
                   launch_on: launch, 
                   name: name,
                   posterurl: poster, 
-                  vote: vote,
-                  onTabAdd: () {
-                    
-                  }, onTabDelete: () {  },
+                  vote: vote, 
+                  
                 ),
               ));
         },

@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                   buttonTitle2: tLoginText7,
                   buttonTitle3: tLoginText9,
                   onTap: () {
-                    Get.to(const SignUpScreen());
+                    Get.to(() => const SignUpScreen());
                   },
                 )
               ],
