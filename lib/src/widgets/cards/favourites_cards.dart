@@ -1,49 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
-import '../screens/description.dart';
+import '../../screens/description.dart';
 
-class SearchCards extends StatelessWidget {
-  const SearchCards({
-    Key? key,
-    required this.banner, 
-    required this.description, 
-    required this.launch, 
-    required this.name, 
-    required this.poster, 
-    required this.vote, 
-  }) : super(key: key);
+Widget favouritesCard(QueryDocumentSnapshot doc, context) {
+  var mediaQuery = MediaQuery.of(context);
+  var brightness = mediaQuery.platformBrightness;
+  final isDarkMode = brightness == Brightness.dark;
 
-  final String banner;
-  final String description;
-  final String launch;
-  final String name;
-  final String poster;
-  // ignore: prefer_typing_uninitialized_variables
-  final vote;
-
-  @override
-  Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-    var brightness = mediaQuery.platformBrightness;
-    final isDarkMode = brightness == Brightness.dark;
-    return Padding(
+  return Padding(
     padding: const EdgeInsets.all(8.0),
     child: InkWell(
-      // go to favourite clicked movie
+        // go to favourite clicked movie
         onTap: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => Description(
-                  bannerurl: banner, 
-                  description: description, 
-                  launch_on: launch, 
-                  name: name,
-                  posterurl: poster, 
-                  vote: vote, 
+                  bannerurl: doc['movie_banner'],
+                  description: doc['movie_description'],
+                  launch_on: doc['movie_launch'],
+                  name: doc['movie_title'],
+                  posterurl: doc['movie_poster'],
+                  vote: doc['movie_vote'],
                   
                 ),
               ));
@@ -63,7 +46,7 @@ class SearchCards extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5),
                     bottomLeft: Radius.circular(5)),
-                child: Image.network(poster, fit: BoxFit.fill,
+                child: Image.network(doc['movie_poster'], fit: BoxFit.fill,
                     loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) {
                     return child;
@@ -95,12 +78,12 @@ class SearchCards extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name,
+                        doc['movie_title'],
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       const SizedBox(height: tPadding10),
                       RatingBar.builder(
-                        initialRating: vote / 2,
+                        initialRating: doc['movie_vote'] / 2,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
                         ignoreGestures: true,
@@ -122,9 +105,21 @@ class SearchCards extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(launch,
+                          Text(doc['movie_launch'],
                               style: const TextStyle(
                                   fontSize: 18, color: Colors.white)),
+                          GestureDetector(
+                              onTap: () {
+                                //remove movie from Firebase and consequently from favourites list
+                                FirebaseFirestore.instance
+                                    .collection("Users")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection('favourites')
+                                    .doc(doc['movie_title'])
+                                    .delete();
+                              },
+                              child: const Icon(Icons.delete_outline,
+                                  color: Colors.white))
                         ],
                       ),
                     ],
@@ -135,5 +130,4 @@ class SearchCards extends StatelessWidget {
           ],
         )),
   );
-  }
 }

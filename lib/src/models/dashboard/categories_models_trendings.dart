@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/screens/description.dart';
-import 'package:movie_login/src/widgets/moviecards.dart';
+import 'package:movie_login/src/widgets/cards/movie_cards.dart';
 
 
 class TrendingMovies extends StatelessWidget {

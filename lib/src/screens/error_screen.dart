@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/widgets/common_widget/button/degrade_button.dart';
+import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 
 class ErrorScreen extends StatelessWidget {

@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_login/src/widgets/common_widget/button/degrade_button.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
@@ -21,7 +23,13 @@ class _LoginFormState extends State<LoginForm> {
 // text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool _obscureTextController = true;
 
+  void _toggleObscureText() {
+    setState(() {
+      _obscureTextController = !_obscureTextController;
+    });
+  }
   // sign user in method
   void signUserIn() async {
     // show loading circle
@@ -41,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
         password: passwordController.text,
       );
       // pop the loading circle
-      Get.to(const GnavBottomBar());
+      Get.to(() => const GnavBottomBar());
     } on FirebaseAuthException catch (e) {
       // pop the loading circle
       Navigator.pop(context);
@@ -56,13 +64,21 @@ class _LoginFormState extends State<LoginForm> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: tThirdColor,
-          title: Center(
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.white),
+          title: Text('error'.toUpperCase(),
+              style: GoogleFonts.lato(
+                  color: Colors.white, fontWeight: FontWeight.bold)),
+          content: Text(message, style: GoogleFonts.lato(color: Colors.white)),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('close'.toUpperCase(),
+                  style: GoogleFonts.lato(color: Colors.white)),
             ),
-          ),
+          ],
+          elevation: 10,
+          backgroundColor: tThirdColor,
         );
       },
     );
@@ -89,15 +105,15 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            obscureText: true,
+            obscureText: _obscureTextController,
             controller: passwordController,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.fingerprint),
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.fingerprint),
               labelText: tLoginText4,
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               suffixIcon: IconButton(
-                onPressed: null,
-                icon: Icon(Icons.remove_red_eye_outlined),
+                onPressed: _toggleObscureText,
+                icon: _obscureTextController ? Icon(LineAwesomeIcons.eye_slash_1)  : Icon(LineAwesomeIcons.eye),
               ),
             ),
           ),

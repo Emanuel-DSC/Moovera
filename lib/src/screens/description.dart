@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/widgets/common_widget/button/animated_like_button.dart';
-import 'package:movie_login/src/widgets/common_widget/button/my_elevated_button.dart';
+import 'package:movie_login/src/widgets/button/animated_like_button.dart';
+import 'package:movie_login/src/widgets/button/my_elevated_button.dart';
 
 class Description extends StatelessWidget {
   final String name, description, bannerurl, posterurl, launch_on;
@@ -44,7 +44,9 @@ class Description extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: const Icon(LineAwesomeIcons.angle_left,
                       color: tWhiteColor)),
             ),

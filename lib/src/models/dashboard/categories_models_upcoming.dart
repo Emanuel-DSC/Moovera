@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_login/src/screens/description.dart';
-import 'package:movie_login/src/widgets/banners.dart';
+import 'package:movie_login/src/widgets/cards/banners_cards.dart';
 
 class UpComingMovies extends StatelessWidget {
   final List upcoming;

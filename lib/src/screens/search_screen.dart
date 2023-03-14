@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_login/src/constants/colors.dart';
 import 'dart:convert';
-import 'package:movie_login/src/widgets/search_cards.dart';
+import 'package:movie_login/src/widgets/cards/search_cards.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

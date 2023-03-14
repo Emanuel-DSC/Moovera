@@ -10,11 +10,14 @@ import 'package:movie_login/src/screens/on_boarding/on_boarding_screen.dart';
 import 'package:movie_login/src/utils/theme/theme.dart';
 
 void main() async {
+
+  //firebase init
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
 
+  //error page
   ErrorWidget.builder = (FlutterErrorDetails details ) {
     return ErrorScreen();
   };
@@ -24,7 +27,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

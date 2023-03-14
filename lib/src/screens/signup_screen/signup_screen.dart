@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_login/src/screens/login_screen/login_screen.dart';
 import 'package:movie_login/src/screens/signup_screen/signUp_form.dart';
-import 'package:movie_login/src/widgets/common_widget/form/form_footer_widget.dart';
-import 'package:movie_login/src/widgets/common_widget/form/form_header_widget.dart';
+import 'package:movie_login/src/widgets/form/form_footer_widget.dart';
+import 'package:movie_login/src/widgets/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 

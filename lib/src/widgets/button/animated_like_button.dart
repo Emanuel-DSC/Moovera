@@ -21,27 +21,30 @@ class AnimatedLikeButton extends StatefulWidget {
 
   @override
   State<AnimatedLikeButton> createState() => _AnimatedLikeButtonState();
-   Future<bool> onLikeButtonTapped(bool isLiked) async {
 
+  // like button function
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
     // remove movie from firestore
     if (isLiked == true) {
       FirebaseFirestore.instance
-      .collection("Users")
-      .doc(FirebaseAuth.instance.currentUser?.uid)
-      .collection('favourites').doc(name)
-      .delete();
-
-    // add movie to firestore
-
-    } else {
-          FirebaseFirestore.instance
           .collection("Users")
           .doc(FirebaseAuth.instance.currentUser?.uid)
-          .collection('favourites').doc(name)
+          .collection('favourites')
+          .doc(name)
+          .delete();
+
+      // add movie to firestore
+
+    } else {
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .collection('favourites')
+          .doc(name)
           .set({
         "movie_title": name,
         "movie_banner": bannerurl,
-        "movie_description":  description,
+        "movie_description": description,
         "movie_launch": launch,
         "movie_vote": vote,
         "movie_poster": posterurl,
@@ -53,9 +56,6 @@ class AnimatedLikeButton extends StatefulWidget {
 }
 
 class _AnimatedLikeButtonState extends State<AnimatedLikeButton> {
-
-  
-
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
@@ -81,10 +81,15 @@ class _AnimatedLikeButtonState extends State<AnimatedLikeButton> {
           return isLiked
               ? const Icon(
                   LineAwesomeIcons.heart_1,
-                  color: Colors.white,
+                  color: Colors.red,
                 )
               : const Icon(LineAwesomeIcons.heart, color: Colors.white);
         },
+        bubblesColor: BubblesColor(
+            dotPrimaryColor: Colors.red.shade400,
+            dotSecondaryColor: Colors.red.shade500,
+            dotThirdColor: Colors.red.shade600,
+            dotLastColor: Colors.red.shade900),
       ),
     );
   }
