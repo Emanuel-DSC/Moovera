@@ -6,26 +6,26 @@ import 'package:movie_login/src/constants/text_string.dart';
 import '../screens/search_screen.dart';
 
 class SearchBar extends StatelessWidget {
+  final double pad;
   const SearchBar({
     Key? key,
     required this.isDarkMode,
+    required this.pad,
   }) : super(key: key);
 
   final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
-      padding: const EdgeInsets.only(right: 30),
+      padding: EdgeInsets.only(right: pad),
       child: Center(
         child: GestureDetector(
           onTap: () {
-            Get.to(const SearchScreen());
+            Get.to(() => const SearchScreen());
           },
           child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             width: 400,
             height: 50,
             decoration: BoxDecoration(
@@ -44,8 +44,7 @@ class SearchBar extends StatelessWidget {
                   ),
                 ),
                 Icon(CustomIcon.search,
-                    color: isDarkMode ? tThirdColor : tWhiteColor,
-                    size: 16),
+                    color: isDarkMode ? tThirdColor : tWhiteColor, size: 16),
               ],
             ),
           ),

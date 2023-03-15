@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
                     height: 50,
                     child: OutlinedButton(
                       onPressed: () {
-                        Get.to(const LoginScreen());
+                        Get.to(() => LoginScreen());
                       },
                       child: Text(
                         'LOGIN',

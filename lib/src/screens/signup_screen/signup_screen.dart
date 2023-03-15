@@ -22,30 +22,28 @@ class SignUpScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(30.0),
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // theme on image
-                  FormHeaderWidget(
-                      isDarkMode: isDarkMode,
-                      size: size,
-                      title: tSignUpText,
-                      subtitle: tSignUpText2,
-                      image: tWelcomeImage_dark,
-                      imageDark: tWelcomeImage),
-                  const SizedBox(height: 20),
-                  const SignUpForm(),
-                  FormFooter(
-                    buttonTitle1: tLoginText6,
-                    buttonTitle2: tSignUpText5,
-                    buttonTitle3: tLoginText8,
-                    onTap: () {
-                      Get.to(const LoginScreen());
-                    },
-                  ),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // theme on image
+                FormHeaderWidget(
+                    isDarkMode: isDarkMode,
+                    size: size,
+                    title: tSignUpText,
+                    subtitle: tSignUpText2,
+                    image: tWelcomeImage_dark,
+                    imageDark: tWelcomeImage),
+                const SizedBox(height: 20),
+                const SignUpForm(),
+                FormFooter(
+                  buttonTitle1: tLoginText6,
+                  buttonTitle2: tSignUpText5,
+                  buttonTitle3: tLoginText8,
+                  onTap: () {
+                    Get.to(const LoginScreen());
+                  },
+                ),
+              ],
             ),
           ),
         ),

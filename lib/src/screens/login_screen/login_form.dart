@@ -113,7 +113,8 @@ class _LoginFormState extends State<LoginForm> {
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                 onPressed: _toggleObscureText,
-                icon: _obscureTextController ? Icon(LineAwesomeIcons.eye_slash_1)  : Icon(LineAwesomeIcons.eye),
+                icon: _obscureTextController ? const Icon(LineAwesomeIcons.eye_slash_1)  
+                : const Icon(LineAwesomeIcons.eye),
               ),
             ),
           ),

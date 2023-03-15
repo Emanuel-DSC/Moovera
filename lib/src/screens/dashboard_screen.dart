@@ -74,7 +74,7 @@ class _DashBoardState extends State<DashBoard> {
                     const SizedBox(height: tPadding30),
 
                     // SEARCH BAR
-                    SearchBar(isDarkMode: isDarkMode),
+                    SearchBar(isDarkMode: isDarkMode, pad: 30),
                     const SizedBox(height: tPadding16),
 
                     // TEXT
