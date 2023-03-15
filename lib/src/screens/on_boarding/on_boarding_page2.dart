@@ -3,7 +3,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../controllers/on_boarding_controlles.dart';
 import '../welcome_screen.dart';
 
@@ -91,7 +90,7 @@ class OnBoarding2 extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Skip',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),

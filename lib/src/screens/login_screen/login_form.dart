@@ -24,6 +24,8 @@ class _LoginFormState extends State<LoginForm> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool _obscureTextController = true;
+  FocusNode textFieldFocusPassword = FocusNode();
+
 
   void _toggleObscureText() {
     setState(() {
@@ -57,7 +59,6 @@ class _LoginFormState extends State<LoginForm> {
       showErrorMessage(e.code);
     }
   }
-
   // error message
   void showErrorMessage(String message) {
     showDialog(
@@ -96,6 +97,8 @@ class _LoginFormState extends State<LoginForm> {
         children: [
           const SizedBox(height: 10),
           TextFormField(
+            // onFieldSumbitted go to password text field
+            onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(textFieldFocusPassword),
             controller: emailController,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.person_outline_outlined),
@@ -105,6 +108,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const SizedBox(height: 10),
           TextFormField(
+            focusNode: textFieldFocusPassword,
             obscureText: _obscureTextController,
             controller: passwordController,
             decoration: InputDecoration(

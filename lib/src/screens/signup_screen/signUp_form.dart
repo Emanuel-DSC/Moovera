@@ -23,6 +23,8 @@ class _SignUpFormState extends State<SignUpForm> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordConfirmController = TextEditingController();
+  FocusNode textFieldFocusPassword = FocusNode();
+  FocusNode textFieldFocusConfirmPassword = FocusNode();
 
   // sign user up method
   void signUserUp() async {
@@ -44,17 +46,17 @@ class _SignUpFormState extends State<SignUpForm> {
     }
     // try sign Up
     try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text);
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
 
-        // create user in Users collection Firebase
-        var user = FirebaseAuth.instance.currentUser?.uid;
-        await FirebaseFirestore.instance.collection('Users')
-        .doc(user).set({ 'ID': emailController.text});
+      // create user in Users collection Firebase
+      var user = FirebaseAuth.instance.currentUser?.uid;
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(user)
+          .set({'ID': emailController.text});
       // get to movies screen
       Get.to(const GnavBottomBar());
-
     } on FirebaseAuthException catch (e) {
       // pop the loading circle
       Navigator.pop(context);
@@ -86,7 +88,6 @@ class _SignUpFormState extends State<SignUpForm> {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    
 
     return Form(
       child: Column(
@@ -94,37 +95,46 @@ class _SignUpFormState extends State<SignUpForm> {
         children: [
           const SizedBox(height: 10),
           TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      label: Text(tLoginText3),
-                      prefixIcon: Icon(Icons.mail_outline_rounded),
-                    ),
-                  ),   
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      label: Text(tLoginText4),
-                      prefixIcon: Icon(Icons.fingerprint),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    controller: passwordConfirmController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      label: Text(tLoginText44),
-                      prefixIcon: Icon(Icons.fingerprint),
-                    ),
-                  ),
+            // onFieldSumbitted go to password text field
+            onFieldSubmitted: (value) =>
+                FocusScope.of(context).requestFocus(textFieldFocusPassword),
+
+            controller: emailController,
+            decoration: const InputDecoration(
+              label: Text(tLoginText3),
+              prefixIcon: Icon(Icons.mail_outline_rounded),
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            focusNode: textFieldFocusPassword,
+            // onFieldSumbitted go to confirm password text field
+            onFieldSubmitted: (value) =>
+                FocusScope.of(context).requestFocus(textFieldFocusConfirmPassword),
+            controller: passwordController,
+            obscureText: true,
+            decoration: const InputDecoration(
+              label: Text(tLoginText4),
+              prefixIcon: Icon(Icons.fingerprint),
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            focusNode: textFieldFocusConfirmPassword,
+            controller: passwordConfirmController,
+            obscureText: true,
+            decoration: const InputDecoration(
+              label: Text(tLoginText44),
+              prefixIcon: Icon(Icons.fingerprint),
+            ),
+          ),
           const SizedBox(height: 10),
           DegradeButton(
             buttonText: 'SIGN UP',
             isDarkMode: isDarkMode,
             border: 10,
             onTab: () {
-              signUserUp();         
+              signUserUp();
             },
           ),
         ],

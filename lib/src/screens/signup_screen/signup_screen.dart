@@ -40,7 +40,7 @@ class SignUpScreen extends StatelessWidget {
                   buttonTitle2: tSignUpText5,
                   buttonTitle3: tLoginText8,
                   onTap: () {
-                    Get.to(const LoginScreen());
+                    Get.to(() => const LoginScreen());
                   },
                 ),
               ],

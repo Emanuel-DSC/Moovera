@@ -53,7 +53,7 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
                   } else {
                     return Center(
                         child: CircularProgressIndicator(
-                      color: Colors.red.shade900,
+                      color: isDarkMode ? tPrimaryColor : tPrimaryDarkColor,
                       backgroundColor: Colors.grey.shade600,
                     ));
                   }

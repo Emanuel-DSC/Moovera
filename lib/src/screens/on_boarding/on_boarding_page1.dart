@@ -92,7 +92,7 @@ class OnBoarding1 extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Skip',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),
