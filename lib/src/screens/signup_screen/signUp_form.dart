@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
@@ -25,6 +26,20 @@ class _SignUpFormState extends State<SignUpForm> {
   final passwordConfirmController = TextEditingController();
   FocusNode textFieldFocusPassword = FocusNode();
   FocusNode textFieldFocusConfirmPassword = FocusNode();
+  bool _obscureTextController = true;
+  bool _obscureTextController2 = true;
+
+  void _toggleObscureText() {
+    setState(() {
+      _obscureTextController = !_obscureTextController;
+    });
+  }
+  
+  void _toggleObscureText2() {
+    setState(() {
+      _obscureTextController2 = !_obscureTextController2;
+    });
+  }
 
   // sign user up method
   void signUserUp() async {
@@ -114,20 +129,32 @@ class _SignUpFormState extends State<SignUpForm> {
             onFieldSubmitted: (value) =>
                 FocusScope.of(context).requestFocus(textFieldFocusConfirmPassword),
             controller: passwordController,
-            obscureText: true,
-            decoration: const InputDecoration(
-              label: Text(tLoginText4),
-              prefixIcon: Icon(Icons.fingerprint),
+            obscureText: _obscureTextController,
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.fingerprint),
+              labelText: tLoginText4,
+              border: const OutlineInputBorder(),
+              suffixIcon: IconButton(
+                onPressed: _toggleObscureText,
+                icon: _obscureTextController ? const Icon(LineAwesomeIcons.eye_slash_1)  
+                : const Icon(LineAwesomeIcons.eye),
+              ),
             ),
           ),
           const SizedBox(height: 10),
           TextFormField(
             focusNode: textFieldFocusConfirmPassword,
             controller: passwordConfirmController,
-            obscureText: true,
-            decoration: const InputDecoration(
-              label: Text(tLoginText44),
-              prefixIcon: Icon(Icons.fingerprint),
+            obscureText: _obscureTextController2,
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.fingerprint),
+              labelText: tLoginText4,
+              border: const OutlineInputBorder(),
+              suffixIcon: IconButton(
+                onPressed: _toggleObscureText2,
+                icon: _obscureTextController2 ? const Icon(LineAwesomeIcons.eye_slash_1)  
+                : const Icon(LineAwesomeIcons.eye),
+              ),
             ),
           ),
           const SizedBox(height: 10),
