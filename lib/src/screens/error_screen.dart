@@ -11,37 +11,47 @@ class ErrorScreen extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            "assets/images/error_images/error.png",
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.15,
-            left: MediaQuery.of(context).size.width * 0.3,
-            right: MediaQuery.of(context).size.width * 0.3,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 13),
-                    blurRadius: 25,
-                    color: const Color(0xFF5666C2).withOpacity(0.17),
-                  ),
-                ],
-              ),
-              child: DegradeButton(
-                border: 5,
-                buttonText: 'RETURN',
-                isDarkMode: isDarkMode,
-                onTab: () { Get.to(const GnavBottomBar()); },
-              ),
+    Size size = MediaQuery.of(context).size;
+
+    return SizedBox(
+      height: size.height,
+      width: size.height,
+      child: Scaffold(
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            isDarkMode ? 
+            Image.asset(
+              "assets/images/error_images/error_dark.png",
+              fit: BoxFit.contain,
+            ) : Image.asset(
+              "assets/images/error_images/error.png",
+              fit: BoxFit.cover,
             ),
-          )
-        ],
+            Positioned(
+              bottom: MediaQuery.of(context).size.height * 0.15,
+              left: MediaQuery.of(context).size.width * 0.3,
+              right: MediaQuery.of(context).size.width * 0.3,
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 13),
+                      blurRadius: 25,
+                      color: const Color(0xFF5666C2).withOpacity(0.17),
+                    ),
+                  ],
+                ),
+                child: DegradeButton(
+                  border: 5,
+                  buttonText: 'RETURN',
+                  isDarkMode: isDarkMode,
+                  onTab: () { Get.to(const GnavBottomBar()); },
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

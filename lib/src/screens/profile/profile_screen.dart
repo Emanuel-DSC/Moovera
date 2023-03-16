@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/authentication/auth_services.dart';
+import 'package:movie_login/src/screens/profile/profile_update_screen.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/widgets/profile_menu_widget.dart';
@@ -38,9 +41,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(LineAwesomeIcons.angle_left)),
             title: const Text(
               "Profile",
               style: TextStyle(
@@ -64,9 +64,23 @@ class ProfileScreen extends StatelessWidget {
             child: Center(
               child: Column(children: [
                 const SizedBox(height: 20),
-                Text("Jason", style: Theme.of(context).textTheme.headline4),
-                Text("jason51@gmail.com",
-                    style: Theme.of(context).textTheme.bodyText1),
+
+                // get user ID (email)
+                  Center(
+                    child:FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                    future: FirebaseFirestore.instance.collection('Users')
+                      .doc(FirebaseAuth.instance.currentUser!.uid).get(),
+                    builder: (_, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error = ${snapshot.error}');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text("Loading");
+                    }
+                    Map<String, dynamic> data = snapshot.data!.data()!;
+                    return Text(data['Email'], style: Theme.of(context).textTheme.headline4); 
+                  },
+                )),
                 const SizedBox(height: 30),
                 ProfileMenuWidget(
                     title: 'Settings',
@@ -97,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
                     isDarkMode: isDarkMode,
                     border: 20,
                     onTab: () {
-                      Get.to(const ProfileScreen());
+                      Get.to(ProfileScreeenUpdate());
                     },
                   ),
                 )

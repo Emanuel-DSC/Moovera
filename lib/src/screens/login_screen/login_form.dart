@@ -8,6 +8,7 @@ import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 
+import '../../widgets/alert_dialog.dart';
 import '../forget_password/forget_password_option/forget_password_model_bottom_sheet.dart';
 
 class LoginForm extends StatefulWidget {
@@ -60,27 +61,11 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
   // error message
-  void showErrorMessage(String message) {
+  void showErrorMessage(String text) {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text('error'.toUpperCase(),
-              style: GoogleFonts.lato(
-                  color: Colors.white, fontWeight: FontWeight.bold)),
-          content: Text(message, style: GoogleFonts.lato(color: Colors.white)),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('close'.toUpperCase(),
-                  style: GoogleFonts.lato(color: Colors.white)),
-            ),
-          ],
-          elevation: 10,
-          backgroundColor: tThirdColor,
-        );
+        return MyAlertDialog(message: 'error', message2: text);
       },
     );
   }
@@ -147,3 +132,4 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 }
+

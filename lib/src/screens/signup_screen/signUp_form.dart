@@ -54,7 +54,9 @@ class _SignUpFormState extends State<SignUpForm> {
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(user)
-          .set({'ID': emailController.text});
+          .set({'Email': emailController.text, 
+          'Password': passwordController.text,
+          'ConfirmPassword': passwordConfirmController.text});
       // get to movies screen
       Get.to(const GnavBottomBar());
     } on FirebaseAuthException catch (e) {
