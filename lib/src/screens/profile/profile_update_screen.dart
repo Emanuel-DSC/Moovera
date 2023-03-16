@@ -6,6 +6,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/screens/profile/profile_screen.dart';
 import 'package:movie_login/src/widgets/alert_dialog.dart';
+import 'package:movie_login/src/widgets/button/my_elevated_button.dart';
 
 import '../../widgets/button/degrade_button.dart';
 
@@ -13,13 +14,15 @@ class ProfileScreeenUpdate extends StatelessWidget {
   ProfileScreeenUpdate({Key? key}) : super(key: key);
   final user = FirebaseAuth.instance.currentUser?.uid;
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
 
   saveChanges() {
     FirebaseFirestore.instance.collection('Users').doc(user).set({
       'Email': emailController.text,
-      'Password': passwordController.text,
-      'ConfirmPassword': passwordController.text
+    });
+  }
+  cancelChanges(x) {
+    FirebaseFirestore.instance.collection('Users').doc(user).set({
+      'Email': x,
     });
   }
 
@@ -35,12 +38,6 @@ class ProfileScreeenUpdate extends StatelessWidget {
         titleSpacing: mediaQuery.size.width * 0.25,
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
-        leading: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              LineAwesomeIcons.angle_left,
-              color: isDarkMode ? tWhiteColor : tDarkBackground,
-            )),
         title: Text(
           "Edit Profile",
           style: TextStyle(
@@ -116,74 +113,52 @@ class ProfileScreeenUpdate extends StatelessWidget {
                             ),
                             const SizedBox(height: 50),
                             TextFormField(
-                              onFieldSubmitted: (value) {
-                                emailController.text.isEmpty
-                                    ? MyAlertDialog(
-                                        message: 'error',
-                                        message2: 'Field is empty')
-                                    : saveChanges();
-                              },
                               controller: emailController,
                               decoration: InputDecoration(
                                 label: Text(data['Email']),
-                                prefixIcon:
-                                    const Icon(Icons.mail_outline_rounded),
+                                prefixIcon: const Icon(Icons.person_outline),
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            TextFormField(
-                              onFieldSubmitted: (value) {
-                                saveChanges();
-                              },
-                              controller: passwordController,
-                              decoration: InputDecoration(
-                                label: Text(data['Password']),
-                                prefixIcon: const Icon(Icons.fingerprint),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 30),
                             DegradeButton(
-                              buttonText: 'SAVE',
+                              buttonText: 'SAVE CHANGES',
                               isDarkMode: isDarkMode,
                               border: 5,
                               onTab: () {
-                                Get.to(const ProfileScreen());
+                                emailController.text.isEmpty
+                                    ? showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return MyAlertDialog(
+                                              message: 'error',
+                                              message2: 'Field is empty');
+                                        })
+                                    : Get.to(const ProfileScreen());
+                                saveChanges();
                               },
                             ),
-                            const SizedBox(height: 30),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 2),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text.rich(
-                                    TextSpan(
-                                      text: 'joined',
-                                      style: TextStyle(fontSize: 12),
-                                      children: [
-                                        TextSpan(
-                                            text: '12 october 2022',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12)),
-                                      ],
-                                    ),
+                            const SizedBox(height: 10),
+                            GestureDetector(
+                              onTap: () {
+                              cancelChanges(data['Email']);
+                              Get.to(() => const ProfileScreen());
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 350,
+                                decoration: BoxDecoration(
+                                  color: Colors.red.shade900,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(5)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'CANCEL',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.red.shade300),
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Colors.redAccent.withOpacity(0.1),
-                                      elevation: 0,
-                                      foregroundColor: Colors.red,
-                                      shape: const StadiumBorder(),
-                                      side: BorderSide.none,
-                                    ),
-                                    child: const Text('Delete'),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ],
