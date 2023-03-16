@@ -60,63 +60,61 @@ class ProfileScreen extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           physics: const NeverScrollableScrollPhysics(),
-          child: Expanded(
-            child: Center(
-              child: Column(children: [
-                const SizedBox(height: 20),
+          child: Center(
+            child: Column(children: [
+              const SizedBox(height: 20),
 
-                // get user ID (email)
-                  Center(
-                    child:FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                    future: FirebaseFirestore.instance.collection('Users')
-                      .doc(FirebaseAuth.instance.currentUser!.uid).get(),
-                    builder: (_, snapshot) {
-                    if (snapshot.hasError) {
-                      return Text('Error = ${snapshot.error}');
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text("Loading");
-                    }
-                    Map<String, dynamic> data = snapshot.data!.data()!;
-                    return Text(data['Email'], style: Theme.of(context).textTheme.headline4); 
+              // get user ID (email)
+                Center(
+                  child:FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                  future: FirebaseFirestore.instance.collection('Users')
+                    .doc(FirebaseAuth.instance.currentUser!.uid).get(),
+                  builder: (_, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error = ${snapshot.error}');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text("Loading");
+                  }
+                  Map<String, dynamic> data = snapshot.data!.data()!;
+                  return Text(data['Email'], style: Theme.of(context).textTheme.headline4); 
+                },
+              )),
+              const SizedBox(height: 30),
+              ProfileMenuWidget(
+                  title: 'Settings',
+                  icon: LineAwesomeIcons.cog,
+                  onPress: () {}),
+              ProfileMenuWidget(
+                  title: 'User Management',
+                  icon: LineAwesomeIcons.user,
+                  onPress: () {}),
+              ProfileMenuWidget(
+                  title: 'Information',
+                  icon: LineAwesomeIcons.info,
+                  onPress: () {}),
+              ProfileMenuWidget(
+                  title: 'Logout',
+                  icon: Icons.logout,
+                  onPress: () {
+                    AuthenticationRepository.instance.logout();
+                    AuthService().signOutWithGoogle();
                   },
-                )),
-                const SizedBox(height: 30),
-                ProfileMenuWidget(
-                    title: 'Settings',
-                    icon: LineAwesomeIcons.cog,
-                    onPress: () {}),
-                ProfileMenuWidget(
-                    title: 'User Management',
-                    icon: LineAwesomeIcons.user,
-                    onPress: () {}),
-                ProfileMenuWidget(
-                    title: 'Information',
-                    icon: LineAwesomeIcons.info,
-                    onPress: () {}),
-                ProfileMenuWidget(
-                    title: 'Logout',
-                    icon: Icons.logout,
-                    onPress: () {
-                      AuthenticationRepository.instance.logout();
-                      AuthService().signOutWithGoogle();
-                    },
-                    textColor: Colors.red,
-                    endIcon: false),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: DegradeButton(
-                    buttonText: 'Edit Profile',
-                    isDarkMode: isDarkMode,
-                    border: 20,
-                    onTab: () {
-                      Get.to(ProfileScreeenUpdate());
-                    },
-                  ),
-                )
-              ]),
-            ),
+                  textColor: Colors.red,
+                  endIcon: false),
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: DegradeButton(
+                  buttonText: 'Edit Profile',
+                  isDarkMode: isDarkMode,
+                  border: 20,
+                  onTab: () {
+                    Get.to(() => ProfileScreeenUpdate());
+                  },
+                ),
+              )
+            ]),
           ),
         ),
       ),

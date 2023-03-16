@@ -34,34 +34,31 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           backgroundColor: Colors.transparent,
           body: Container(
             padding: const EdgeInsets.all(10),
-            child: Expanded(
-              child: 
-              StreamBuilder<QuerySnapshot>(
-                  stream:    
-                  FirebaseFirestore.instance
-                      .collection('Users')
-                      .doc(FirebaseAuth.instance.currentUser?.uid)
-                      .collection('favourites')
-                      .snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    //checking connection state
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasData) {
-                      return ListView(
-                        children: snapshot.data!.docs
-                            .map(
-                                (favourite) => favouritesCard(favourite, context))
-                            .toList(),
-                      );
-                    }
-                    return Center(
-                      child: Text("There's no favourites",
-                          style: GoogleFonts.nunito(color: Colors.white)),
+            child: StreamBuilder<QuerySnapshot>(
+                stream:    
+                FirebaseFirestore.instance
+                    .collection('Users')
+                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                    .collection('favourites')
+                    .snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  //checking connection state
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasData) {
+                    return ListView(
+                      children: snapshot.data!.docs
+                          .map(
+                              (favourite) => favouritesCard(favourite, context))
+                          .toList(),
                     );
-                  }) 
-            ),
+                  }
+                  return Center(
+                    child: Text("There's no favourites",
+                        style: GoogleFonts.nunito(color: Colors.white)),
+                  );
+                }),
           ),
         ),
       ),
