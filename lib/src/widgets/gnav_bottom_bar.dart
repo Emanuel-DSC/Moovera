@@ -27,7 +27,7 @@ class _GnavBottomBarState extends State<GnavBottomBar> {
   final List<Widget> _pages = [
     const DashBoard(),
     const FavoritesScreen(),
-     const ProfileScreen(),
+    const ProfileScreen(),
   ];
 
   @override

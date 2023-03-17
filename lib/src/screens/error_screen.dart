@@ -46,7 +46,7 @@ class ErrorScreen extends StatelessWidget {
                   border: 5,
                   buttonText: 'RETURN',
                   isDarkMode: isDarkMode,
-                  onTab: () { Get.to(const GnavBottomBar()); },
+                  onTab: () { Get.to(() => const GnavBottomBar()); },
                 ),
               ),
             )

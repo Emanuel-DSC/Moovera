@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movie_login/src/screens/description.dart';
 import 'package:movie_login/src/widgets/cards/movie_cards.dart';
 
-
 class TrendingMovies extends StatelessWidget {
   final List trending;
 
@@ -44,16 +43,14 @@ class TrendingListWidget extends StatelessWidget {
       child: ListView.builder(
         itemCount: trending.length,
         itemBuilder: (context, index) {
-
           var kTrending = trending[index];
-          String title = kTrending['title'].toString();
-          String bannerUrl =
-              'https://image.tmdb.org/t/p/w500' + kTrending['backdrop_path'];
-          String posterUrl =
-              'https://image.tmdb.org/t/p/w500' + kTrending['poster_path'];
-          String description = kTrending['overview'];
+          String? title , posterUrl, description, launchOn ;
+          
+          title = kTrending['title'];
+          posterUrl = 'https://image.tmdb.org/t/p/w500' + kTrending['poster_path'];
+          description = kTrending['overview'];
           double vote = kTrending['vote_average'].toDouble();
-          String launchOn = kTrending['release_date'];
+          launchOn = kTrending['release_date'];
 
           return InkWell(
               onTap: () {
@@ -61,17 +58,15 @@ class TrendingListWidget extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Description(
-                              name: title,
-                              bannerurl: bannerUrl,
-                              posterurl: posterUrl,
-                              description: description,
+                              name: title ?? 'failed to load movie title'.toUpperCase(),
+                              bannerurl: posterUrl ?? 'failed to load movie cover',
+                              posterurl: posterUrl ?? 'failed to load movie cover' ,
+                              description: description ?? 'failed to load movie description',
                               vote: vote,
-                              launch_on: launchOn,
-                              
+                              launch_on: launchOn ?? 'failed to load',
                             )));
               },
-              child: MovieCards(
-                  imageName: posterUrl));
+              child: MovieCards(imageName: posterUrl));
         },
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,

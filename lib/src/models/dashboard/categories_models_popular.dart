@@ -44,27 +44,25 @@ class PopularListWidget extends StatelessWidget {
         itemCount: popular.length,
         itemBuilder: (context, index) {
           var kPopular = popular[index];
-          String title = kPopular['title'].toString();
-          String bannerUrl =
-              'https://image.tmdb.org/t/p/w500' + kPopular['backdrop_path'];
-          String posterUrl =
+          String? title , posterUrl, description, launchOn ;
+          title = kPopular['title'];
+          posterUrl =
               'https://image.tmdb.org/t/p/w500' + kPopular['poster_path'];
-          String description = kPopular['overview'];
+          description = kPopular['overview'];
           double vote = kPopular['vote_average'].toDouble();
-          String launchOn = kPopular['release_date'];
+          launchOn = kPopular['release_date'];
           return InkWell(
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Description(
-                              name: title,
-                              bannerurl: bannerUrl,
-                              posterurl: posterUrl,
-                              description: description,
+                             name: title ?? 'failed to load movie title'.toUpperCase(),
+                              bannerurl: posterUrl ?? 'failed to load movie cover',
+                              posterurl: posterUrl ?? 'failed to load movie cover' ,
+                              description: description ?? 'failed to load movie description',
                               vote: vote,
-                              launch_on: launchOn,
-                              
+                              launch_on: launchOn ?? 'failed to load',
                             )));
               },
               child: MovieCards(imageName: posterUrl));

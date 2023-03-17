@@ -28,7 +28,12 @@ class Description extends StatelessWidget {
     final isDarkMode = brightness == Brightness.dark;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: isDarkMode ? tDarkBackground : tWhiteColor,
+      appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            leading: IconButton(icon: const Icon(LineAwesomeIcons.angle_left), onPressed: () { Navigator.of(context).pop(); },),
+          ),
       body: Stack(
         children: [
           Container(
@@ -39,18 +44,6 @@ class Description extends StatelessWidget {
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.5,
               fit: BoxFit.cover),
-          Positioned(
-            top: 30,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(LineAwesomeIcons.angle_left,
-                      color: tWhiteColor)),
-            ),
-          ),
           Positioned.fill(
             child: DecoratedBox(
                 decoration: BoxDecoration(

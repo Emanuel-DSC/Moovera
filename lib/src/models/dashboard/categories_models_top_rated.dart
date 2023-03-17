@@ -46,14 +46,14 @@ class TopRatedListWidget extends StatelessWidget {
         itemBuilder: (context, index) {
 
           var kTopRated = topRated[index];
-          String title = kTopRated['title'].toString();
-          String bannerUrl =
-              'https://image.tmdb.org/t/p/w500' + kTopRated['backdrop_path'];
-          String posterUrl =
+          String? title , posterUrl, description, launchOn ;
+
+          title = kTopRated['title'];
+           posterUrl =
               'https://image.tmdb.org/t/p/w500' + kTopRated['poster_path'];
-          String description = kTopRated['overview'];
+           description = kTopRated['overview'];
           double vote = kTopRated['vote_average'].toDouble();
-          String launchOn = kTopRated['release_date'];
+           launchOn = kTopRated['release_date'];
 
           return InkWell(
               onTap: () {
@@ -61,13 +61,12 @@ class TopRatedListWidget extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Description(
-                              name: title,
-                              bannerurl: bannerUrl,
-                              posterurl: posterUrl,
-                              description: description,
+                              name: title ?? 'failed to load movie title'.toUpperCase(),
+                              bannerurl: posterUrl ?? 'failed to load movie cover',
+                              posterurl: posterUrl ?? 'failed to load movie cover' ,
+                              description: description ?? 'failed to load movie description',
                               vote: vote,
-                              launch_on: launchOn,
-                              
+                              launch_on: launchOn ?? 'failed to load',
                             )));
               },
               child: MovieCards(

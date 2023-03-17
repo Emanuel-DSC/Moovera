@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_login/src/authentication/auth_services.dart';
+import 'package:movie_login/src/authentication/google_auth_services.dart';
 import 'package:movie_login/src/constants/images.dart';
 
 class FormFooter extends StatelessWidget {
@@ -34,7 +34,7 @@ class FormFooter extends StatelessWidget {
               ),
               side: BorderSide(
                 width: 2,
-                color: isDarkMode ? Colors.white : Colors.black,
+                color: isDarkMode ? Colors.white : Colors.grey,
               ),
             ),
             icon: const Image(

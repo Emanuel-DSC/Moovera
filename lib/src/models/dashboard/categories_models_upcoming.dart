@@ -44,14 +44,15 @@ class UpcomingListWidget extends StatelessWidget {
         itemCount: upcoming.length,
         itemBuilder: (context, index) {
           var kUpComing = upcoming[index];
-          String title = kUpComing['title'].toString();
-          String bannerUrl =
+          String? title , bannerUrl, posterUrl, description, launchOn ;
+           title = kUpComing['title'].toString();
+           bannerUrl =
               'https://image.tmdb.org/t/p/w500' + kUpComing['backdrop_path'];
-          String posterUrl =
+           posterUrl =
               'https://image.tmdb.org/t/p/w500' + kUpComing['poster_path'];
-          String description = kUpComing['overview'];
+           description = kUpComing['overview'];
           double vote = kUpComing['vote_average'].toDouble();
-          String launchOn = kUpComing['release_date'];
+           launchOn = kUpComing['release_date'];
 
           return InkWell(
               onTap: () {
@@ -59,13 +60,12 @@ class UpcomingListWidget extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Description(
-                              name: title,
-                              bannerurl: bannerUrl,
-                              posterurl: posterUrl,
-                              description: description,
+                              name: title ?? 'failed to load movie title'.toUpperCase(),
+                              bannerurl: bannerUrl ?? 'failed to load movie cover',
+                              posterurl: posterUrl ?? 'failed to load movie cover' ,
+                              description: description ?? 'failed to load movie description',
                               vote: vote,
-                              launch_on: launchOn,
-                              
+                              launch_on: launchOn ?? 'failed to load',
                             )));
               },
               child: Banners(imageName: bannerUrl));
