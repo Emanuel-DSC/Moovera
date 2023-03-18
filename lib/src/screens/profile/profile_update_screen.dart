@@ -19,6 +19,7 @@ class ProfileScreeenUpdate extends StatelessWidget {
       'Email': emailController.text,
     });
   }
+  
   cancelChanges(x) {
     FirebaseFirestore.instance.collection('Users').doc(user).set({
       'Email': x,
@@ -112,7 +113,7 @@ class ProfileScreeenUpdate extends StatelessWidget {
                                   builder: (context) {
                                     return MyAlertDialog(
                                         message: 'error',
-                                        message2: 'Field is empty');
+                                        message2: 'Field is empty', onTap: () { Navigator.of(context).pop();  },);
                                   })
                               : Get.to(const ProfileScreen());
                           saveChanges();

@@ -5,7 +5,6 @@ const double tPadding16 = 16;
 const double tPadding30 = 30;
 const double tPadding10 = 10;
 
-
 //on boarding texts
 const String tOnBoardingText1 = "Get the first Movie";
 const String tOnBoardingText11 = "& TV information";
@@ -43,8 +42,12 @@ const String tForgetPasswordText2 =
 const String tForgetPasswordText3 = "Reset via E-Mail Verification.";
 const String tForgetPasswordText4 = "Reset via Phone Verification.";
 const String tForgetPasswordText5 = "Phone Number";
-const String tForgetPasswordText6 = "FORGET PASSWORD";
+const String tForgetPasswordText6 = "FORGET PASSWORD ?";
 const String tForgetPasswordText7 = "Type your email below.";
+const String tResetPassword = "reset password";
+const String tEmailSent = "Password reset link sent! Chek your email";
+const String tEmailSent2 = "all done";
+
 
 // otp screen text
 
@@ -58,6 +61,3 @@ const String tDashboardText2 = 'UP COMING';
 const String tDashboardText3 = 'TRENDINGS';
 const String tDashboardText4 = 'TOP RATED';
 const String tDashboardText5 = 'POPULAR';
-
-
-

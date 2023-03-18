@@ -7,9 +7,12 @@ import '../constants/colors.dart';
 class MyAlertDialog extends StatelessWidget {
   String message;
   String message2;
+  VoidCallback onTap; 
+
   MyAlertDialog({
     Key? key,
     required this.message,
+    required this.onTap,
     required this.message2,
   }) : super(key: key);
 
@@ -22,9 +25,7 @@ class MyAlertDialog extends StatelessWidget {
       content: Text(message2, style: GoogleFonts.lato(color: Colors.white)),
       actions: [
         TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: onTap,
           child: Text('close'.toUpperCase(),
               style: GoogleFonts.lato(color: Colors.white)),
         ),

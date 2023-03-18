@@ -63,7 +63,8 @@ class _LoginFormState extends State<LoginForm> {
     showDialog(
       context: context,
       builder: (context) {
-        return MyAlertDialog(message: 'error', message2: text);
+        return MyAlertDialog(message: 'error', message2: text, 
+        onTap: () => Navigator.of(context).pop());
       },
     );
   }
