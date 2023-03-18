@@ -49,10 +49,10 @@ const String tEmailSent = "Password reset link sent! Chek your email";
 const String tEmailSent2 = "all done";
 
 
-// otp screen text
+// Verify screen text
 
 const String tOtpText = "Verification";
-const String tOtpText2 = "Enter the verification code sent at ";
+const String tOtpText2 = "A verification link was sent to your email";
 
 // dashboard text
 

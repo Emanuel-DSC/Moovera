@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:movie_login/src/screens/verify_email_screen.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
-import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({
@@ -62,18 +62,18 @@ class _SignUpFormState extends State<SignUpForm> {
     // try sign Up
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
+          email: emailController.text, password: passwordController.text.trim());
 
       // create user in Users collection Firebase
       var user = FirebaseAuth.instance.currentUser?.uid;
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(user)
-          .set({'Email': emailController.text, 
+          .set({'Email': emailController.text.trim(), 
           'Password': passwordController.text,
           'ConfirmPassword': passwordConfirmController.text});
       // get to movies screen
-      Get.to(const GnavBottomBar());
+      Get.to(const VerifyEmailScreen());
     } on FirebaseAuthException catch (e) {
       // pop the loading circle
       Navigator.pop(context);

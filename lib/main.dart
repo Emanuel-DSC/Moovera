@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_login/src/authentication/firebase_options.dart';
 import 'package:movie_login/src/repository/auth_repository/auth_repo.dart';
 import 'package:movie_login/src/screens/error_screen.dart';
+import 'package:movie_login/src/screens/verify_email_screen.dart';
 import 'package:movie_login/src/screens/on_boarding/on_boarding_screen.dart';
 import 'package:movie_login/src/utils/theme/theme.dart';
 
@@ -37,7 +39,18 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(), //dashboard
-    );
+
+      // if user loged in -> Movies Screen else -> OnBoarding
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData){
+            return VerifyEmailScreen();
+          } else {
+            return OnBoardingScreen();
+          }
+        }
+      ), 
+    );//dashboard
   }
 }
