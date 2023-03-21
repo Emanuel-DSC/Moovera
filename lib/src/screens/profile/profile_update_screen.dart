@@ -23,10 +23,10 @@ class _ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
   final FirebaseStorage storage = FirebaseStorage.instance;
   final emailController = TextEditingController();
 
-  cancelChanges(email , image) {
+  cancelChanges(email, image) {
     FirebaseFirestore.instance.collection('Users').doc(user).set({
       'Email': email,
-      'ProfilePicture' : image,
+      'ProfilePicture': image,
     });
   }
 
@@ -96,14 +96,19 @@ class _ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                             SizedBox(
                               width: 150,
                               height: 150,
-                              child: data['ProfilePicture'] != null
-                                  ? CircleAvatar(
-                                      radius: 150,
-                                      backgroundImage: NetworkImage(data['ProfilePicture']))
-                                  : const CircleAvatar(
+                              child: UploadImage != null
+                                  ? ClipOval(
+                                      child: SizedBox.fromSize(
+                                        size:
+                                            const Size.fromRadius(48), // Image radius
+                                        child: (Image.file(UploadImage!,
+                                            fit: BoxFit.cover)),
+                                      ),
+                                    )
+                                  : CircleAvatar(
                                       radius: 150,
                                       backgroundImage: NetworkImage(
-                                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png')),
+                                          data['ProfilePicture'].toString())),
                             ),
                             Positioned(
                               bottom: 0,
@@ -140,9 +145,12 @@ class _ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                         isDarkMode: isDarkMode,
                         border: 5,
                         onTab: () {
-                          emailController.text.isEmpty
-                              ? emailController.text = data['Email']
-                              : saveChanges(UploadImage!);
+                          if (emailController.text.isEmpty) {
+                            emailController.text = data['Email'];
+                            saveChanges(UploadImage!);
+                          }
+
+                          saveChanges(UploadImage!);
                           Get.to(() => const GnavBottomBar());
                         },
                       ),

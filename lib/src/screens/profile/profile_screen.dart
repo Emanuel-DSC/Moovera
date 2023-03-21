@@ -25,8 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var brightness = mediaQuery.platformBrightness;
     var isDarkMode = brightness == Brightness.dark;
     var user = FirebaseAuth.instance.currentUser?.uid ?? 'No user found';
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: SafeArea(
@@ -37,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.data == null) {
-                  return const Text('no data');
+                  return const Center(child: Text('no data'));
       
                 } else {
       
@@ -47,20 +45,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     child: Center(
                       child: Column(children: [
-                        Container(
-                        height: height * 0.3,
-                        width: width,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
+                        AspectRatio(
+                          aspectRatio: 5/4,
+                          child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30),
+                            ),
+                            image: DecorationImage(
+                              image: NetworkImage(data['ProfilePicture']),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          image: DecorationImage(
-                            image: NetworkImage(data['ProfilePicture']),
-                            fit: BoxFit.cover,
-                          ),
+                                              ),
                         ),
-                      ),
                         const SizedBox(height: 30),
                         Text(data['Email'], style: Theme.of(context).textTheme.headline4),
                         const SizedBox(height: 10),
@@ -103,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }
       
               } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
                 // error
               } else {
                 return const Text('Error'); // loading
