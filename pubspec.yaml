@@ -42,11 +42,13 @@ dependencies:
   firebase_database: ^10.0.14
   firebase_auth: ^4.2.0
   cloud_firestore: ^4.2.0
+  firebase_storage: ^11.0.10
   tmdb_api:
   line_awesome_flutter: ^2.0.0
   flutter_rating_bar: ^4.0.1
   google_sign_in: ^6.0.1
   like_button: ^2.0.5
+  image_picker: ^0.8.7
   
 dev_dependencies:
   flutter_test:

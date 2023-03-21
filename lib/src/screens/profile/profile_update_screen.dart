@@ -1,30 +1,52 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/screens/profile/profile_screen.dart';
-import 'package:movie_login/src/widgets/alert_dialog.dart';
-
+import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
+import '../../services/select_image.dart';
+import '../../widgets/button/cancel_button.dart';
 import '../../widgets/button/degrade_button.dart';
 
-class ProfileScreeenUpdate extends StatelessWidget {
-  ProfileScreeenUpdate({Key? key}) : super(key: key);
+class ProfileScreeenUpdate extends StatefulWidget {
+  const ProfileScreeenUpdate({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreeenUpdate> createState() => _ProfileScreeenUpdateState();
+}
+
+class _ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
   final user = FirebaseAuth.instance.currentUser?.uid;
+  final FirebaseStorage storage = FirebaseStorage.instance;
   final emailController = TextEditingController();
 
-  saveChanges() {
+  cancelChanges(email , image) {
     FirebaseFirestore.instance.collection('Users').doc(user).set({
-      'Email': emailController.text,
+      'Email': email,
+      'ProfilePicture' : image,
     });
   }
-  
-  cancelChanges(x) {
+
+  Future<bool> saveChanges(File image) async {
+    //upload image
+    final String nameFile = image.path.split("/").last;
+    final Reference ref = storage.ref().child("images").child(nameFile);
+    final UploadTask uploadTask = ref.putFile(image);
+    final TaskSnapshot snapshot = await uploadTask.whenComplete(() => true);
+    String url = await snapshot.ref.getDownloadURL();
+    // save changes
     FirebaseFirestore.instance.collection('Users').doc(user).set({
-      'Email': x,
+      'ProfilePicture': url,
+      'Email': emailController.text.toUpperCase(),
     });
+    return false;
   }
+
+  // ignore: non_constant_identifier_names
+  File? UploadImage;
 
   @override
   Widget build(BuildContext context) {
@@ -58,40 +80,51 @@ class ProfileScreeenUpdate extends StatelessWidget {
                   return Text('Error = ${snapshot.error}');
                 }
                 Map<String, dynamic> data = snapshot.data!.data()!;
+
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      // const SizedBox(height: 40),
-                      Stack(
-                        children: [
-                          const SizedBox(
-                            width: 150,
-                            height: 150,
-                            child: CircleAvatar(
-                                radius: 150,
-                                backgroundImage: NetworkImage(
-                                    'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80')),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(100),
-                                  color: isDarkMode
-                                      ? tPrimaryColor
-                                      : tSecundaryDarkColor),
-                              child: const Icon(
-                                LineAwesomeIcons.alternate_pencil,
-                                color: tWhiteColor,
-                                size: 20,
+                      GestureDetector(
+                        onTap: () async {
+                          final picture = await getImage();
+                          setState(() {
+                            UploadImage = File(picture!.path);
+                          });
+                        },
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                              width: 150,
+                              height: 150,
+                              child: data['ProfilePicture'] != null
+                                  ? CircleAvatar(
+                                      radius: 150,
+                                      backgroundImage: NetworkImage(data['ProfilePicture']))
+                                  : const CircleAvatar(
+                                      radius: 150,
+                                      backgroundImage: NetworkImage(
+                                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png')),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: isDarkMode
+                                        ? tPrimaryColor
+                                        : tSecundaryDarkColor),
+                                child: const Icon(
+                                  LineAwesomeIcons.alternate_pencil,
+                                  color: tWhiteColor,
+                                  size: 20,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 50),
                       TextFormField(
@@ -108,40 +141,18 @@ class ProfileScreeenUpdate extends StatelessWidget {
                         border: 5,
                         onTab: () {
                           emailController.text.isEmpty
-                              ? showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return MyAlertDialog(
-                                        message: 'error',
-                                        message2: 'Field is empty', onTap: () { Navigator.of(context).pop();  },);
-                                  })
-                              : Get.to(const ProfileScreen());
-                          saveChanges();
+                              ? emailController.text = data['Email']
+                              : saveChanges(UploadImage!);
+                          Get.to(() => const GnavBottomBar());
                         },
                       ),
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () {
-                        cancelChanges(data['Email']);
-                        Get.to(() => const ProfileScreen());
+                          cancelChanges(data['Email'], data['ProfilePicture']);
+                          Get.to(() => const GnavBottomBar());
                         },
-                        child: Container(
-                          height: 50,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            color: Colors.red.shade900,
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(5)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'CANCEL',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.red.shade300),
-                            ),
-                          ),
-                        ),
+                        child: const CancelButtonStyle(),
                       ),
                     ],
                   ),

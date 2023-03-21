@@ -71,7 +71,8 @@ class _SignUpFormState extends State<SignUpForm> {
           .doc(user)
           .set({'Email': emailController.text.trim(), 
           'Password': passwordController.text,
-          'ConfirmPassword': passwordConfirmController.text});
+          'ConfirmPassword': passwordConfirmController.text,
+          'ProfilePicture': 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'});
       // get to movies screen
       Get.to(const VerifyEmailScreen());
     } on FirebaseAuthException catch (e) {
