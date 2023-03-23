@@ -61,7 +61,7 @@ class UpcomingListWidget extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => Description(
                               name: title ?? 'failed to load movie title'.toUpperCase(),
-                              bannerurl: bannerUrl ?? 'failed to load movie cover',
+                              bannerurl: posterUrl ?? 'failed to load movie cover',
                               posterurl: posterUrl ?? 'failed to load movie cover' ,
                               description: description ?? 'failed to load movie description',
                               vote: vote,

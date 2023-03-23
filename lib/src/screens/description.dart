@@ -31,6 +31,7 @@ class Description extends StatelessWidget {
       extendBodyBehindAppBar: true,
       backgroundColor: isDarkMode ? tDarkBackground : tWhiteColor,
       appBar: AppBar(
+            elevation: 0,
             backgroundColor: Colors.transparent,
             leading: IconButton(icon: const Icon(LineAwesomeIcons.angle_left), onPressed: () { Navigator.of(context).pop(); },),
           ),
@@ -42,7 +43,7 @@ class Description extends StatelessWidget {
           ),
           Image.network(bannerurl,
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.65,
               fit: BoxFit.cover),
           Positioned.fill(
             child: DecoratedBox(

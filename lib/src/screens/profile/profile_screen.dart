@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                                               ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 10),
                         Text(data['Email'], style: Theme.of(context).textTheme.headline4),
                         const SizedBox(height: 10),
                         ProfileMenuWidget(
@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                             textColor: Colors.red,
                             endIcon: false),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: DegradeButton(
