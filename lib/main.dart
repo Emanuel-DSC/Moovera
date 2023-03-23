@@ -9,7 +9,7 @@ import 'package:movie_login/src/repository/auth_repository/auth_repo.dart';
 import 'package:movie_login/src/screens/error_screen.dart';
 import 'package:movie_login/src/screens/verify_email_screen.dart';
 import 'package:movie_login/src/screens/on_boarding/on_boarding_screen.dart';
-import 'package:movie_login/src/utils/theme/theme.dart';
+import 'package:movie_login/src/constants/theme/theme.dart';
 
 void main() async {
 

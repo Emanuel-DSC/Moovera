@@ -2,10 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
+import 'package:movie_login/src/controllers/video_player.dart';
+import 'package:movie_login/src/screens/movie_player_screen.dart';
 import 'package:movie_login/src/widgets/button/animated_like_button.dart';
 import 'package:movie_login/src/widgets/button/my_elevated_button.dart';
+import 'package:video_player/video_player.dart';
 
 class Description extends StatelessWidget {
   final String name, description, bannerurl, posterurl, launch_on;
@@ -31,10 +36,15 @@ class Description extends StatelessWidget {
       extendBodyBehindAppBar: true,
       backgroundColor: isDarkMode ? tDarkBackground : tWhiteColor,
       appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            leading: IconButton(icon: const Icon(LineAwesomeIcons.angle_left), onPressed: () { Navigator.of(context).pop(); },),
-          ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(LineAwesomeIcons.angle_left),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Stack(
         children: [
           Container(
@@ -117,10 +127,16 @@ class Description extends StatelessWidget {
                       MyElevatedButton(
                           isDarkMode: isDarkMode,
                           icon: LineAwesomeIcons.play,
-                          onTap: () {}),
-                       AnimatedLikeButton(bannerurl: bannerurl, 
-                       description: description, launch: launch_on, 
-                       name: name, posterurl: posterurl, vote: vote), //onTabDelete: onTabDelete)
+                          onTap: () {
+                            Get.to(() => const MoviePlayerScreen());
+                          }),
+                      AnimatedLikeButton(
+                          bannerurl: bannerurl,
+                          description: description,
+                          launch: launch_on,
+                          name: name,
+                          posterurl: posterurl,
+                          vote: vote), //onTabDelete: onTabDelete)
                     ],
                   ),
                 ],

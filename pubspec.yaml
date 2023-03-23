@@ -50,6 +50,8 @@ dependencies:
   like_button: ^2.0.5
   image_picker: ^0.8.7
   image_cropper: ^3.0.1
+  chewie: ^1.4.0
+  video_player: ^2.6.0
   
 dev_dependencies:
   flutter_test:

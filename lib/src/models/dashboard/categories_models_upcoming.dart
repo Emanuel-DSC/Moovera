@@ -65,7 +65,7 @@ class UpcomingListWidget extends StatelessWidget {
                               posterurl: posterUrl ?? 'failed to load movie cover' ,
                               description: description ?? 'failed to load movie description',
                               vote: vote,
-                              launch_on: launchOn ?? 'failed to load',
+                              launch_on: launchOn ?? 'failed to load movie release date',
                             )));
               },
               child: Banners(imageName: bannerUrl));

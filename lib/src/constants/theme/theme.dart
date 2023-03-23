@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_login/src/constants/colors.dart';
-import 'package:movie_login/src/utils/theme/outlinedButtonTheme.dart';
-import 'package:movie_login/src/utils/theme/textfieldTheme.dart';
+import 'package:movie_login/src/constants/theme/outlinedButtonTheme.dart';
+import 'package:movie_login/src/constants/theme/textfieldTheme.dart';
 
 class TAppTheme {
 //para deixar privado e o usuario nao poder alterar
