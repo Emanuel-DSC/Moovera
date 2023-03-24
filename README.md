@@ -6,7 +6,7 @@ COMING SOON
 ## About this Project
 Streaming movies app. You can create and login in your account, explore movies, search , add to favorites and play. 
 
-!! Since the search bar its only to show the implementation of filtering , I made it filter only POPULAR category. 
+!! Since the search bar its only to show the implementation of filtering , I made it filter only POPULAR category. <br>
 !! TMDB doesn't can't share real movies links, so I used the same animation for every movie, just to show Media Player implemetation. 
 
 ## Why ? 
