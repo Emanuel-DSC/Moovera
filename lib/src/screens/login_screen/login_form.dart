@@ -5,7 +5,6 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
-
 import '../../widgets/alert_dialog.dart';
 import '../forget_password/forget_password_option/forget_password_model_bottom_sheet.dart';
 

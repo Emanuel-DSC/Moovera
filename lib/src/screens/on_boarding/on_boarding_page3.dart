@@ -4,7 +4,7 @@ import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../controllers/on_boarding_controlles.dart';
+import '../../controllers/on_boarding_controllers.dart';
 import '../welcome_screen.dart';
 
 class OnBoarding3 extends StatelessWidget {

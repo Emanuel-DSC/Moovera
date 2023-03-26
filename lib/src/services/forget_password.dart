@@ -6,7 +6,6 @@ import 'package:movie_login/src/screens/forget_password/forget_password_email/fo
 import 'package:movie_login/src/screens/login_screen/login_screen.dart';
 import 'package:movie_login/src/widgets/alert_dialog.dart';
 
-
 Future passwordReset(context) async {
   try {
     await FirebaseAuth.instance

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
-import '../../controllers/on_boarding_controlles.dart';
+import '../../controllers/on_boarding_controllers.dart';
 import 'on_boarding_page1.dart';
 import 'on_boarding_page2.dart';
 import 'on_boarding_page3.dart';

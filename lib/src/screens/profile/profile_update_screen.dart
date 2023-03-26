@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/constants/colors.dart';
+import 'package:movie_login/src/services/profile/cancel_changes.dart';
+import 'package:movie_login/src/services/profile/save_changes.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 import '../../services/select_image.dart';
 import '../../widgets/button/cancel_button.dart';
@@ -15,35 +16,12 @@ class ProfileScreeenUpdate extends StatefulWidget {
   const ProfileScreeenUpdate({Key? key}) : super(key: key);
 
   @override
-  State<ProfileScreeenUpdate> createState() => _ProfileScreeenUpdateState();
+  State<ProfileScreeenUpdate> createState() => ProfileScreeenUpdateState();
 }
 
-class _ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
+class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
   final user = FirebaseAuth.instance.currentUser?.uid;
-  final FirebaseStorage storage = FirebaseStorage.instance;
-  final emailController = TextEditingController();
-
-  cancelChanges(email, image) {
-    FirebaseFirestore.instance.collection('Users').doc(user).set({
-      'Email': email,
-      'ProfilePicture': image,
-    });
-  }
-
-  Future<bool> saveChanges(File image) async {
-    //upload image
-    final String nameFile = image.path.split("/").last;
-    final Reference ref = storage.ref().child("images").child(nameFile);
-    final UploadTask uploadTask = ref.putFile(image);
-    final TaskSnapshot snapshot = await uploadTask.whenComplete(() => true);
-    String url = await snapshot.ref.getDownloadURL();
-    // save changes
-    FirebaseFirestore.instance.collection('Users').doc(user).set({
-      'ProfilePicture': url,
-      'Email': emailController.text.toUpperCase(),
-    });
-    return false;
-  }
+  static final emailController = TextEditingController();
 
   // ignore: non_constant_identifier_names
   File? UploadImage;
@@ -149,9 +127,7 @@ class _ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                             emailController.text = data['Email'];
                             saveChanges(UploadImage!);
                           }
-
                           saveChanges(UploadImage!);
-                          Get.to(() => const GnavBottomBar());
                         },
                       ),
                       const SizedBox(height: 10),

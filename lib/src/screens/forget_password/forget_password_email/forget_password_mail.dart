@@ -1,15 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:movie_login/src/screens/login_screen/login_screen.dart';
-import 'package:movie_login/src/widgets/alert_dialog.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/widgets/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 
-import '../../../controllers/forget_password_controller.dart';
+import '../../../services/forget_password.dart';
 
 class ForgetPasswordMailScreen extends StatefulWidget {
   const ForgetPasswordMailScreen({Key? key}) : super(key: key);
@@ -27,31 +23,6 @@ class ForgetPasswordMailScreenState extends State<ForgetPasswordMailScreen> {
     emailController.dispose();
     super.dispose();
   }
-
-  // Future passwordReset() async {
-  //   try {
-  //     await FirebaseAuth.instance
-  //         .sendPasswordResetEmail(email: _emailController.text.trim());
-  //     showDialog(
-  //         context: context,
-  //         builder: (context) {
-  //           return MyAlertDialog(message: tEmailSent2, message2: tEmailSent,
-  //           onTap: () {
-  //             Navigator.of(context).pop();
-  //             Get.to(() => const LoginScreen());
-  //             });
-  //         });
-
-  //   } on FirebaseAuthException catch (e) {
-  //     showDialog(
-  //         context: context,
-  //         builder: (context) {
-  //           return MyAlertDialog(
-  //               message: 'error', message2: e.message.toString(),
-  //               onTap: () => Navigator.of(context).pop());
-  //         });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

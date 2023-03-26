@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
-import '../controllers/video_player.dart';
+import '../controllers/video_player_controller.dart';
 
 class MoviePlayerScreen extends StatelessWidget {
   const MoviePlayerScreen({super.key});
