@@ -6,9 +6,9 @@ import 'package:movie_login/src/models/dashboard/categories_models_popular.dart'
 import 'package:movie_login/src/models/dashboard/categories_models_top_rated.dart';
 import 'package:movie_login/src/models/dashboard/categories_models_trendings.dart';
 import 'package:movie_login/src/models/dashboard/categories_models_upcoming.dart';
+import 'package:movie_login/src/services/api_services.dart';
 import 'package:movie_login/src/widgets/categories_text.dart';
 import 'package:movie_login/src/widgets/searchbar.dart';
-import 'package:tmdb_api/tmdb_api.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -18,40 +18,10 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  final String apikey = 'ccfcb2162afe6c935d40b19d0603d0b5';
-  final String readaccesstoken =
-      'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2N2FmNWU2MzFkY2JiNGQwOTgxYjA2OTk2ZmNkNDdiYyIsInN1YiI6IjYwNzQ1OTA0ZjkyNTMyMDAyOTFmZDczYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.C_Bkz_T8OybTGo3HfYsESNjN46LBYdw3LHdF-1TzYYs';
-  List trendingMovies = [];
-  List topratedMovies = [];
-  List upcomingMovies = [];
-  List popularMovies = [];
-
   @override
   void initState() {
     super.initState();
-    loadmovies();
-  }
-
-  loadmovies() async {
-    TMDB tmdbWithCustomLogs = TMDB(
-      ApiKeys(apikey, readaccesstoken),
-      logConfig: ConfigLogger(
-        showLogs: true,
-        showErrorLogs: true,
-      ),
-    );
-
-    Map trendingResult = await tmdbWithCustomLogs.v3.trending.getTrending();
-    Map topratedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
-    Map popularResult = await tmdbWithCustomLogs.v3.movies.getPopular();
-    Map upcomingResult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
-
-    setState(() {
-      trendingMovies = trendingResult['results'];
-      topratedMovies = topratedResult['results'];
-      upcomingMovies = upcomingResult['results'];
-      popularMovies = popularResult['results'];
-    });
+    loadmovies(setState);
   }
 
   @override

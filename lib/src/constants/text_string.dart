@@ -29,13 +29,11 @@ const String tLoginText8 = "SIGN IN ";
 const String tLoginText9 = "SIGN UP ";
 
 //sign up text
-
 const String tSignUpText = "Get on Board!";
 const String tSignUpText2 = "Create your profile to start your journey.";
 const String tSignUpText5 = "Already have an account? ";
 
 // forget password text
-
 const String tForgetPasswordText = "Make selection!";
 const String tForgetPasswordText2 =
     "Select one of the options given below to reset your password.";
@@ -48,14 +46,11 @@ const String tResetPassword = "reset password";
 const String tEmailSent = "Password reset link sent! Chek your email";
 const String tEmailSent2 = "all done";
 
-
 // Verify screen text
-
 const String tOtpText = "Verification";
 const String tOtpText2 = "A verification link was sent to your email";
 
 // dashboard text
-
 const String tDashboardText = 'Search...';
 const String tDashboardText2 = 'UP COMING';
 const String tDashboardText3 = 'TRENDINGS';
