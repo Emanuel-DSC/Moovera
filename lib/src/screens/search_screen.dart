@@ -1,32 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:movie_login/src/constants/colors.dart';
-import 'dart:convert';
 import 'package:movie_login/src/widgets/cards/search_cards.dart';
+import '../services/search_service.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
   @override
-  // ignore: library_private_types_in_public_api
-  _SearchScreenState createState() => _SearchScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  List movies = [];
-  List filteredMovies = [];
+class SearchScreenState extends State<SearchScreen> {
+  static List movies = [];
+  static List filteredMovies = [];
   final _textController = TextEditingController();
   bool _searchIconController = true;
   FocusNode textFieldFocus = FocusNode();
-
-  getMovies() async {
-
-    //TMDB API DOESNT HAVE A LINK TO EVERY MOVIE SO I WILL CALL POPULAR ONLY 
-    final response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/movie/popular?api_key=ccfcb2162afe6c935d40b19d0603d0b5&language=en-US&page=1'));
-    Map<String, dynamic> map = json.decode(response.body);
-    List<dynamic> data = map["results"];
-    return data;
-  }
 
   @override
   void initState() {
@@ -42,15 +30,6 @@ class _SearchScreenState extends State<SearchScreen> {
         .addPostFrameCallback((_) => FocusScope.of(context).requestFocus(textFieldFocus));
   }
 
-  void _filterMovies(value) {
-    setState(() {
-      filteredMovies = movies
-          .where((movie) => movie['original_title']
-              .toLowerCase()
-              .contains(value.toLowerCase()))
-          .toList();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           focusNode: textFieldFocus,
                           controller: _textController,
                           onChanged: (value) {
-                            _filterMovies(value);
+                            filterMovies(value, setState);
                             _searchIconController = true;
                             if (value.isEmpty) {
                               _textController.clear();
