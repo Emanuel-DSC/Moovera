@@ -6,9 +6,11 @@ COMING SOON
 ## About this Project
 Streaming movies app. You can create and login in your account, explore movies, search , add to favorites and play. 
 
-!! Since the search bar its only to show the implementation of filtering , I made it filter only movies from POPULAR category. <br>
-!! TMDB can't share real movies links, so I used the same animation for every movie, just to show Media Player implemetation. 
-
+## Observations
+ Since the search bar its only to show the implementation of filtering , I made it filter only movies from POPULAR category. <br>
+ TMDB can't share real movies links, so I used the same animation for every movie, just to show Media Player implemetation. <br>
+ Couldn't find a way to reset password by phone number, so I "phone reset button" just for design purpose.
+ 
 ## Why ? 
 I decided to create "Moovera" to study Flutter and Dart. Now it's part of my personal portfolio, so any feedback about the project, code, structure or anything else will be very welcome!
 
