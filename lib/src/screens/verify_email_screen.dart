@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_login/src/services/verify_email_service.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/widgets/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
-
-import '../services/verify_email_service.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});

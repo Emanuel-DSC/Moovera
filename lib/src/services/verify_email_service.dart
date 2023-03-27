@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../screens/verify_email_screen.dart';
-import '../widgets/alert_dialog.dart';
+import 'package:movie_login/src/screens/verify_email_screen.dart';
+import 'package:movie_login/src/widgets/alert_dialog.dart';
 
 Future sendVerificationEmail(setState, context) async {
     try {

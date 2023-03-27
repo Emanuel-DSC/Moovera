@@ -6,7 +6,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/authentication/google_auth_services.dart';
 import 'package:movie_login/src/screens/profile/profile_update_screen.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
-import 'package:movie_login/src/widgets/profile/profile_menu_widget.dart';
+import 'package:movie_login/src/widgets/profile_menu_widget.dart';
 import 'package:movie_login/src/repository/auth_repository/auth_repo.dart';
 
 class ProfileScreen extends StatefulWidget {

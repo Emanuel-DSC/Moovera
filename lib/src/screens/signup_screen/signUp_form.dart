@@ -1,13 +1,8 @@
 // ignore_for_file: file_names
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:movie_login/src/screens/verify_email_screen.dart';
+import 'package:movie_login/src/services/sign_up_service.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
-import 'package:movie_login/src/constants/colors.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -16,14 +11,14 @@ class SignUpForm extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SignUpForm> createState() => _SignUpFormState();
+  State<SignUpForm> createState() => SignUpFormState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
+class SignUpFormState extends State<SignUpForm> {
 // text editing controllers
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final passwordConfirmController = TextEditingController();
+  static var emailController = TextEditingController();
+  static var passwordController = TextEditingController();
+  static var passwordConfirmController = TextEditingController();
   FocusNode textFieldFocusPassword = FocusNode();
   FocusNode textFieldFocusConfirmPassword = FocusNode();
   bool _obscureTextController = true;
@@ -39,66 +34,6 @@ class _SignUpFormState extends State<SignUpForm> {
     setState(() {
       _obscureTextController2 = !_obscureTextController2;
     });
-  }
-
-  // sign user up method
-  void signUserUp() async {
-    // show loading circle
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
-
-    // check if passwords are the same
-    if (passwordController.text != passwordConfirmController.text) {
-      Navigator.pop(context);
-      showErrorMessage("Passwords do not match");
-      return;
-    }
-    // try sign Up
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text.trim());
-
-      // create user in Users collection Firebase
-      var user = FirebaseAuth.instance.currentUser?.uid;
-      await FirebaseFirestore.instance
-          .collection('Users')
-          .doc(user)
-          .set({'Email': emailController.text.trim(), 
-          'Password': passwordController.text,
-          'ConfirmPassword': passwordConfirmController.text,
-          'ProfilePicture': 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'});
-      // get to movies screen
-      Get.to(const VerifyEmailScreen());
-    } on FirebaseAuthException catch (e) {
-      // pop the loading circle
-      Navigator.pop(context);
-      // show error message
-      showErrorMessage(e.code);
-    }
-  }
-
-  // error message
-  void showErrorMessage(String message) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: tThirdColor,
-          title: Center(
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -164,7 +99,7 @@ class _SignUpFormState extends State<SignUpForm> {
             isDarkMode: isDarkMode,
             border: 10,
             onTab: () {
-              signUserUp();
+              signUserUp(context);
             },
           ),
         ],
