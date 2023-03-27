@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_login/src/widgets/alert_dialog.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/widgets/form/form_header_widget.dart';
 import 'package:movie_login/src/constants/colors.dart';
@@ -10,17 +8,19 @@ import 'package:movie_login/src/constants/images.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
 
+import '../services/verify_email_service.dart';
+
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});
 
   @override
-  State<VerifyEmailScreen> createState() => _VerifyEmailScreenState();
+  State<VerifyEmailScreen> createState() => VerifyEmailScreenState();
 }
 
-class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
-  bool isEmailVerified = false;
-  bool canResendEmail = false;
-  Timer? timer;
+class VerifyEmailScreenState extends State<VerifyEmailScreen> {
+  static bool isEmailVerified = false;
+  static bool canResendEmail = false;
+  static Timer? timer;
 
   @override
   void initState() {
@@ -30,9 +30,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
 
     if (!isEmailVerified) {
-      sendVerificationEmail();
+      sendVerificationEmail(setState, context);
 
-      timer = Timer.periodic(const Duration(seconds: 3), (_) => checkEmailVerified());
+      timer = Timer.periodic(const Duration(seconds: 3), (_) => checkEmailVerified(setState));
     }
   }
 
@@ -40,40 +40,6 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   void dispose() {
     timer?.cancel();
     super.dispose();
-  }
-
-  Future sendVerificationEmail() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser!;
-      await user.sendEmailVerification();
-
-      //timer to resend email 
-      setState(() => canResendEmail = false);
-      await Future.delayed(const Duration(seconds: 20));
-      setState(() => canResendEmail = true);
-    } on FirebaseAuthException catch (e) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return MyAlertDialog(
-                message: 'error',
-                message2: e.message.toString(),
-                onTap: () {
-                  Navigator.of(context).pop();
-                });
-          });
-    }
-  }
-
-  //call after email verification
-  Future checkEmailVerified() async {
-    await FirebaseAuth.instance.currentUser!.reload();
-
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
-
-    if (isEmailVerified) timer?.cancel();
   }
 
   @override
