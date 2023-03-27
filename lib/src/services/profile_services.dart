@@ -1,10 +1,22 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:movie_login/src/screens/profile/profile_update_screen.dart';
 import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
+
+Future<CroppedFile?> getImage() async {
+  // pick image
+  final ImagePicker picker = ImagePicker();
+  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  //crop image
+  CroppedFile? croppedImage =
+      await ImageCropper().cropImage(sourcePath: image!.path, aspectRatio: const CropAspectRatio(ratioX: 5, ratioY: 4));
+  return croppedImage;
+}
 
 Future<bool> saveChanges(File image) async {
   final user = FirebaseAuth.instance.currentUser?.uid;
@@ -26,3 +38,12 @@ Future<bool> saveChanges(File image) async {
   Get.to(() => const GnavBottomBar());
   return false;
 }
+
+cancelChanges(email, image) {
+    final user = FirebaseAuth.instance.currentUser?.uid;
+    FirebaseFirestore.instance.collection('Users').doc(user).set({
+      'Email': email,
+      'ProfilePicture': image,
+    });
+  }
+

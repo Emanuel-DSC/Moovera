@@ -3,7 +3,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/constants/text_string.dart';
 import '../../services/login_services.dart';
-import '../forget_password/forget_password_option/forget_password_model_bottom_sheet.dart';
+import '../forget_password/forget_password_email/forget_password_model_bottom_sheet.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({

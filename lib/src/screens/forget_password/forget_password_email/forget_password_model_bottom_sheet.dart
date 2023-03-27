@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:movie_login/src/constants/text_string.dart';
-import '../forget_password_email/forget_password_mail.dart';
-import 'forget_password_button_widget.dart';
+import 'forget_password_mail.dart';
+import '../../../widgets/button/forget_password_button_widget.dart';
 
 class ForgetPasswordScreen {
   static Future<dynamic> buildShowModalBottomSheet(BuildContext context) {

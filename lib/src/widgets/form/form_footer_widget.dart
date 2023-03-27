@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_login/src/authentication/google_auth_services.dart';
+import 'package:movie_login/src/services/google_auth_services.dart';
 import 'package:movie_login/src/constants/images.dart';
 
 class FormFooter extends StatelessWidget {
