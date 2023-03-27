@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:movie_login/src/widgets/button/degrade_button.dart';
 import 'package:movie_login/src/constants/text_string.dart';
-import 'package:movie_login/src/widgets/gnav_bottom_bar.dart';
-import '../../widgets/alert_dialog.dart';
+import '../../services/login_services.dart';
 import '../forget_password/forget_password_option/forget_password_model_bottom_sheet.dart';
 
 class LoginForm extends StatefulWidget {
@@ -14,60 +11,22 @@ class LoginForm extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<LoginForm> createState() => LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class LoginFormState extends State<LoginForm> {
 // text editing controllers
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  static var emailController = TextEditingController();
+  static var passwordController = TextEditingController();
   bool _obscureTextController = true;
   FocusNode textFieldFocusPassword = FocusNode();
-
 
   void _toggleObscureText() {
     setState(() {
       _obscureTextController = !_obscureTextController;
     });
   }
-  // sign user in method
-  void signUserIn() async {
-    // show loading circle
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
-
-    // try sign in
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      // pop the loading circle
-      Get.to(() => const GnavBottomBar());
-    } on FirebaseAuthException catch (e) {
-      // pop the loading circle
-      Navigator.pop(context);
-      // show error message
-      showErrorMessage(e.code);
-    }
-  }
-  // error message
-  void showErrorMessage(String text) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return MyAlertDialog(message: 'error', message2: text, 
-        onTap: () => Navigator.of(context).pop());
-      },
-    );
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
@@ -122,7 +81,7 @@ class _LoginFormState extends State<LoginForm> {
             isDarkMode: isDarkMode,
             border: 10,
             onTab: () {
-              signUserIn();
+              signUserIn(context);
             },
           ),
         ],
