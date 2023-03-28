@@ -23,7 +23,6 @@ email: emanuelldsc@gmail.com
   get: ^4.6.5<br>
   liquid_swipe: ^3.0.0<br>
   smooth_page_indicator: ^1.0.0+2<br>
-  flutter_otp_text_field: ^1.1.1<br>
   google_nav_bar: ^5.0.6<br>
   firebase_core: ^2.4.0<br>
   firebase_database: ^10.0.14<br>
