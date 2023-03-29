@@ -11,7 +11,7 @@
 
 <br>
 <div>
-  <img src="https://user-images.githubusercontent.com/61395660/228376037-f6249e97-4840-40e7-a3a8-ede1d4be763b.jpg" alt="Bording screenshot1" width="32%" height="700"/>
+  <img src="https://user-images.githubusercontent.com/61395660/228376037-f6249e97-4840-40e7-a3a8-ede1d4be763b.jpg" alt="Bording screenshot1" width="32%" height="auto"/>
   <img src="https://user-images.githubusercontent.com/61395660/228376044-838137c9-bda5-4d4d-b987-a2f6aa97a15d.jpg" alt="Bording screenshot2" width="32%" height="700"/>
   <img src="https://user-images.githubusercontent.com/61395660/228376042-b87a4d82-2541-494c-9302-6a09a6c2476d.jpg" alt="Bording screenshot3" width="32%" height="700"/>
 </div>
