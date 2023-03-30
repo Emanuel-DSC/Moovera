@@ -7,22 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:578682965712:android:ae1a2b70087fffa40058d5",
+        "mobilesdk_app_id": "1:578682965712:android:be4f6706b854c3aa0058d5",
         "android_client_info": {
-          "package_name": "com.example.movie_login"
+          "package_name": "Moovera.package"
         }
       },
       "oauth_client": [
         {
-          "client_id": "578682965712-1ba697h1u8qd0p0cq3vftpg9p100e4hn.apps.googleusercontent.com",
+          "client_id": "578682965712-243or84lvublbermjstequq1lt2ctsll.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.movie_login",
+            "package_name": "Moovera.package",
             "certificate_hash": "a84d9571fcffa645446d8a33a5b8cae29d3de176"
           }
         },
         {
-          "client_id": "578682965712-1shhq49msi01ju6reocembssb8n2fpqq.apps.googleusercontent.com",
+          "client_id": "578682965712-33f6egntlppgu9kvvcgo5ctevb66u820.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

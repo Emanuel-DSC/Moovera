@@ -35,7 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 if (snapshot.data == null) {
                   return const Center(child: Text('no data'));
                 } else {
-                  Map<String, dynamic> data = snapshot.data!.data()!;
+
+                  Map<String, dynamic>? data; 
+                  data = snapshot.data.data();
+
                   return SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     physics: const NeverScrollableScrollPhysics(),
@@ -50,14 +53,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 bottomRight: Radius.circular(30),
                               ),
                               image: DecorationImage(
-                                image: NetworkImage(data['ProfilePicture']),
+                                image: NetworkImage(data?['ProfilePicture'] ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Text(data['Email'],
+                        Text(data?['Email'] ?? 'Change your name :)',
                             style: Theme.of(context).textTheme.headline4),
                         const SizedBox(height: 10),
                         ProfileMenuWidget(

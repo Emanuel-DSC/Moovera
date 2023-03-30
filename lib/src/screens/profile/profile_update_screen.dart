@@ -18,7 +18,7 @@ class ProfileScreeenUpdate extends StatefulWidget {
 }
 
 class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
-  final user = FirebaseAuth.instance.currentUser?.uid;
+  var user = FirebaseAuth.instance.currentUser?.uid ?? 'No user found';
   static final emailController = TextEditingController();
 
   // ignore: non_constant_identifier_names
@@ -46,16 +46,18 @@ class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(30),
-          child: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+          child: FutureBuilder(
               future: FirebaseFirestore.instance
                   .collection('Users')
                   .doc(user)
                   .get(),
-              builder: (context, snapshot) {
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasError) {
                   return Text('Error = ${snapshot.error}');
                 }
-                Map<String, dynamic> data = snapshot.data!.data()!;
+                
+                Map<String, dynamic> ? data;  
+                data = snapshot.data.data();
 
                 return SingleChildScrollView(
                   child: Column(
@@ -84,7 +86,7 @@ class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                                   : CircleAvatar(
                                       radius: 150,
                                       backgroundImage: NetworkImage(
-                                          data['ProfilePicture'].toString())),
+                                          data?['ProfilePicture'].toString() ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png')),
                             ),
                             Positioned(
                               bottom: 0,
@@ -111,7 +113,7 @@ class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                       TextFormField(
                         controller: emailController,
                         decoration: InputDecoration(
-                          label: Text(data['Email']),
+                          label: Text(data?['Email'] ?? 'Change here'),
                           prefixIcon: const Icon(Icons.person_outline),
                         ),
                       ),
@@ -122,7 +124,7 @@ class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                         border: 5,
                         onTab: () {
                           if (emailController.text.isEmpty) {
-                            emailController.text = data['Email'];
+                            emailController.text = data?['Email'] ?? 'Change here';
                             saveChanges(UploadImage!);
                           }
                           saveChanges(UploadImage!);
@@ -131,7 +133,7 @@ class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () {
-                          cancelChanges(data['Email'], data['ProfilePicture']);
+                          cancelChanges(data?['Email'], data?['ProfilePicture']);
                           Get.to(() => const GnavBottomBar());
                         },
                         child: const CancelButtonStyle(),

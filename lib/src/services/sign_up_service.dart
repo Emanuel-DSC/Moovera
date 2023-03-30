@@ -35,8 +35,6 @@ void signUserUp(context) async {
           .collection('Users')
           .doc(user)
           .set({'Email': SignUpFormState.emailController.text.trim(), 
-          'Password': SignUpFormState.passwordController.text,
-          'ConfirmPassword': SignUpFormState.passwordConfirmController.text,
           'ProfilePicture': 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'});
       // get to movies screen
       Get.to(const VerifyEmailScreen());

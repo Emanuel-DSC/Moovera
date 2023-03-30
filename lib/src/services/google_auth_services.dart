@@ -22,7 +22,8 @@ class AuthService {
     // create user in Users collection Firebase
         var user = FirebaseAuth.instance.currentUser?.uid;
         await FirebaseFirestore.instance.collection('Users')
-        .doc(user).set({ 'ID': credential.toString()});
+        .doc(user).set({'Email': gUser.email.toString(), 
+          'ProfilePicture': 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'});
         
     //sign in
 
