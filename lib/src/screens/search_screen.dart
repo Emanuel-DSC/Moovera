@@ -97,7 +97,7 @@ class SearchScreenState extends State<SearchScreen> {
                             filled: true,
                             fillColor: isDarkMode
                                 ? tBottomDarkColor.withOpacity(0.5)
-                                : tThirdDarkColor,
+                                : tThirdDarkColor.withOpacity(0.2),
                           ),
                           cursorWidth: 3,
                           cursorColor:

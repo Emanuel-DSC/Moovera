@@ -8,13 +8,17 @@ class MoviePlayerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('watch your movie below'.toUpperCase()),
+        title: Text('watch your movie below'.toUpperCase(), 
+        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),),
         leading: IconButton(
-          icon: const Icon(LineAwesomeIcons.angle_left),
+          icon: Icon(LineAwesomeIcons.angle_left, color: isDarkMode ? Colors.white : Colors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },

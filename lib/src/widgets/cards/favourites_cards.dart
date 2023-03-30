@@ -79,8 +79,8 @@ Widget favouritesCard(QueryDocumentSnapshot doc, context) {
                     children: [
                       Text(
                         doc['movie_title'],
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
+                        style: const TextStyle(
+                                  fontSize: 18, color: Colors.white)),
                       const SizedBox(height: tPadding10),
                       RatingBar.builder(
                         initialRating: doc['movie_vote'] / 2,

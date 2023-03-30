@@ -81,15 +81,15 @@ class _AnimatedLikeButtonState extends State<AnimatedLikeButton> {
           return isLiked
               ? const Icon(
                   LineAwesomeIcons.heart_1,
-                  color: Colors.red,
+                  color: Colors.white,
                 )
               : const Icon(LineAwesomeIcons.heart, color: Colors.white);
         },
         bubblesColor: BubblesColor(
-            dotPrimaryColor: Colors.red.shade400,
-            dotSecondaryColor: Colors.red.shade500,
-            dotThirdColor: Colors.red.shade600,
-            dotLastColor: Colors.red.shade900),
+            dotPrimaryColor: isDarkMode ? tHeartAnimationColor : Colors.red.shade400,
+            dotSecondaryColor: isDarkMode ? tHeartAnimationColor :Colors.red.shade500,
+            dotThirdColor: isDarkMode ? tHeartAnimationColor : Colors.red.shade600,
+            dotLastColor: isDarkMode ? tHeartAnimationColor :Colors.red.shade900),
       ),
     );
   }

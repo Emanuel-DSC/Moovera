@@ -133,7 +133,7 @@ class ProfileScreeenUpdateState extends State<ProfileScreeenUpdate> {
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () {
-                          cancelChanges(data?['Email'], data?['ProfilePicture']);
+                          cancelChanges(data?['Email'], data?['ProfilePicture'] ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png');
                           Get.to(() => const GnavBottomBar());
                         },
                         child: const CancelButtonStyle(),

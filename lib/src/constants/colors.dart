@@ -12,3 +12,5 @@ const tThirdColor = Color.fromARGB(255, 145, 145, 145);
 const tBottomDarkColor = Color.fromARGB(255, 71, 71, 71);
 const tDarkBackground = Color.fromARGB(255, 51, 51, 51);
 const favouritesBgLightColor = Color.fromARGB(255, 65, 0, 0);
+
+const tHeartAnimationColor = Color(0xff1B3A6D);

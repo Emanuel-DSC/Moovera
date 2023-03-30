@@ -96,7 +96,8 @@ class SearchCards extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: const TextStyle(
+                                  fontSize: 18, color: Colors.white),
                       ),
                       const SizedBox(height: tPadding10),
                       RatingBar.builder(
