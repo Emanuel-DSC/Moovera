@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerView extends StatefulWidget {
@@ -21,6 +22,11 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+  ]);
 
     switch (widget.dataSourceType) {
       case DataSourceType.asset:
@@ -40,6 +46,12 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
 
     _videoPlayerController.initialize().then((_) => setState(() =>
         _chewieController = ChewieController(
+            materialProgressColors: ChewieProgressColors(
+              backgroundColor: Colors.grey, 
+              bufferedColor: Colors.white),
+            autoPlay: true,
+            fullScreenByDefault: true,
+            allowFullScreen: true,
             videoPlayerController: _videoPlayerController,
             aspectRatio: _videoPlayerController.value.aspectRatio)));
   }
@@ -60,3 +72,4 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     const SizedBox.shrink();
   }
 }
+
