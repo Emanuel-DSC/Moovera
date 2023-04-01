@@ -2,7 +2,7 @@
 
 ### Media
 
-* Video link: soon!
+* Video link: https://www.youtube.com/watch?v=u_Aa6tIJZ0s&ab_channel=EmanuelCosta
 
 <div>
   <img align="center" src="https://user-images.githubusercontent.com/61395660/228386281-6eeebcfe-f057-43de-bcee-1f62bf662158.png" alt="Media screenshot1" width="49%" height="auto"/>
