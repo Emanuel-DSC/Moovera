@@ -1,6 +1,9 @@
 # Moovera
 
 ### Media
+
+* Video link: soon!
+
 <div>
   <img align="center" src="https://user-images.githubusercontent.com/61395660/228386281-6eeebcfe-f057-43de-bcee-1f62bf662158.png" alt="Media screenshot1" width="49%" height="auto"/>
   <img align="center" src="https://user-images.githubusercontent.com/61395660/228386301-fb7be8d9-e50f-4041-b274-c91ddb3f3034.png" alt="Media screenshot2"  width="49%" height="auto"/>
@@ -50,6 +53,25 @@
 <div>
   <img src="https://user-images.githubusercontent.com/61395660/228376048-5fce773d-bca3-4d0a-8ecc-9587f408241b.jpg" alt="Profile screenshot1" width="32%" height="auto"/>
   <img src="https://user-images.githubusercontent.com/61395660/228376022-221af26f-b6ce-4e7c-8e0b-b52b145a08c9.jpg" alt="Profile screenshot2" width="32%" height="auto"/>
+</div>
+<br>
+
+* Light mode   
+
+<br>
+<div>
+  <img src="https://user-images.githubusercontent.com/61395660/229266038-1457a9a5-c8d7-4fed-b00c-e1b4a71264c8.jpg" alt="DashboardLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266041-671ecad6-434f-4d3b-86ef-91eb0431a157.jpg" alt="descriptionLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266042-2ce1819f-3df7-40eb-805a-7ffcf4f21b57.jpg" alt="editProfileLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266043-9a4e7e9d-9333-4174-8cfd-2f6ee4c3a988.jpg" alt="emailLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266044-368b5c43-9ecf-48ba-9af1-c899d968b0b0.jpg" alt="emailSelectLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266046-705f5f71-7ef4-4386-a004-eeca6da65e16.jpg" alt="favoritesScreenLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266047-a16728b6-c66d-49ea-b092-5cc1bdd02d91.jpg" alt="filteredMovieLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266049-d14f7423-d499-4853-94d1-602f472e8fa2.jpg" alt="loginLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266051-94a127d9-11cb-4cce-ac8c-7d8a78c144d7.jpg" alt="signUpLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266053-6b30ed07-b071-467b-8b48-d9fdebbef99e.jpg" alt="verificationLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266054-efd35f1a-40f4-4602-90b3-54739fd73726.jpg" alt="welcomeLight" width="23%" height="auto"/>
+  <img src="https://user-images.githubusercontent.com/61395660/229266165-622ad68e-bd89-4225-8f31-5fbcbe1e2def.jpg" alt="profileScreenLight" width="23%" height="auto"/>
 </div>
 <br>
 
