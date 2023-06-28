@@ -88,7 +88,7 @@ I decided to create "Moovera" to study Flutter and Dart, but I wanted an app mor
 
 email: emanuelldsc@gmail.com
 
-## APIs  
+## Packages  
   cupertino_icons: ^1.0.2<br>
   google_fonts: ^3.0.1<br>
   flutter_native_splash: ^2.2.9<br>
@@ -111,9 +111,5 @@ email: emanuelldsc@gmail.com
   chewie: ^1.4.0<br>
   video_player: ^2.6.0
 
-## Installers
-If you want to test the App in the Production mode, the installers are listed below:
-
-Android .apk installer : Soon!
-
-iOS .ipa installer: Soon!
+## API 
+https://www.themoviedb.org
